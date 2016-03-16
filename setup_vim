@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+VIMFILES=$HOME/.vim
+COLORS=$VIMFILES/colors
+SWP=$VIMFILES/swp
+AUTO=$VIMFILES/autoload
+
+# create necessary folders in ~/.vim
+mkdir -p $COLORS
+mkdir -p $SWP
+mkdir -p $AUTO
+
+# get molokai colorscheme and Vim-Plug
+wget -q -O $COLORS/molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+wget -q -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+cp ./vimrc $VIMFILES/vimrc
+vim

@@ -15,10 +15,11 @@ Plug 'Yggdroot/indentLine', { 'for' : ['python', 'haskell', 'c', 'cpp'] }
 "Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
 
 " markdown -------------------------------------------------
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plug 'godlygeek/tabular', { 'for' : 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 " git integration ------------------------------------------
-Plug 'tpope/vim-fugitive' " git wrapper
+"Plug 'tpope/vim-fugitive' " git wrapper
 "Plug 'junegunn/vim-github-dashboard' " GH events browser
 "Plug 'junegunn/gv.vim' " light git repo browser
 "Plug 'gregsexton/gitv' " git repo browser
@@ -123,6 +124,7 @@ let mapleader = ','
 let maplocalleader = ''
 
 nnoremap <c-s> :w<CR>
+nnoremap / :se hlsearch<CR>/
 
 "movement keys for insert mode
 inoremap <c-h> <left>
@@ -225,6 +227,8 @@ vnoremap <leader>> <esc>`>a><esc>`<i<<esc>
 nnoremap <silent> <BS> :se hlsearch!<CR>
 
 " abrevs ===================================================
+iabbrev amx max
+iabbrev itn int
 iabbrev adn and
 iabbrev waht what
 iabbrev tehn then
@@ -236,7 +240,7 @@ let @d='I#define '
 
 " invisibles ===============================================
 se list
-se listchars=tab:▸~,eol:¬,trail:∙
+se listchars=tab:\|▸,eol:¬,trail:∙
 "se listchars=tab:>~,trail:.
 
 " indentline ===============================================
@@ -244,7 +248,7 @@ nnoremap <silent><tab> :IndentLinesToggle<CR>
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
 let g:indentLine_color_dark = 2
-let g:indentLine_leadingSpaceChar = '.'
+let g:indentLine_leadingSpaceChar = '▸'
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_enabled = 1
 
@@ -348,6 +352,9 @@ let g:vimwiki_list = [{
 
 " delimitmate ==============================================
 "let delimitMate_expand_cr = 1
+
+" tabular ==================================================
+let g:tabular_loaded = 1
 
 " vim-markdown =============================================
 let g:vim_markdown_folding_disabled = 0
