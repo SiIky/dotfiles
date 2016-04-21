@@ -1,4 +1,5 @@
 scriptencoding utf-8
+se nocompatible
 " vim-plug =================================================
 let g:plug_threads = 1
 
@@ -9,6 +10,9 @@ Plug 'itchyny/lightline.vim'
 "Plug 'vim-airline/vim-airline-themes'
 "Plug 'bling/vim-bufferline'
 "Plug 'jlanzarotta/bufexplorer'
+
+" terminal -------------------------------------------------
+"Plug 'mattn/vim-terminal'
 
 " indentation display --------------------------------------
 Plug 'Yggdroot/indentLine', { 'for' : ['python', 'haskell', 'c', 'cpp'] }
@@ -23,9 +27,11 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 "Plug 'junegunn/vim-github-dashboard' " GH events browser
 "Plug 'junegunn/gv.vim' " light git repo browser
 "Plug 'gregsexton/gitv' " git repo browser
+"Plug 'mattn/gist-vim'
 
 " some random settings -------------------------------------
 "Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-obsession'
 
 " haskell stuff --------------------------------------------
 Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
@@ -88,14 +94,13 @@ se hlsearch
 se incsearch
 se laststatus=2
 se linebreak
-se nocompatible
 se noerrorbells
 se noshowmode
 se nospell
 se number
 se omnifunc=syntaxcomplete#Complete
 se relativenumber
-se ruler
+se noruler
 se scrolljump=10
 se scrolloff=5
 se shiftwidth=4
@@ -113,18 +118,31 @@ se tabstop=8
 se ttimeoutlen=0 " status bar change mode delay (ms)
 se wildignore+=*.swp,*.o
 se wildmenu
-se wrap
+se nowrap
 highlight comment cterm=italic
 syntax on
 "se mouse=a
+
+" vim -b : edit binary using xxd-format --------------------
+augroup Binary
+  au!
+  au BufReadPre  *.o,*.dbg,*.x,*.out let &bin = 1
+  au BufReadPost *.o,*.dbg,*.x,*.out if &bin | %!xxd
+  au BufReadPost *.o,*.dbg,*.x,*.out set filetype = xxd | endif
+  au BufWritePre *.o,*.dbg,*.x,*.out if &bin | %!xxd -r
+  au BufWritePre *.o,*.dbg,*.x,*.out endif
+  au BufWritePost *.o,*.dbg,*.x,*.out if &bin | %!xxd
+  au BufWritePost *.o,*.dbg,*.x,*.out set nomod | endif
+augroup END
 
 " bindings -------------------------------------------------
 " leader/localleader
 let mapleader = ','
 let maplocalleader = ''
 
-nnoremap <c-s> :w<CR>
-nnoremap / :se hlsearch<CR>/
+nnoremap ZZ :w<CR>
+nnoremap QQ :q!<CR>
+nnoremap ZQ :x<CR>
 
 "movement keys for insert mode
 inoremap <c-h> <left>
@@ -151,20 +169,20 @@ vnoremap e E
 vnoremap E e
 
 "bye bye arrow keys
-nnoremap <up> <esc>
-nnoremap <down> <esc>
-nnoremap <left> <esc>
-nnoremap <right> <esc>
+inoremap <down> <nop>
+nnoremap <down> <nop>
+vnoremap <down> <nop>
+inoremap <left> <nop>
+nnoremap <left> <nop>
+vnoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap <right> <nop>
+vnoremap <right> <nop>
+inoremap <up> <nop>
+nnoremap <up> <nop>
+vnoremap <up> <nop>
 
-inoremap <up> <esc>
-inoremap <down> <esc>
-inoremap <left> <esc>
-inoremap <right> <esc>
-
-vnoremap <up> <esc>
-vnoremap <down> <esc>
-vnoremap <left> <esc>
-vnoremap <right> <esc>
+nnoremap <space> za
 
 " move cursor to the beggining/end of the line
 nnoremap H _
@@ -172,18 +190,17 @@ nnoremap L $
 vnoremap H _
 vnoremap L $
 
-" search for selected text
-vnoremap / y/<c-r>"
-
-"open/close folds
-nnoremap <space> za
-
-" select a word and make it uppercase
-nnoremap <c-u> viwU
+nnoremap <silent> <BS> :se hlsearch!<CR>
+vnoremap / y/<c-r>"<CR>
+nnoremap / :se hlsearch<CR>/
+nnoremap n :se hlsearch<CR>n
+nnoremap N :se hlsearch<CR>N
+nnoremap * :se hlsearch<CR>*
 
 " vimrc edit
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " tabs
 nnoremap <localleader>1 1gt
 nnoremap <localleader>2 2gt
@@ -209,7 +226,6 @@ nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
 nnoremap <leader>} viw<esc>a}<esc>hbi{<esc>lel
 nnoremap <leader>< viw<esc>a><esc>hbi<<esc>lel
 nnoremap <leader>> viw<esc>a><esc>hbi<<esc>lel
-
 " put stuff around selected text
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
@@ -223,25 +239,25 @@ vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
 vnoremap <leader>< <esc>`>a><esc>`<i<<esc>
 vnoremap <leader>> <esc>`>a><esc>`<i<<esc>
 
-" turn off search highlight
-nnoremap <silent> <BS> :se hlsearch!<CR>
-
 " abrevs ===================================================
 iabbrev amx max
 iabbrev itn int
 iabbrev adn and
 iabbrev waht what
 iabbrev tehn then
+iabbrev tepydef typedef
 
 " C snippets ===============================================
 let @i='i#include <>i'
 let @f='A (){}kba'
 let @d='I#define '
+let @c='A /*  */2hi'
 
 " invisibles ===============================================
-se list
+se nolist
 se listchars=tab:\|▸,eol:¬,trail:∙
 "se listchars=tab:>~,trail:.
+nnoremap <c-l> :se list!<CR>
 
 " indentline ===============================================
 nnoremap <silent><tab> :IndentLinesToggle<CR>
@@ -249,12 +265,12 @@ let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
 let g:indentLine_color_dark = 2
 let g:indentLine_leadingSpaceChar = '▸'
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_enabled = 1
+let g:indentLine_leadingSpaceEnabled = 0
+let g:indentLine_enabled = 0
 
 " NETRW explore file browser ===============================
-let g:netrw_liststyle=3 " listing style
-let g:netrw_browse_split=0 " opening behaviour
+let g:netrw_liststyle = 3 " listing style
+let g:netrw_browse_split = 0 " opening behaviour
 map <silent><c-e> :Explore<CR>
 
 " monokai theme ============================================
@@ -263,10 +279,13 @@ let g:molokai_original = 1
 let g:rehash256 = 0
 
 " lightline ================================================
+" 'obsession': 'ObsessionStatus',
 let g:lightline = {
     \ 'active': {
-    \    'left': [ [ 'mode', 'paste' ],
-    \              [ 'fugitive', 'filename', 'readonly' ] ]
+    \    'left': [
+    \            [ 'mode', 'paste' ],
+    \            [ 'fugitive', 'filename', 'readonly' ]
+    \            ]
     \ },
     \ 'component_function': {
     \    'fugitive': 'LightLineFugitive',
@@ -335,7 +354,7 @@ let g:vimwiki_dir_link = ''
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_autowriteall = 0
 let g:vimwiki_url_maxsave = 15 "default
-let g:vimwiki_map_prefix = '<localleader>e' " '<space>e'
+let g:vimwiki_map_prefix = '<localleader>e'
 let g:vimwiki_auto_chdir = 1
 
 " change 'path' if needed
