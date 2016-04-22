@@ -53,8 +53,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.config/hub/hub.bash_completion ]; then
-    . ~/.config/hub/hub.bash_completion
+if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
+    . ~/.config/hub/hub.bash_completion.sh
 fi
 
 stty -ixon
