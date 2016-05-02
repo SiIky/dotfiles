@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# keyboard layout
+# pt
+exec setxkbmap us &
+exec barM &
+exec dwm
