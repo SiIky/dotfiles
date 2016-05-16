@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # keyboard layout
-# pt
-exec setxkbmap us &
-exec barM &
+# `$ grep "grp:.*toggle" /usr/share/X11/xkb/rules/base.lst`
+# set US as default and scroll lock to toggle between layouts
+exec setxkbmap -layout us,pt -option grp:sclk_toggle &
+
+exec xsetroot -name " " &
+exec slstatus &
+
 exec dwm

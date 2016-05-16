@@ -6,8 +6,6 @@ let g:plug_threads = 1
 call plug#begin('~/.vim/plugged')
 " status line ----------------------------------------------
 Plug 'itchyny/lightline.vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 "Plug 'bling/vim-bufferline'
 "Plug 'jlanzarotta/bufexplorer'
 
@@ -15,12 +13,15 @@ Plug 'itchyny/lightline.vim'
 "Plug 'mattn/vim-terminal'
 
 " indentation display --------------------------------------
-Plug 'Yggdroot/indentLine', { 'for' : ['python', 'haskell', 'c', 'cpp'] }
+Plug 'Yggdroot/indentLine', { 'for': ['python', 'haskell', 'c', 'cpp'] }
 "Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
 
+" toml -----------------------------------------------------
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
 " markdown -------------------------------------------------
-Plug 'godlygeek/tabular', { 'for' : 'markdown' }
-Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
+Plug 'godlygeek/tabular', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " git integration ------------------------------------------
 "Plug 'tpope/vim-fugitive' " git wrapper
@@ -32,6 +33,9 @@ Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 " some random settings -------------------------------------
 "Plug 'tpope/vim-sensible'
 "Plug 'tpope/vim-obsession'
+
+" rust stuff -----------------------------------------------
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " haskell stuff --------------------------------------------
 Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
@@ -60,8 +64,6 @@ Plug 'vimwiki/vimwiki', { 'for': ['vimwiki', 'wiki'], 'on': ['VimwikiIndex', 'Vi
 "Plug 'szw/vim-ctrlspace'
 " parens/brackets auto closing
 "Plug 'Raimondi/delimitMate'
-" syntastic linter engine
-"Plug 'scrooloose/syntastic'
 
 " completion engine -- req python2+
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'for': ['haskell', 'python', 'c'] } 
@@ -95,12 +97,13 @@ se incsearch
 se laststatus=2
 se linebreak
 se noerrorbells
+se noruler
 se noshowmode
 se nospell
+se nowrap
 se number
 se omnifunc=syntaxcomplete#Complete
 se relativenumber
-se noruler
 se scrolljump=10
 se scrolloff=5
 se shiftwidth=4
@@ -113,12 +116,12 @@ se softtabstop=0
 se splitbelow
 se splitright
 se t_Co=256
-se tabpagemax=5
+se tabpagemax=10
 se tabstop=8
 se ttimeoutlen=0 " status bar change mode delay (ms)
+se viminfo+=n~/.vim/viminfo
 se wildignore+=*.swp,*.o
 se wildmenu
-se nowrap
 highlight comment cterm=italic
 syntax on
 "se mouse=a
@@ -169,18 +172,18 @@ vnoremap e E
 vnoremap E e
 
 "bye bye arrow keys
-inoremap <down> <nop>
-nnoremap <down> <nop>
-vnoremap <down> <nop>
-inoremap <left> <nop>
-nnoremap <left> <nop>
-vnoremap <left> <nop>
-inoremap <right> <nop>
-nnoremap <right> <nop>
-vnoremap <right> <nop>
-inoremap <up> <nop>
-nnoremap <up> <nop>
-vnoremap <up> <nop>
+"inoremap <down> <nop>
+"nnoremap <down> <nop>
+"vnoremap <down> <nop>
+"inoremap <left> <nop>
+"nnoremap <left> <nop>
+"vnoremap <left> <nop>
+"inoremap <right> <nop>
+"nnoremap <right> <nop>
+"vnoremap <right> <nop>
+"inoremap <up> <nop>
+"nnoremap <up> <nop>
+"vnoremap <up> <nop>
 
 nnoremap <space> za
 
@@ -240,18 +243,22 @@ vnoremap <leader>< <esc>`>a><esc>`<i<<esc>
 vnoremap <leader>> <esc>`>a><esc>`<i<<esc>
 
 " abrevs ===================================================
+iabbrev adn and
 iabbrev amx max
 iabbrev itn int
-iabbrev adn and
-iabbrev waht what
+iabbrev reurnt return
 iabbrev tehn then
 iabbrev tepydef typedef
+iabbrev waht what
 
 " C snippets ===============================================
 let @i='i#include <>i'
 let @f='A (){}kba'
 let @d='I#define '
 let @c='A /*  */2hi'
+
+" rust.vim =================================================
+"let g:rustfmt_autosave = 1
 
 " invisibles ===============================================
 se nolist
