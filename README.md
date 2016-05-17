@@ -1,11 +1,31 @@
 # dotfiles
 
-[Simple Terminal (ST)](http://st.suckless.org)
-[DWM](http://dwm.suckless.org)
-[dmenu](http://tools.suckless.org/dmenu)
-[Hermit Font](https://github.com/pcaro90/hermit)
-[Vim-Plug](https://github.com/junegunn/vim-plug)
-[Molokai](https://github.com/tomasr/molokai)
+[Simple Terminal (ST)][st]
+[DWM][dwm]
+[dmenu][dmenu]
+[Hermit Font][hermit]
+[Vim-Plug][vplug]
+[Molokai][molokai]
 
-`./dwm/dwm.desktop` => `/usr/share/xsessions/dwm.desktop`
-`./dwm/dwm_init` => `~/bin/dwm_init`
+## [ST][st]
+
+Patches:
+* [Hide Cursor](http://st.suckless.org/patches/hidecursor)
+
+## [DWM][dwm]
+
+```shell
+mkdir ~/bin/
+cp ./dwm/dwm_init ~/bin/dwm_init
+cp ./dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
+```
+
+Patches:
+* [Focus on click](http://dwm.suckless.org/patches/focusonclick)
+
+[st](http://st.suckless.org)
+[dwm](http://dwm.suckless.org)
+[dmenu](http://tools.suckless.org/dmenu)
+[hermit](https://github.com/pcaro90/hermit)
+[vplug](https://github.com/junegunn/vim-plug)
+[molokai](https://github.com/tomasr/molokai)

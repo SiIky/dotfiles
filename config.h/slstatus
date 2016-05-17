@@ -1,30 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
-/* alsa sound */
-static const char channel[]   = "Master";
-
-/* battery */
-static const char batterypath[] = "/sys/class/power_supply/";
-static const char batterynow[]  = "energy_now";
-static const char batteryfull[] = "energy_full_design";
-
 /* bar update interval in seconds (smallest value = 1) */
 static unsigned int update_interval = 1;
 
 /* statusbar
-- battery_perc (battery percentage) [argument: battery name]
 - cpu_perc (cpu usage in percent) [argument: NULL]
 - datetime (date and time) [argument: format]
-- disk_perc (disk usage in percent) [argument: mountpoint]
-- ram_perc (ram usage in percent) [argument: NULL]
-- temp (temperature in degrees) [argument: temperature file]
-- vol_perc (alsa volume and mute status in percent) [argument: soundcard]
-- wifi_perc (wifi signal in percent) [argument: wifi card interface name] */
+- ram_perc (ram usage in percent and total ram) [argument: NULL]
+*/
 static const struct arg args[] = {
-    /* function     format          argument */
-    { cpu_perc,     "CPU %4s ",     NULL },
-    { ram_perc,     "RAM %3s | ",   NULL },
-    { vol_perc,     "VOL %4s | ",   "default" },
-    { disk_perc,    "HDD %3s | ",   "/" },
-    { datetime,     "%s",           "%d(%a)/%m(%b)/%y %R" },
+    /* function     format           argument */
+    { cpu_perc,     "CPU %s | ",     NULL },
+    { ram_perc,     "RAM %s | ",     NULL },
+    { datetime,     "%s",            "%d(%a)/%m(%b)/%y %R" },
 };
