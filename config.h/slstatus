@@ -1,5 +1,3 @@
-/* See LICENSE file for copyright and license details. */
-
 /* bar update interval in seconds (smallest value = 1) */
 static unsigned int update_interval = 1;
 
@@ -10,7 +8,7 @@ static unsigned int update_interval = 1;
 */
 static const struct arg args[] = {
     /* function     format           argument */
-    { cpu_perc,     "CPU %s | ",     NULL },
-    { ram_perc,     "RAM %s | ",     NULL },
-    { datetime,     "%s",            "%d(%a)/%m(%b)/%y %R" },
+    { cpu_perc,     "[ CPU %s ]",     NULL },
+    { ram_perc,     "[ RAM %s ]",     NULL },
+    { datetime,     "[ %s ]",            "%d(%a)/%m(%b)/%y %R" },
 };
