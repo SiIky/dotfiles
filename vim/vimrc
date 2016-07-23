@@ -116,7 +116,7 @@ se softtabstop=0
 se splitbelow
 se splitright
 se t_Co=256
-se tabpagemax=10
+se tabpagemax=30
 se tabstop=8
 se ttimeoutlen=0 " status bar change mode delay (ms)
 se viminfo+=n~/.vim/viminfo
@@ -139,6 +139,14 @@ augroup Binary
 augroup END
 
 " bindings -------------------------------------------------
+" quickfix
+nnoremap <F4> :cwindow<CR>
+nnoremap <F5> :make<CR>:cwindow<CR>
+nnoremap <F6> :make clean<CR>:cwindow<CR>
+nnoremap <F7> :cprev<CR>
+nnoremap <F8> :cnext<CR>
+nnoremap <F9> :cclose<CR>
+
 " leader/localleader
 let mapleader = ','
 let maplocalleader = ''
@@ -153,7 +161,7 @@ inoremap <c-l> <right>
 inoremap <c-j> <down>
 inoremap <c-k> <up>
 
-"movement keys for normal mode
+"movement keys
 nnoremap <c-j> 5j
 nnoremap <c-k> 5k
 vnoremap <c-j> 5j
@@ -193,7 +201,8 @@ nnoremap L $
 vnoremap H _
 vnoremap L $
 
-nnoremap <silent> <BS> :se hlsearch!<CR>
+" search
+nnoremap <silent><BS> :se hlsearch!<CR>
 vnoremap / y/<c-r>"<CR>
 nnoremap / :se hlsearch<CR>/
 nnoremap n :se hlsearch<CR>n
@@ -216,6 +225,14 @@ nnoremap <localleader>8 8gt
 nnoremap <localleader>9 9gt
 nnoremap <localleader>l gt
 nnoremap <localleader>h gT
+nnoremap <c-w>tn :tabnew<CR>
+nnoremap <c-w>tc :tabclose<CR>
+
+" windows
+nnoremap <c-w>wf <c-w>f<c-w>T
+nnoremap <c-w>wq :bdelete<CR>
+nnoremap <c-w>wn :new<CR>
+nnoremap <c-w>wv :vnew<CR>
 
 " put stuff around words
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
@@ -250,6 +267,7 @@ iabbrev reurnt return
 iabbrev tehn then
 iabbrev tepydef typedef
 iabbrev waht what
+iabbrev strutc struct
 
 " C snippets ===============================================
 let @i='i#include <>i'
