@@ -25,10 +25,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
-    . ~/.config/hub/hub.bash_completion.sh
-fi
-
 stty -ixon
 export PATH=$HOME/bin:$PATH
 export VISUAL=vim

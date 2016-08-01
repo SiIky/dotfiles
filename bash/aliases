@@ -1,5 +1,7 @@
-alias vim='vim -p'
+alias exit='echo ^D scrub'
+
 alias vi='vim -p'
+alias vim='vim -p'
 alias cls='clear'
 alias ..='cd ..'
 alias ls='ls -ACF --color=auto'
@@ -14,8 +16,13 @@ alias ed='vim'
 alias lynx='lynx -vikeys'
 alias mdv='markdown $1 | lynx -stdin'
 alias wget='wget -c'
+alias mk='make'
+alias vimup='vim +PlugUpgrade +PlugInstall +PlugUpdate'
 
 # Git aliases (if no hub replace with git)
+if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
+    . ~/.config/hub/hub.bash_completion.sh
+fi
 alias git='hub'
 alias gadd='hub add'
 alias gmv='hub mv'
