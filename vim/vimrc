@@ -89,6 +89,7 @@ se cursorline
 se dir=~/.vim/swp//
 se encoding=utf-8
 se expandtab
+se fileencoding=utf-8
 se foldenable
 se foldmethod=manual
 se hidden
@@ -126,6 +127,15 @@ highlight comment cterm=italic
 syntax on
 "se mouse=a
 
+" Status Line ==============================================
+"se statusline=
+"se statusline+=\ %([%n]\ %f%) " [buf#] fname
+"se statusline+=\ %(%m%r%h%w%) " modified/modifiable/etc
+"se statusline+=\ %=%y " ftype
+"se statusline+=\ %{strlen(&fenc)?&fenc:'none'}: "file encoding
+"se statusline+=%{&ff}\ \| "file format
+"se statusline+=\ %(%l:%c\ \|\ %L\ \|\ %) " #C:#L | #TL |
+
 " vim -b : edit binary using xxd-format --------------------
 augroup Binary
   au!
@@ -151,21 +161,26 @@ nnoremap <F9> :cclose<CR>
 let mapleader = ','
 let maplocalleader = ''
 
+" = on the whole buffer
+nnoremap <leader>M maggVG=`a_zz
+nnoremap <leader>m V%=zz
+
 nnoremap ZZ :w<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
+nnoremap yy "*yy
 
 "movement keys for insert mode
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-j> <down>
-inoremap <c-k> <up>
+"inoremap <c-h> <left>
+"inoremap <c-l> <right>
+"inoremap <c-j> <down>
+"inoremap <c-k> <up>
 
 "movement keys
-nnoremap <c-j> 5j
-nnoremap <c-k> 5k
-vnoremap <c-j> 5j
-vnoremap <c-k> 5k
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
+vnoremap <C-J> 5j
+vnoremap <C-K> 5k
 nnoremap w W
 nnoremap b B
 nnoremap W w
@@ -196,18 +211,26 @@ vnoremap E e
 nnoremap <space> za
 
 " move cursor to the beggining/end of the line
-nnoremap H _
-nnoremap L $
-vnoremap H _
-vnoremap L $
+nnoremap gh _
+nnoremap gl $
+nnoremap gj G
+nnoremap gk gg
+vnoremap gh _
+vnoremap gl $
+vnoremap gj G
+vnoremap gk gg
+
+" visual
+nnoremap v <C-V>
+nnoremap <C-V> v
 
 " search
 nnoremap <silent><BS> :se hlsearch!<CR>
-vnoremap / y/<c-r>"<CR>
+vnoremap / y/<C-R>"<CR>:se hlsearch<CR>
 nnoremap / :se hlsearch<CR>/
-nnoremap n :se hlsearch<CR>n
-nnoremap N :se hlsearch<CR>N
-nnoremap * :se hlsearch<CR>*
+nnoremap n n<silent>:se hlsearch<CR>
+nnoremap N N<silent>:se hlsearch<CR>
+nnoremap * *<silent>:se hlsearch<CR>
 
 " vimrc edit
 nnoremap <leader>ev :e $MYVIMRC<cr>
@@ -268,6 +291,7 @@ iabbrev tehn then
 iabbrev tepydef typedef
 iabbrev waht what
 iabbrev strutc struct
+iabbrev flaot float
 
 " C snippets ===============================================
 let @i='i#include <>i'

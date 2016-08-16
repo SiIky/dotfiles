@@ -1,18 +1,18 @@
 # dotfiles
 
-[Simple Terminal (ST)][st]
-[DWM][dwm]
-[dmenu][dmenu]
-[Hermit Font][hermit]
-[Vim-Plug][vplug]
-[Molokai][molokai]
+[Simple Terminal (ST)](st)
+[DWM](dwm)
+[dmenu](dmenu)
+[Hermit Font](hermit)
+[Vim-Plug](vplug)
+[Molokai](molokai)
 
-## [ST][st]
+## [ST](st)
 
 Patches:
 * [Hide Cursor](http://st.suckless.org/patches/hidecursor)
 
-## [DWM][dwm]
+## [DWM](dwm)
 
 ```shell
 mkdir ~/bin/
@@ -23,6 +23,7 @@ cp ./dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
 Patches:
 * [Focus on click](http://dwm.suckless.org/patches/focusonclick)
 
+[slstatus](https://github.com/drkh5h/slstatus)
 [st](http://st.suckless.org)
 [dwm](http://dwm.suckless.org)
 [dmenu](http://tools.suckless.org/dmenu)
