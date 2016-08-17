@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+TOHASTEDIR=$HOME/Downloads/haste/to/
+cp $1 $TOHASTEDIR
+cat $1 | haste

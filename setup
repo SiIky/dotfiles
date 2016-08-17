@@ -1,0 +1,44 @@
+#!/usr/etc/env sh
+
+# setup bash env
+cp ./bash/bashrc ~/.bashrc
+cp ./bash/aliases ~/.bash_aliases
+
+# create user bin folder
+mkdir ~/bin/
+
+# setup vim
+sh ./vim/setup_vim
+
+# setup hastebin scripts
+cp hastebin/* ~/bin
+
+# copy dwm init script to user bin folder
+# and dwm entry for lightdm
+cp ./dwm/dwm_init ~/bin/dwm_init
+cp ./dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
+
+# create temporary setup folder
+mkdir ../dotfiles_setup
+cd ../dotfiles_setup
+
+# install Hermit font
+mkdir hermit
+cd hermit
+wget https://pcaro.es/d/otf-hermit-1.21.tar.gz
+tar xvzf *hermit*.tar.gz
+sudo mkdir -p /usr/share/fonts/opentype/hermit
+sudo cp *.otf /usr/share/fonts/opentype/hermit
+
+# clone git repos
+cd ..
+
+git clone http://git.suckless.org/st
+git clone http://git.suckless.org/dwm
+git clone http://git.suckless.org/dmenu
+git clone https://github.com/drkh5h/slstatus
+
+cp ../dotfiles/config.h/st ./st/config.h
+cp ../dotfiles/config.h/dwm ./dwm/config.h
+cp ../dotfiles/config.h/dmenu ./dmenu/config.h
+cp ../dotfiles/config.h/slstatus ./slstatus/config.h

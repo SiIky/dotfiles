@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+FROMHASTEDIR=$HOME/Downloads/haste/from
+wget -O $FROMHASTEDIR/$1 -qc hastebin.com/raw/$1

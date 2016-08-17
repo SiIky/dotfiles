@@ -14,12 +14,6 @@ Patches:
 
 ## [DWM](dwm)
 
-```shell
-mkdir ~/bin/
-cp ./dwm/dwm_init ~/bin/dwm_init
-cp ./dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
-```
-
 Patches:
 * [Focus on click](http://dwm.suckless.org/patches/focusonclick)
 
