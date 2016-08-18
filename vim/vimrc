@@ -13,10 +13,14 @@ Plug 'itchyny/lightline.vim'
 "Plug 'mattn/vim-terminal'
 
 " indentation display --------------------------------------
-Plug 'Yggdroot/indentLine', { 'for': ['python', 'haskell', 'c', 'cpp'] }
+"Plug 'Yggdroot/indentLine', { 'for': ['python', 'haskell', 'c', 'cpp'] }
 "Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
 
+" elixir ---------------------------------------------------
+Plug 'elixir-lang/vim-elixir', { 'for': ['elixir'] }
+
 " toml -----------------------------------------------------
+" for cargo (rust) files
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " markdown -------------------------------------------------
@@ -79,7 +83,7 @@ se autochdir
 se autoindent
 se autoread
 se backspace=2
-se clipboard=unnamedplus
+se clipboard=unnamed
 se cmdheight=1
 se colorcolumn=60
 se conceallevel=0
@@ -168,7 +172,6 @@ nnoremap <leader>m V%=zz
 nnoremap ZZ :w<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
-nnoremap yy "*yy
 
 "movement keys for insert mode
 "inoremap <c-h> <left>
