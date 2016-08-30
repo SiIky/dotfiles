@@ -1,14 +1,9 @@
 scriptencoding utf-8
 se nocompatible
 " vim-plug =================================================
-let g:plug_threads = 1
+let g:plug_threads = 2
 
 call plug#begin('~/.vim/plugged')
-" status line ----------------------------------------------
-Plug 'itchyny/lightline.vim'
-"Plug 'bling/vim-bufferline'
-"Plug 'jlanzarotta/bufexplorer'
-
 " terminal -------------------------------------------------
 "Plug 'mattn/vim-terminal'
 
@@ -49,13 +44,22 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 "Plug 'lukerandall/haskellmode-vim', { 'for': 'haskell' }
 "Plug 'dag/vim2hs', { 'for': 'haskell' } " Fancy Stuff
 
+" files browser
+"Plug 'Shougo/vimfiler.vim'
+"Plug 'scrooloose/nerdtree'
+"Plug 'bling/vim-bufferline'
+"Plug 'jlanzarotta/bufexplorer'
+
 " general --------------------------------------------------
 " auto-window resize
 "Plug 'justincampbell/vim-eighties'
+
 " visual increment
 "Plug 'triglav/vim-visual-increment'
+
 " sideways
 "Plug 'AndrewRadev/sideways.vim'
+
 " yankring
 "Plug 'vim-scripts/YankRing.vim'
 
@@ -64,8 +68,10 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 
 " windowswap
 "Plug 'wesQ3/vim-windowswap'
+
 " fuzzy finder n stuff
 "Plug 'szw/vim-ctrlspace'
+
 " parens/brackets auto closing
 "Plug 'Raimondi/delimitMate'
 
@@ -74,8 +80,10 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 
 " Molokai coloscheme
 Plug 'tomasr/molokai'
+
 " async execution lib
 "Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+
 call plug#end()
 
 " general ==================================================
@@ -99,13 +107,13 @@ se fileencoding=utf-8
 se foldenable
 se foldmethod=manual
 se hidden
-se hlsearch
+se nohlsearch
 se incsearch
 se laststatus=2
 se linebreak
 se noerrorbells
 se noruler
-se noshowmode
+se showmode
 se nospell
 se nowrap
 se number
@@ -134,13 +142,13 @@ syntax on
 "se mouse=a
 
 " Status Line ==============================================
-"se statusline=
-"se statusline+=\ %([%n]\ %f%) " [buf#] fname
-"se statusline+=\ %(%m%r%h%w%) " modified/modifiable/etc
-"se statusline+=\ %=%y " ftype
-"se statusline+=\ %{strlen(&fenc)?&fenc:'none'}: "file encoding
-"se statusline+=%{&ff}\ \| "file format
-"se statusline+=\ %(%l:%c\ \|\ %L\ \|\ %) " #C:#L | #TL |
+se statusline=\ 
+se statusline+=%([%n]\ %f%)\  " [buf#] fname
+se statusline+=%(%m%r%h%w%) " modified/modifiable/etc
+se statusline+=%=%y\  " ftype
+se statusline+=%{strlen(&fenc)?&fenc:'none'}: "file encoding
+se statusline+=%{&ff}\ \|\  "file format
+se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
 
 " vim -b : edit binary using xxd-format --------------------
 augroup Binary
@@ -167,19 +175,13 @@ nnoremap <F9> :cclose<CR>
 let mapleader = ','
 let maplocalleader = ''
 
-" = on the whole buffer
+" = buffer/function
 nnoremap <LEADER>M maggVG=`a_zz
 nnoremap <LEADER>m ma]][[V%=`a_zz
 
 nnoremap ZZ :w<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
-
-"movement keys for insert mode
-"inoremap <C-H> <LEFT>
-"inoremap <C-L> <RIGHT>
-"inoremap <C-J> <DOWN>
-"inoremap <C-K> <UP>
 
 "movement keys
 nnoremap <C-J> 5j
@@ -230,12 +232,14 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " search
-nnoremap <SILENT><BS> :se hlsearch!<CR>
+nnoremap <C-H> :se hlsearch!<CR>
+nnoremap <silent><BS> :se hlsearch!<CR>
+
 vnoremap / y/<C-R>"<CR>:se hlsearch<CR>
 nnoremap / :se hlsearch<CR>/
-nnoremap n n<SILENT>:se hlsearch<CR>
-nnoremap N N<SILENT>:se hlsearch<CR>
-nnoremap * *<SILENT>:se hlsearch<CR>
+nnoremap n :se hlsearch<CR>n
+nnoremap N :se hlsearch<CR>N
+nnoremap * :se hlsearch<CR>*
 
 " vimrc edit
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
@@ -254,39 +258,40 @@ nnoremap <LOCALLEADER>9 9gt
 nnoremap <LOCALLEADER>l gt
 nnoremap <LOCALLEADER>h gT
 nnoremap <C-W>tn :tabnew<CR>
-nnoremap <C-W>tc :tabclose<CR>
+nnoremap <C-W>tq :tabclose<CR>
 
 " windows
-nnoremap <C-W>wf <C-W>f<C-W>T
-nnoremap <C-W>wq :bdelete<CR>
-nnoremap <C-W>wn :new<CR>
-nnoremap <C-W>wv :vnew<CR>
+nnoremap <C-W>tf <C-W>f<C-W>T
+nnoremap <C-W>q :bdelete<CR>
+nnoremap <C-W>n :new<CR>
+nnoremap <C-W>v :vnew<CR>
 nnoremap <C-L> :ls<CR>
 
 " put stuff around words
-nnoremap <LEADER>" viw<ESC>a"<ESC>hbi"<ESC>lel
-nnoremap <LEADER>' viw<ESC>a'<ESC>hbi'<ESC>lel
-nnoremap <LEADER>` viw<ESC>a`<ESC>hbi`<ESC>lel
-nnoremap <LEADER>( viw<ESC>a)<ESC>hbi(<ESC>lel
-nnoremap <LEADER>) viw<ESC>a)<ESC>hbi(<ESC>lel
-nnoremap <LEADER>[ viw<ESC>a]<ESC>hbi[<ESC>lel
-nnoremap <LEADER>] viw<ESC>a]<ESC>hbi[<ESC>lel
-nnoremap <LEADER>{ viw<ESC>a}<ESC>hbi{<ESC>lel
-nnoremap <LEADER>} viw<ESC>a}<ESC>hbi{<ESC>lel
-nnoremap <LEADER>< VIW<ESC>a><ESC>hbi<<ESC>lel
-nnoremap <LEADER>> viw<ESC>a><ESC>hbi<<ESC>lel
+nnoremap <LEADER>" viw<ESC>a"<ESC>bi"<ESC>el
+nnoremap <LEADER>' viw<ESC>a'<ESC>bi'<ESC>el
+nnoremap <LEADER>` viw<ESC>a`<ESC>bi`<ESC>el
+nnoremap <LEADER>( viw<ESC>a)<ESC>bi(<ESC>el
+nnoremap <LEADER>) viw<ESC>a)<ESC>bi(<ESC>el
+nnoremap <LEADER>[ viw<ESC>a]<ESC>bi[<ESC>el
+nnoremap <LEADER>] viw<ESC>a]<ESC>bi[<ESC>el
+nnoremap <LEADER>{ viw<ESC>a}<ESC>bi{<ESC>el
+nnoremap <LEADER>} viw<ESC>a}<ESC>bi{<ESC>el
+nnoremap <LEADER>< viw<ESC>a><ESC>bi<<ESC>el
+nnoremap <LEADER>> viw<ESC>a><ESC>bi<<ESC>el
+
 " put stuff around selected text
-vnoremap <LEADER>" <ESC>`>a"<ESC>`<I"<ESC>
-vnoremap <LEADER>' <ESC>`>a'<ESC>`<I'<ESC>
-vnoremap <LEADER>` <ESC>`>a`<ESC>`<I`<ESC>
-vnoremap <LEADER>( <ESC>`>a)<ESC>`<I(<ESC>
-vnoremap <LEADER>) <ESC>`>a)<ESC>`<I(<ESC>
-vnoremap <LEADER>[ <ESC>`>a]<ESC>`<I[<ESC>
-vnoremap <LEADER>] <ESC>`>a]<ESC>`<I[<ESC>
-vnoremap <LEADER>{ <ESC>`>a}<ESC>`<I{<ESC>
-vnoremap <LEADER>} <ESC>`>a}<ESC>`<I{<ESC>
-vnoremap <LEADER>< <ESC>`>a><ESC>`<I<<ESC>
-vnoremap <LEADER>> <ESC>`>a><ESC>`<I<<ESC>
+vnoremap <LEADER>" <ESC>`>a"<ESC>`<i"<ESC>
+vnoremap <LEADER>' <ESC>`>a'<ESC>`<i'<ESC>
+vnoremap <LEADER>` <ESC>`>a`<ESC>`<i`<ESC>
+vnoremap <LEADER>( <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap <LEADER>) <ESC>`>a)<ESC>`<i(<ESC>
+vnoremap <LEADER>[ <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap <LEADER>] <ESC>`>a]<ESC>`<i[<ESC>
+vnoremap <LEADER>{ <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap <LEADER>} <ESC>`>a}<ESC>`<i{<ESC>
+vnoremap <LEADER>< <ESC>`>a><ESC>`<i<<ESC>
+vnoremap <LEADER>> <ESC>`>a><ESC>`<i<<ESC>
 
 " abrevs ===================================================
 iabbrev adn and
@@ -299,15 +304,6 @@ iabbrev waht what
 iabbrev strutc struct
 iabbrev flaot float
 
-" C snippets ===============================================
-let @i='i#include <>i'
-let @f='A (){}kba'
-let @d='I#define '
-let @c='A /*  */2hi'
-
-" rust.vim =================================================
-"let g:rustfmt_autosave = 1
-
 " invisibles ===============================================
 se nolist
 se listchars=tab:\|▸,eol:¬,trail:∙
@@ -315,76 +311,23 @@ se listchars=tab:\|▸,eol:¬,trail:∙
 nnoremap <C-P> :se list!<CR>
 
 " indentline ===============================================
-nnoremap <SILENT><TAB> :IndentLinesToggle<CR>
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
-let g:indentLine_color_dark = 2
-let g:indentLine_leadingSpaceChar = '▸'
-let g:indentLine_leadingSpaceEnabled = 0
-let g:indentLine_enabled = 0
+"nnoremap <silent><TAB> :IndentLinesToggle<CR>
+"let g:indentLine_char = '|'
+"let g:indentLine_color_term = 239
+"let g:indentLine_color_dark = 2
+"let g:indentLine_leadingSpaceChar = '▸'
+"let g:indentLine_leadingSpaceEnabled = 0
+"let g:indentLine_enabled = 0
 
-" NETRW explore file browser ===============================
+" NETRW files browser ===============================
 let g:netrw_liststyle = 3 " listing style
 let g:netrw_browse_split = 0 " opening behaviour
-map <SILENT><C-E> :Explore<CR>
+map <silent><C-E> :Explore<CR>
 
 " monokai theme ============================================
 colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 0
-
-" lightline ================================================
-" 'obsession': 'ObsessionStatus',
-let g:lightline = {
-    \ 'active': {
-    \    'left': [
-    \            [ 'mode', 'paste' ],
-    \            [ 'fugitive', 'filename', 'readonly' ]
-    \            ]
-    \ },
-    \ 'component_function': {
-    \    'fugitive': 'LightLineFugitive',
-    \    'readonly': 'LightLineReadonly',
-    \    'filename': 'LightLineFilename'
-    \ },
-    \ }
-
-" lightline functions ---------------------------------------
-function! LightLineReadonly()
-    if &filetype == "help"
-        return ""
-    elseif &readonly
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineFugitive()
-    if exists("*fugitive#head")
-        let _ = fugitive#head()
-        return strlen(_) ? ' '._ : ''
-    endif
-    return ''
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineModified()
-    if &filetype == "help"
-        return ""
-    elseif &modified
-        return "+"
-    elseif &modifiable
-        return ""
-    else
-        return ""
-    endif
-endfunction
 
 " vimwiki ==================================================
 "nmap <LOCALLEADER>es :VimwikiUISelect<CR>
@@ -440,5 +383,6 @@ let g:vim_markdown_emphasis_multiline = 0
 let g:vim_markdown_math = 0
 
 autocmd VimEnter * echo "Fuck You Human .l."
+
 " stuff to remember
 " :h session-file
