@@ -17,7 +17,7 @@ Plug 'itchyny/lightline.vim'
 "Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
 
 " elixir ---------------------------------------------------
-Plug 'elixir-lang/vim-elixir', { 'for': ['elixir'] }
+"Plug 'elixir-lang/vim-elixir', { 'for': ['elixir'] }
 
 " toml -----------------------------------------------------
 " for cargo (rust) files
@@ -60,7 +60,7 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 "Plug 'vim-scripts/YankRing.vim'
 
 " vimwiki
-Plug 'vimwiki/vimwiki', { 'for': ['vimwiki', 'wiki'], 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote', 'VimwikiTabMakeDiaryNote', 'VimwikiFollowLink', 'VimwikiGoBackLink', 'VimwikiSplitLink', 'VimwikiVSplitLink', 'VimwikiTabnewLink', 'VimwikiNextLink', 'VimwikiPrevLink', 'VimwikiGoto', 'VimwikiDeleteLink', 'VimwikiRenameLink', 'Vimwiki2HTML', 'Vimwiki2HTMLBrowse', 'VimwikiAll2HTML', 'VimwikiToggleListItem', 'VimwikiListChangeLevel', 'VimwikiSearch', 'VimwikiBacklinks', 'VimwikiTable', 'VimwikiTableMoveColumnLeft', 'VimwikiGenerateLinks', 'VimwikiDiaryGenerateLinks', 'VimwikiDiaryNextDay', 'VimwikiDiaryPrevDay', 'VimwikiTOC', 'VimwikiCheckLinks', 'VimwikiRebuildTags', 'VimwikiSearchTags', 'VimwikiGenerateTags'] }
+"Plug 'vimwiki/vimwiki', { 'for': ['vimwiki', 'wiki'], 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote', 'VimwikiTabMakeDiaryNote', 'VimwikiFollowLink', 'VimwikiGoBackLink', 'VimwikiSplitLink', 'VimwikiVSplitLink', 'VimwikiTabnewLink', 'VimwikiNextLink', 'VimwikiPrevLink', 'VimwikiGoto', 'VimwikiDeleteLink', 'VimwikiRenameLink', 'Vimwiki2HTML', 'Vimwiki2HTMLBrowse', 'VimwikiAll2HTML', 'VimwikiToggleListItem', 'VimwikiListChangeLevel', 'VimwikiSearch', 'VimwikiBacklinks', 'VimwikiTable', 'VimwikiTableMoveColumnLeft', 'VimwikiGenerateLinks', 'VimwikiDiaryGenerateLinks', 'VimwikiDiaryNextDay', 'VimwikiDiaryPrevDay', 'VimwikiTOC', 'VimwikiCheckLinks', 'VimwikiRebuildTags', 'VimwikiSearchTags', 'VimwikiGenerateTags'] }
 
 " windowswap
 "Plug 'wesQ3/vim-windowswap'
@@ -72,6 +72,8 @@ Plug 'vimwiki/vimwiki', { 'for': ['vimwiki', 'wiki'], 'on': ['VimwikiIndex', 'Vi
 " completion engine -- req python2+
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'for': ['haskell', 'python', 'c'] } 
 
+" Molokai coloscheme
+Plug 'tomasr/molokai'
 " async execution lib
 "Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 call plug#end()
@@ -166,18 +168,18 @@ let mapleader = ','
 let maplocalleader = ''
 
 " = on the whole buffer
-nnoremap <leader>M maggVG=`a_zz
-nnoremap <leader>m V%=zz
+nnoremap <LEADER>M maggVG=`a_zz
+nnoremap <LEADER>m ma]][[V%=`a_zz
 
 nnoremap ZZ :w<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
 
 "movement keys for insert mode
-"inoremap <c-h> <left>
-"inoremap <c-l> <right>
-"inoremap <c-j> <down>
-"inoremap <c-k> <up>
+"inoremap <C-H> <LEFT>
+"inoremap <C-L> <RIGHT>
+"inoremap <C-J> <DOWN>
+"inoremap <C-K> <UP>
 
 "movement keys
 nnoremap <C-J> 5j
@@ -198,20 +200,20 @@ vnoremap e E
 vnoremap E e
 
 "bye bye arrow keys
-"inoremap <down> <nop>
-"nnoremap <down> <nop>
-"vnoremap <down> <nop>
-"inoremap <left> <nop>
-"nnoremap <left> <nop>
-"vnoremap <left> <nop>
-"inoremap <right> <nop>
-"nnoremap <right> <nop>
-"vnoremap <right> <nop>
-"inoremap <up> <nop>
-"nnoremap <up> <nop>
-"vnoremap <up> <nop>
+"inoremap <DOWN> <NOP>
+"nnoremap <DOWN> <NOP>
+"vnoremap <DOWN> <NOP>
+"inoremap <LEFT> <NOP>
+"nnoremap <LEFT> <NOP>
+"vnoremap <LEFT> <NOP>
+"inoremap <RIGHT> <NOP>
+"nnoremap <RIGHT> <NOP>
+"vnoremap <RIGHT> <NOP>
+"inoremap <UP> <NOP>
+"nnoremap <UP> <NOP>
+"vnoremap <UP> <NOP>
 
-nnoremap <space> za
+nnoremap <SPACE> za
 
 " move cursor to the beggining/end of the line
 nnoremap gh _
@@ -228,62 +230,63 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " search
-nnoremap <silent><BS> :se hlsearch!<CR>
+nnoremap <SILENT><BS> :se hlsearch!<CR>
 vnoremap / y/<C-R>"<CR>:se hlsearch<CR>
 nnoremap / :se hlsearch<CR>/
-nnoremap n n<silent>:se hlsearch<CR>
-nnoremap N N<silent>:se hlsearch<CR>
-nnoremap * *<silent>:se hlsearch<CR>
+nnoremap n n<SILENT>:se hlsearch<CR>
+nnoremap N N<SILENT>:se hlsearch<CR>
+nnoremap * *<SILENT>:se hlsearch<CR>
 
 " vimrc edit
-nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <LEADER>ev :e $MYVIMRC<CR>
+nnoremap <LEADER>sv :source $MYVIMRC<CR>
 
 " tabs
-nnoremap <localleader>1 1gt
-nnoremap <localleader>2 2gt
-nnoremap <localleader>3 3gt
-nnoremap <localleader>4 4gt
-nnoremap <localleader>5 5gt
-nnoremap <localleader>6 6gt
-nnoremap <localleader>7 7gt
-nnoremap <localleader>8 8gt
-nnoremap <localleader>9 9gt
-nnoremap <localleader>l gt
-nnoremap <localleader>h gT
-nnoremap <c-w>tn :tabnew<CR>
-nnoremap <c-w>tc :tabclose<CR>
+nnoremap <LOCALLEADER>1 1gt
+nnoremap <LOCALLEADER>2 2gt
+nnoremap <LOCALLEADER>3 3gt
+nnoremap <LOCALLEADER>4 4gt
+nnoremap <LOCALLEADER>5 5gt
+nnoremap <LOCALLEADER>6 6gt
+nnoremap <LOCALLEADER>7 7gt
+nnoremap <LOCALLEADER>8 8gt
+nnoremap <LOCALLEADER>9 9gt
+nnoremap <LOCALLEADER>l gt
+nnoremap <LOCALLEADER>h gT
+nnoremap <C-W>tn :tabnew<CR>
+nnoremap <C-W>tc :tabclose<CR>
 
 " windows
-nnoremap <c-w>wf <c-w>f<c-w>T
-nnoremap <c-w>wq :bdelete<CR>
-nnoremap <c-w>wn :new<CR>
-nnoremap <c-w>wv :vnew<CR>
+nnoremap <C-W>wf <C-W>f<C-W>T
+nnoremap <C-W>wq :bdelete<CR>
+nnoremap <C-W>wn :new<CR>
+nnoremap <C-W>wv :vnew<CR>
+nnoremap <C-L> :ls<CR>
 
 " put stuff around words
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
-nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
-nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
-nnoremap <leader>) viw<esc>a)<esc>hbi(<esc>lel
-nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
-nnoremap <leader>] viw<esc>a]<esc>hbi[<esc>lel
-nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
-nnoremap <leader>} viw<esc>a}<esc>hbi{<esc>lel
-nnoremap <leader>< viw<esc>a><esc>hbi<<esc>lel
-nnoremap <leader>> viw<esc>a><esc>hbi<<esc>lel
+nnoremap <LEADER>" viw<ESC>a"<ESC>hbi"<ESC>lel
+nnoremap <LEADER>' viw<ESC>a'<ESC>hbi'<ESC>lel
+nnoremap <LEADER>` viw<ESC>a`<ESC>hbi`<ESC>lel
+nnoremap <LEADER>( viw<ESC>a)<ESC>hbi(<ESC>lel
+nnoremap <LEADER>) viw<ESC>a)<ESC>hbi(<ESC>lel
+nnoremap <LEADER>[ viw<ESC>a]<ESC>hbi[<ESC>lel
+nnoremap <LEADER>] viw<ESC>a]<ESC>hbi[<ESC>lel
+nnoremap <LEADER>{ viw<ESC>a}<ESC>hbi{<ESC>lel
+nnoremap <LEADER>} viw<ESC>a}<ESC>hbi{<ESC>lel
+nnoremap <LEADER>< VIW<ESC>a><ESC>hbi<<ESC>lel
+nnoremap <LEADER>> viw<ESC>a><ESC>hbi<<ESC>lel
 " put stuff around selected text
-vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
-vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
-vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
-vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>
-vnoremap <leader>) <esc>`>a)<esc>`<i(<esc>
-vnoremap <leader>[ <esc>`>a]<esc>`<i[<esc>
-vnoremap <leader>] <esc>`>a]<esc>`<i[<esc>
-vnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
-vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
-vnoremap <leader>< <esc>`>a><esc>`<i<<esc>
-vnoremap <leader>> <esc>`>a><esc>`<i<<esc>
+vnoremap <LEADER>" <ESC>`>a"<ESC>`<I"<ESC>
+vnoremap <LEADER>' <ESC>`>a'<ESC>`<I'<ESC>
+vnoremap <LEADER>` <ESC>`>a`<ESC>`<I`<ESC>
+vnoremap <LEADER>( <ESC>`>a)<ESC>`<I(<ESC>
+vnoremap <LEADER>) <ESC>`>a)<ESC>`<I(<ESC>
+vnoremap <LEADER>[ <ESC>`>a]<ESC>`<I[<ESC>
+vnoremap <LEADER>] <ESC>`>a]<ESC>`<I[<ESC>
+vnoremap <LEADER>{ <ESC>`>a}<ESC>`<I{<ESC>
+vnoremap <LEADER>} <ESC>`>a}<ESC>`<I{<ESC>
+vnoremap <LEADER>< <ESC>`>a><ESC>`<I<<ESC>
+vnoremap <LEADER>> <ESC>`>a><ESC>`<I<<ESC>
 
 " abrevs ===================================================
 iabbrev adn and
@@ -309,10 +312,10 @@ let @c='A /*  */2hi'
 se nolist
 se listchars=tab:\|▸,eol:¬,trail:∙
 "se listchars=tab:>~,trail:.
-nnoremap <c-l> :se list!<CR>
+nnoremap <C-P> :se list!<CR>
 
 " indentline ===============================================
-nnoremap <silent><tab> :IndentLinesToggle<CR>
+nnoremap <SILENT><TAB> :IndentLinesToggle<CR>
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
 let g:indentLine_color_dark = 2
@@ -323,7 +326,7 @@ let g:indentLine_enabled = 0
 " NETRW explore file browser ===============================
 let g:netrw_liststyle = 3 " listing style
 let g:netrw_browse_split = 0 " opening behaviour
-map <silent><c-e> :Explore<CR>
+map <SILENT><C-E> :Explore<CR>
 
 " monokai theme ============================================
 colorscheme molokai
@@ -384,42 +387,42 @@ function! LightLineModified()
 endfunction
 
 " vimwiki ==================================================
-nmap <localleader>es :VimwikiUISelect<CR>
-au BufNewFile,BufRead,BufReadPost *.wiki set filetype=vimwiki
-let g:vimwiki_hl_headers = 0
-let g:vimwiki_hl_cb_checked = 1
-let g:vimwiki_global_ext = 0
-let g:vimwiki_ext2syntax = {
-    \ '.md': 'markdown',
-    \ '.wiki': 'default'
-    \ }
-let g:vimwiki_menu = '' " 'Vimwiki'
-let g:vimwiki_listsyms = ' .oOX'
+"nmap <LOCALLEADER>es :VimwikiUISelect<CR>
+"au BufNewFile,BufRead,BufReadPost *.wiki set filetype=vimwiki
+"let g:vimwiki_hl_headers = 0
+"let g:vimwiki_hl_cb_checked = 1
+"let g:vimwiki_global_ext = 0
+"let g:vimwiki_ext2syntax = {
+"    \ '.md': 'markdown',
+"    \ '.wiki': 'default'
+"    \ }
+"let g:vimwiki_menu = '' " 'Vimwiki'
+"let g:vimwiki_listsyms = ' .oOX'
 "let g:vimwiki_listsyms = '✗○◐●✓'
-let g:vimwiki_use_mouse = 0
-let g:vimwiki_folding = ''
-let g:vimwiki_use_calendar = 0
-let g:vimwiki_table_mappings = 0
-let g:vimwiki_table_auto_fmt = 1
-let g:vimwiki_CJK_length = 0 " UTF8 related
-let g:vimwiki_dir_link = ''
-let g:vimwiki_conceallevel = 2
-let g:vimwiki_autowriteall = 0
-let g:vimwiki_url_maxsave = 15 "default
-let g:vimwiki_map_prefix = '<localleader>e'
-let g:vimwiki_auto_chdir = 1
-
-" change 'path' if needed
-let g:vimwiki_list = [{
-    \ 'path': '~/Documents/my_stuff/vim/wiki',
-    \ 'auto_export': 0,
-    \ 'auto_toc': 1,
-    \ 'syntax': 'default',
-    \ 'ext': '.wiki',
-    \ 'maxhl': 1,
-    \ 'auto_tags': 1,
-    \ 'list_margin': -1
-    \ }]
+"let g:vimwiki_use_mouse = 0
+"let g:vimwiki_folding = ''
+"let g:vimwiki_use_calendar = 0
+"let g:vimwiki_table_mappings = 0
+"let g:vimwiki_table_auto_fmt = 1
+"let g:vimwiki_CJK_length = 0 " UTF8 related
+"let g:vimwiki_dir_link = ''
+"let g:vimwiki_conceallevel = 2
+"let g:vimwiki_autowriteall = 0
+"let g:vimwiki_url_maxsave = 15 "default
+"let g:vimwiki_map_prefix = '<LOCALLEADER>e'
+"let g:vimwiki_auto_chdir = 1
+"
+"" change 'path' if needed
+"let g:vimwiki_list = [{
+"    \ 'path': '~/Documents/my_stuff/vim/wiki',
+"    \ 'auto_export': 0,
+"    \ 'auto_toc': 1,
+"    \ 'syntax': 'default',
+"    \ 'ext': '.wiki',
+"    \ 'maxhl': 1,
+"    \ 'auto_tags': 1,
+"    \ 'list_margin': -1
+"    \ }]
 
 " delimitmate ==============================================
 "let delimitMate_expand_cr = 1
