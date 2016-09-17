@@ -1,44 +1,53 @@
-#!/usr/etc/env sh
+#!/usr/bin/env sh
+
+REPODIR=$(pwd)
+TMPDIR=/tmp/dotfiles_setup
 
 # setup bash env
-cp ./bash/bashrc ~/.bashrc
-cp ./bash/aliases ~/.bash_aliases
+echo 'setup bashrc'
+cp $REPODIR/bash/bashrc ~/.bashrc
+cp $REPODIR/bash/aliases ~/.bash_aliases
 
 # create user bin folder
 mkdir ~/bin/
 
 # setup vim
-sh ./vim/setup_vim
+echo 'setup vim'
+sh $REPODIR/vim/setup_vim
 
 # setup hastebin scripts
-cp hastebin/* ~/bin
+echo 'setup hastebin'
+cp $REPODIR/hastebin/* ~/bin
 
 # copy dwm init script to user bin folder
 # and dwm entry for lightdm
-cp ./dwm/dwm_init ~/bin/dwm_init
-cp ./dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
+echo 'setup dwm'
+cp $REPODIR/dwm/dwm_init ~/bin/dwm_init
+cp $REPODIR/dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
 
 # create temporary setup folder
-mkdir ../dotfiles_setup
-cd ../dotfiles_setup
+mkdir $TMPDIR
 
 # install Hermit font
-mkdir hermit
-cd hermit
+echo 'setup hermit font'
+mkdir $TMPDIR/hermit
+cd $TMPDIR/hermit
 wget https://pcaro.es/d/otf-hermit-1.21.tar.gz
 tar xvzf *hermit*.tar.gz
 sudo mkdir -p /usr/share/fonts/opentype/hermit
 sudo cp *.otf /usr/share/fonts/opentype/hermit
 
 # clone git repos
-cd ..
+cd $TMPDIR
 
+echo 'cloning repositories'
 git clone http://git.suckless.org/st
 git clone http://git.suckless.org/dwm
 git clone http://git.suckless.org/dmenu
 git clone https://github.com/drkh5h/slstatus
 
-cp ../dotfiles/config.h/st ./st/config.h
-cp ../dotfiles/config.h/dwm ./dwm/config.h
-cp ../dotfiles/config.h/dmenu ./dmenu/config.h
-cp ../dotfiles/config.h/slstatus ./slstatus/config.h
+echo 'copying config files'
+cp $REPODIR/config.h/st $TMPDIR/st/config.h
+cp $REPODIR/config.h/dwm $TMPDIR/dwm/config.h
+cp $REPODIR/config.h/dmenu $TMPDIR/dmenu/config.h
+cp $REPODIR/config.h/slstatus $TMPDIR/slstatus/config.h
