@@ -3,7 +3,7 @@
 # keyboard layout
 # `$ grep "grp:.*toggle" /usr/share/X11/xkb/rules/base.lst`
 # set US as default and scroll lock to toggle between layouts
-exec setxkbmap -layout us,pt -option grp:sclk_toggle &
+exec setxkbmap -layout pt,us -option grp:sclk_toggle &
 
 exec xsetroot -name " " &
 exec slstatus &

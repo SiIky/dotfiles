@@ -22,7 +22,12 @@ static const char *colors[SchemeLast][3]      = {
 static const Bool focusonwheelscroll = False;
 
 /* tagging */
-static const char *tags[] = { "ViM", "term", "music", "w", "w", "w", "void" };
+static const char *tags[] = { "ViM", "term", "music", "w", "m", "steam", "void" };
+
+/* tabs */
+#define T_FIREFOX       (1 << 2)
+#define T_SPOTIFY       (1 << 2)
+#define T_STEAM         (1 << 5)
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -31,8 +36,9 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
-        { "Spotify",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       T_FIREFOX,    0,           -1 },
+        { "Spotify",  NULL,       NULL,       T_SPOTIFY,    0,           -1 },
+        { "Steam",    NULL,       NULL,       T_STEAM,      0,           -1 },
 };
 
 /* layout(s) */
@@ -84,7 +90,7 @@ static Key keys[] = {
 	{ WinKey|ShiftMask,        XK_l,             setmfact,              {.f = +0.05} },
 	{ WinKey,                  XK_Return,        zoom,                  {0} },
 	{ WinKey,                  XK_Tab,           view,                  {0} },
-	{ WinKey|ShiftMask,        XK_c,             killclient,            {0} },
+	{ LAlt,                    XK_F4,            killclient,            {0} },
 	{ WinKey,                  XK_space,         setlayout,             {0} },
 	{ WinKey|ShiftMask,        XK_space,         togglefloating,        {0} },
 	{ WinKey,                  XK_0,             view,                  {.ui = ~0 } },
@@ -93,7 +99,7 @@ static Key keys[] = {
 	{ WinKey,                  XK_period,        focusmon,              {.i = +1 } },
 	{ WinKey|ShiftMask,        XK_comma,         tagmon,                {.i = -1 } },
 	{ WinKey|ShiftMask,        XK_period,        tagmon,                {.i = +1 } },
-	{ WinKey|ShiftMask,        XK_q,             quit,                  {0} },
+	{ WinKey|ShiftMask,        XK_F4,            quit,                  {0} },
 	{ WinKey,                  XK_F12,           spawn,                 {.v = upvol   } },
 	{ WinKey,                  XK_F11,           spawn,                 {.v = downvol } },
 	{ WinKey,                  XK_F10,           spawn,                 {.v = mutevol } },
@@ -110,14 +116,16 @@ static Key keys[] = {
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click            event mask    button      function           argument */
+	{ ClkStatusText,    0,            Button2,    spawn,             {.v = termcmd } },
+    /*
 	{ ClkLtSymbol,      0,            Button1,    setlayout,         {0} },
 	{ ClkWinTitle,      0,            Button2,    zoom,              {0} },
-	{ ClkStatusText,    0,            Button2,    spawn,             {.v = termcmd } },
-	{ ClkClientWin,     WinKey,      Button1,    movemouse,         {0} },
-	{ ClkClientWin,     WinKey,      Button2,    togglefloating,    {0} },
-	{ ClkClientWin,     WinKey,      Button3,    resizemouse,       {0} },
+	{ ClkClientWin,     WinKey,       Button1,    movemouse,         {0} },
+	{ ClkClientWin,     WinKey,       Button2,    togglefloating,    {0} },
+	{ ClkClientWin,     WinKey,       Button3,    resizemouse,       {0} },
 	{ ClkTagBar,        0,            Button1,    view,              {0} },
 	{ ClkTagBar,        0,            Button3,    toggleview,        {0} },
-	{ ClkTagBar,        WinKey,      Button1,    tag,               {0} },
-	{ ClkTagBar,        WinKey,      Button3,    toggletag,         {0} },
+	{ ClkTagBar,        WinKey,       Button1,    tag,               {0} },
+	{ ClkTagBar,        WinKey,       Button3,    toggletag,         {0} },
+        */
 };
