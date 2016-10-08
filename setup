@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 REPODIR=$(pwd)
-TMPDIR=/tmp/dotfiles_setup
+TMPDIR=$1
 
 # setup bash env
 echo 'setup bashrc'
