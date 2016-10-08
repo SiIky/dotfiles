@@ -4,8 +4,8 @@ case $- in
 esac
 
 HISTCONTROL=ignoreboth
-HISTSIZE=500
-HISTFILESIZE=1000
+HISTSIZE=250
+HISTFILESIZE=500
 shopt -s histappend
 shopt -s checkwinsize
 
@@ -29,4 +29,4 @@ stty -ixon
 export PATH=$HOME/bin:$PATH
 export VISUAL=vim
 export EDITOR=vim
-export LD_LIBRARY_PATH=~/projects/c/lib:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH: # Add libs here
