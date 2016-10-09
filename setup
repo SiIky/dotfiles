@@ -47,7 +47,7 @@ git clone http://git.suckless.org/dmenu
 git clone https://github.com/drkh5h/slstatus
 
 echo 'copying config files'
-cp $REPODIR/config.h/st $TMPDIR/st/config.h
-cp $REPODIR/config.h/dwm $TMPDIR/dwm/config.h
-cp $REPODIR/config.h/dmenu $TMPDIR/dmenu/config.h
-cp $REPODIR/config.h/slstatus $TMPDIR/slstatus/config.h
+cp -f $REPODIR/st/* $TMPDIR/st
+cp -f $REPODIR/dwm/* $TMPDIR/dwm
+cp -f $REPODIR/dmenu/* $TMPDIR/dmenu
+cp -f $REPODIR/slstatus/* $TMPDIR/slstatus

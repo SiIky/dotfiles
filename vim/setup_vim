@@ -1,14 +1,13 @@
 #!/usr/bin/env sh
 
-VIMFILES=$HOME/.vim
-COLORS=$VIMFILES/colors
+VIMFILES=~/.vim
 SWP=$VIMFILES/swp
 AUTO=$VIMFILES/autoload
 
 # create necessary folders in ~/.vim
-mkdir -p $COLORS $SWP $AUTO
+mkdir -p $SWP $AUTO
 
-# get molokai colorscheme and Vim-Plug
+# get Vim-Plug
 wget -q -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cp ./vimrc $VIMFILES/vimrc
