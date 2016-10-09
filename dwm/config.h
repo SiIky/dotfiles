@@ -25,8 +25,9 @@ static const Bool focusonwheelscroll = False;
 static const char *tags[] = { "ViM", "term", "music", "w", "m", "steam", "void" };
 
 /* tabs */
-#define T_FIREFOX       (1 << 3)
-#define T_SPOTIFY       (1 << 2)
+#define T_MUSIC         (1 << 2)
+#define T_WEB           (1 << 3)
+#define T_MAIL          (1 << 4)
 #define T_STEAM         (1 << 5)
 
 static const Rule rules[] = {
@@ -34,11 +35,14 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class      instance    title       tags mask     isfloating   monitor */
-    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    { "Firefox",  NULL,       NULL,       T_FIREFOX,    0,           -1 },
-    { "Spotify",  NULL,       NULL,       T_SPOTIFY,    0,           -1 },
-    { "Steam",    NULL,       NULL,       T_STEAM,      0,           -1 },
+    /* class            instance        title           tags mask       isfloating      monitor */
+    { "Gimp",           NULL,           NULL,           0,              1,              -1 },
+    { "Spotify",        NULL,           NULL,           T_MUSIC,        0,              -1 },
+    { "st-256color",    "st-256color",  "cmus v2.7.0",  T_MUSIC,        0,              -1 },
+    { "Firefox",        NULL,           NULL,           T_WEB,          0,              -1 },
+    { NULL,             "Mail",         NULL,           T_MAIL,         0,              -1 },
+    { "Steam",          NULL,           NULL,           T_STEAM,        1,              -1 },
+    { "Surf",           "surf",         NULL,           T_MAIL,         0,              -1 },
 };
 
 /* layout(s) */
