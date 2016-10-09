@@ -1,0 +1,15 @@
+# Generic Background
+# First value is not used.
+color background color013 color233
+
+#Text/background when reading an article
+color article color108 color233
+
+#Color the listview items
+color listnormal color188 color233
+
+#Selected listveiew item.
+color listfocus color108 color236
+
+# info
+color info color144 color234
