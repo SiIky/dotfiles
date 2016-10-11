@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec st -c CMUS -t CMUS -n CMUS cmus

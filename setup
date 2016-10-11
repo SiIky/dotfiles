@@ -5,24 +5,25 @@ TMPDIR=$1
 
 # setup bash env
 echo 'setup bashrc'
+# LS_COLORS
+wget https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS -O ~/.config/dircolors
 cp $REPODIR/bash/bashrc ~/.bashrc
 cp $REPODIR/bash/aliases ~/.bash_aliases
 
 # create user bin folder
-mkdir ~/bin/
+cp $REPODIR/bin $HOME
 
 # setup vim
 echo 'setup vim'
 sh $REPODIR/vim/setup_vim
 
-# setup hastebin scripts
-echo 'setup hastebin'
-cp $REPODIR/hastebin/* ~/bin
+# setup newsbeuter
+mkdir ~/.newsbeuter
+cp -f config colors -t ~/.newsbeuter
 
 # copy dwm init script to user bin folder
 # and dwm entry for lightdm
 echo 'setup dwm'
-cp $REPODIR/dwm/dwm_init ~/bin/dwm_init
 cp $REPODIR/dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
 
 # create temporary setup folder
@@ -44,10 +45,14 @@ echo 'cloning repositories'
 git clone http://git.suckless.org/st
 git clone http://git.suckless.org/dwm
 git clone http://git.suckless.org/dmenu
+git clone http://git.suckless.org/slock
 git clone https://github.com/drkh5h/slstatus
+git clone https://github.com/knopwob/dunst
 
 echo 'copying config files'
 cp -f $REPODIR/st/* $TMPDIR/st
 cp -f $REPODIR/dwm/* $TMPDIR/dwm
 cp -f $REPODIR/dmenu/* $TMPDIR/dmenu
+cp -f $REPODIR/slock/* $TMPDIR/slock
 cp -f $REPODIR/slstatus/* $TMPDIR/slstatus
+cp -f $REPODIR/dunst/* $TMPDIR/dunst

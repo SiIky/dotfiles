@@ -31,3 +31,4 @@ export VISUAL=vim
 export EDITOR=vim
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH: # Add libs here
 export STEAM_FRAME_FORCE_CLOSE=1
+eval $(dircolors -b $HOME/.config/dircolors)
