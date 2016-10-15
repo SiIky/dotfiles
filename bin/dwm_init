@@ -2,10 +2,16 @@
 
 # keyboard layout
 # `$ grep "grp:.*toggle" /usr/share/X11/xkb/rules/base.lst`
-# set US as default and scroll lock to toggle between layouts
+# set PT as default and bind scroll lock to toggle between layouts
 exec setxkbmap -layout pt,us -option grp:sclk_toggle &
 
-exec xsetroot -name " " &
-exec slstatus &
+exec slstatus -d & # status bar
+exec xset m 0 0 & # disable mouse accel (almost, keep looking)
+exec redshift &
+exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose &
 
-exec dwm
+if [ -f ~/.fehbg ]; then
+    . ~/.fehbg # wallpaper
+fi
+
+exec dwm # window manager

@@ -1,11 +1,11 @@
 # dotfiles
 
-[Simple Terminal (ST)][st]
-[DWM][dwm]
-[dmenu][dmenu]
-[Hermit Font][hermit]
-[Vim-Plug][vplug]
-[Molokai][molokai]
+* [Simple Terminal (ST)][st]
+* [DWM][dwm]
+* [dmenu][dmenu]
+* [Hermit Font][hermit]
+* [Vim-Plug][vplug]
+* [Molokai][molokai]
 
 ## [ST](st)
 

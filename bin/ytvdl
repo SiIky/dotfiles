@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+youtube-dl --restrict-filenames -o "~/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" $1

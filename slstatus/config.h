@@ -12,13 +12,13 @@
 #define CPU_F   "\u231A " /* ⌚ */
 #define RAM_F   "\u2328 " /* ⌨  */
 #define BAT_F   "bat "
-#define TIME_F  "\u231B " /* ⌛ */
+#define TIME_F  "" /*"\u231B "*/ /* ⌛ */
 
 #define WIFI_A  "wlan0"
 #define CPU_A   NULL
 #define RAM_A   NULL
 #define BAT_A   "BAT0"
-#define TIME_A  "%R"
+#define TIME_A  "%R" /* "%d(%a)/%m(%b)/%y %R" */
 
 /* statusbar
 - battery_perc (battery percentage) [argument: battery name]
@@ -49,9 +49,8 @@
 static const struct arg args[] = {
     /* function         format                  argument */
     { wifi_essid,       SEP WIFI_F "%s ",       WIFI_A },
-    { cpu_perc,         SEP CPU_F  "%s ",       CPU_A  },
-    { ram_perc,         SEP RAM_F  "%s ",       RAM_A  },
-    { battery_perc,     SEP BAT_F  "%s ",       BAT_A  },
+    { cpu_perc,         SEP CPU_F  "%s ",       CPU_A },
+    { ram_perc,         SEP RAM_F  "%s ",       RAM_A },
+    { battery_perc,     SEP BAT_F  "%s ",       BAT_A },
     { datetime,         SEP TIME_F "%s ",       TIME_A },
-    /*{ datetime,     "| %s ",        "%d(%a)/%m(%b)/%y %R" },*/
 };

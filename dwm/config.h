@@ -22,7 +22,7 @@ static const char *colors[SchemeLast][3]      = {
 static const Bool focusonwheelscroll = False;
 
 /* tagging */
-#define SEP     " \u232A"
+#define SEP     " \u232A" /* 〉 */
 
 #define TAG1    "ViM"   SEP
 #define TAG2    "term"  SEP
@@ -48,15 +48,15 @@ static const Rule rules[] = {
      */
     /* class            instance        title           tags mask       isfloating      monitor */
     { "Gimp",           NULL,           NULL,           0,              1,              -1 },
-    { "Spotify",        NULL,           NULL,           T_MUSIC,        0,              -1 },
-    { "st-256color",    "st-256color",  "cmus v2.7.0",  T_MUSIC,        0,              -1 },
-    { "Firefox",        NULL,           NULL,           T_WEB,          0,              -1 },
-    { NULL,             "Mail",         NULL,           T_MAIL,         0,              -1 },
-    { "Steam",          NULL,           NULL,           T_STEAM,        0,              -1 },
-    { "Surf",           "surf",         NULL,           T_MAIL,         0,              -1 },
-    { "HTOP",           "HTOP",         "HTOP",         T_VOID,         0,              -1 },
-    { "NEWSBEUTER",     "NEWSBEUTER",   "NEWSBEUTER",   T_MAIL,         0,              -1 },
+    { "Spotify",        "spotify",      "Spotify",      T_MUSIC,        0,              -1 },
     { "CMUS",           "CMUS",         "CMUS",         T_MUSIC,        0,              -1 },
+    { "Firefox",        "Navigator",    NULL,           T_WEB,          0,              -1 },
+    { NULL,             "Mail",         NULL,           T_MAIL,         0,              -1 },
+    { "Surf",           "surf",         NULL,           T_MAIL,         0,              -1 },
+    { "NEWSBEUTER",     "NEWSBEUTER",   "NEWSBEUTER",   T_MAIL,         0,              -1 },
+    { "PODBEUTER",      "PODBEUTER",    "PODBEUTER",    T_MAIL,         0,              -1 },
+    { "Steam",          NULL,           NULL,           T_STEAM,        1,              -1 },
+    { "HTOP",           "HTOP",         "HTOP",         T_VOID,         0,              -1 },
 };
 
 /* layout(s) */

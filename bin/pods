@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec st -c PODBEUTER -t PODBEUTER -n PODBEUTER podbeuter

@@ -1,58 +1,69 @@
 #!/usr/bin/env sh
 
+############################################################
 REPODIR=$(pwd)
-TMPDIR=$1
+TMPDIR=~/.dotfiles/setup
 
 # setup bash env
 echo 'setup bashrc'
-# LS_COLORS
-wget https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS -O ~/.config/dircolors
-cp $REPODIR/bash/bashrc ~/.bashrc
-cp $REPODIR/bash/aliases ~/.bash_aliases
+wget -q -O ~/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+cp -i $REPODIR/bash/* $HOME
 
 # create user bin folder
-cp $REPODIR/bin $HOME
+cp -r $REPODIR/bin $HOME
 
-# setup vim
-echo 'setup vim'
-sh $REPODIR/vim/setup_vim
+############################################################
+VIMFILES=~/.vim
+SWP=$VIMFILES/swp
+AUTO=$VIMFILES/autoload
 
+# create necessary folders in ~/.vim
+mkdir -p $SWP $AUTO
+
+# get Vim-Plug
+wget -q -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+cp ./vimrc $VIMFILES/vimrc
+vim -c "PlugInstall"
+
+############################################################
 # setup newsbeuter
-mkdir ~/.newsbeuter
-cp -f config colors -t ~/.newsbeuter
+mkdir -p ~/.config/newsbeuter ~/.local/share/newsbeuter
+cp -f $REPODIR/newsbeuter/* ~/.config/newsbeuter
 
-# copy dwm init script to user bin folder
-# and dwm entry for lightdm
-echo 'setup dwm'
-cp $REPODIR/dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
-
+############################################################
 # create temporary setup folder
-mkdir $TMPDIR
+mkdir -p $TMPDIR/hermit
 
 # install Hermit font
 echo 'setup hermit font'
-mkdir $TMPDIR/hermit
 cd $TMPDIR/hermit
 wget https://pcaro.es/d/otf-hermit-1.21.tar.gz
 tar xvzf *hermit*.tar.gz
 sudo mkdir -p /usr/share/fonts/opentype/hermit
 sudo cp *.otf /usr/share/fonts/opentype/hermit
 
+# copy dwm entry for lightdm
+echo 'setup dwm'
+cp $REPODIR/dwm/dwm.desktop /usr/share/xsessions/
+
+############################################################
 # clone git repos
 cd $TMPDIR
 
 echo 'cloning repositories'
 git clone http://git.suckless.org/st
-git clone http://git.suckless.org/dwm
 git clone http://git.suckless.org/dmenu
-git clone http://git.suckless.org/slock
+git clone http://git.suckless.org/dwm
 git clone https://github.com/drkh5h/slstatus
+git clone http://git.suckless.org/slock
 git clone https://github.com/knopwob/dunst
 
+############################################################
 echo 'copying config files'
 cp -f $REPODIR/st/* $TMPDIR/st
-cp -f $REPODIR/dwm/* $TMPDIR/dwm
 cp -f $REPODIR/dmenu/* $TMPDIR/dmenu
-cp -f $REPODIR/slock/* $TMPDIR/slock
+cp -f $REPODIR/dwm/* $TMPDIR/dwm
 cp -f $REPODIR/slstatus/* $TMPDIR/slstatus
+cp -f $REPODIR/slock/* $TMPDIR/slock
 cp -f $REPODIR/dunst/* $TMPDIR/dunst
