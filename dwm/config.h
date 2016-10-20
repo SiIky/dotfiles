@@ -91,8 +91,8 @@ static const char *ffcmd[] = { "firefox", NULL };
 static const char *htopcmd[] = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 
 /* volume controls */
-static const char *volup[]   = { "amixer", "set", "Master", "5+",     NULL };
-static const char *voldown[] = { "amixer", "set", "Master", "5-",     NULL };
+static const char *volup[]   = { "amixer", "set", "Master", "3277+",  NULL };
+static const char *voldown[] = { "amixer", "set", "Master", "3277-",  NULL };
 static const char *volmute[] = { "amixer", "set", "Master", "toggle", NULL };
 
 static Key keys[] = {

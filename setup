@@ -4,10 +4,14 @@
 REPODIR=$(pwd)
 TMPDIR=~/.dotfiles/setup
 
+# disable mouse accel
+sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
+
 # setup bash env
 echo 'setup bashrc'
 wget -q -O ~/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
-cp -i $REPODIR/bash/* $HOME
+cp -i $REPODIR/bash/.bashrc $HOME
+cp -i $REPODIR/bash/aliases ~/.config
 
 # create user bin folder
 cp -r $REPODIR/bin $HOME
@@ -28,8 +32,8 @@ vim -c "PlugInstall"
 
 ############################################################
 # setup newsbeuter
-mkdir -p ~/.config/newsbeuter ~/.local/share/newsbeuter
-cp -f $REPODIR/newsbeuter/* ~/.config/newsbeuter
+mkdir -p ~/.local/share/newsbeuter
+cp -f $REPODIR/newsbeuter ~/.config
 
 ############################################################
 # create temporary setup folder

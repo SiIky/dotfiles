@@ -5,6 +5,7 @@
 # set PT as default and bind scroll lock to toggle between layouts
 exec setxkbmap -layout pt,us -option grp:sclk_toggle &
 
+#exec xsetroot -name " " &
 exec slstatus -d & # status bar
 exec xset m 0 0 & # disable mouse accel (almost, keep looking)
 exec redshift &
