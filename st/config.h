@@ -63,7 +63,7 @@ static unsigned int cursorthickness = 2;
 static int bellvolume = 0;
 
 /* default TERM value */
-static char termname[] = "st-256color";
+static char termname[] = "st-meta-256color";
 
 /*
  * spaces per tab
@@ -138,12 +138,10 @@ static unsigned int mousefg = 7;
 static unsigned int mousebg = 0;
 
 /*
- * Colors used, when the specific fg == defaultfg. So in reverse mode this
- * will reverse too. Another logic would only make the simple feature too
- * complex.
+ * Color used to display font attributes when fontconfig selected a font which
+ * doesn't match the ones requested.
  */
-static unsigned int defaultitalic = 11;
-static unsigned int defaultunderline = 7;
+static unsigned int defaultattr = 11;
 
 /*
  * Internal mouse shortcuts.
@@ -156,12 +154,12 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
+#define MODKEY ControlMask
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
+	{ MODKEY,               XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_Prior,       xzoom,          {.f = +1} },
@@ -172,6 +170,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
+	/*{ MODKEY|XK_Alt_L,      XK_X,           iso14755,       {.i =  0} },*/
 };
 
 /*
@@ -430,7 +429,7 @@ static Key key[] = {
  * If no match is found, regular selection is used.
  */
 static uint selmasks[] = {
-	[SEL_RECTANGULAR] = Mod1Mask,
+	[SEL_RECTANGULAR] = ControlMask,
 };
 
 /*
