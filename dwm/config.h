@@ -26,7 +26,7 @@ static const Bool focusonwheelscroll = False;
 
 #define TAG1    "ViM"   SEP
 #define TAG2    "term"  SEP
-#define TAG3    "music" SEP
+#define TAG3    "media" SEP
 #define TAG4    "W"     SEP
 #define TAG5    "M"     SEP
 #define TAG6    "steam" SEP
@@ -38,7 +38,7 @@ static const Bool focusonwheelscroll = False;
 static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7, TAG8, TAG9, TAG0 };
 
 /* tabs */
-#define T_MUSIC         (1 << 2)
+#define T_MEDIA         (1 << 2)
 #define T_WEB           (1 << 3)
 #define T_MAIL          (1 << 4)
 #define T_STEAM         (1 << 5)
@@ -52,14 +52,15 @@ static const Rule rules[] = {
     /*class                     instance                        title           tags mask       isfloating      monitor */
     { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
     { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
-    { "Spotify",                "spotify",                      "Spotify",      T_MUSIC,        0,              -1 },
-    { "CMUS",                   "CMUS",                         "CMUS",         T_MUSIC,        0,              -1 },
+    { "Spotify",                "spotify",                      "Spotify",      T_MEDIA,        0,              -1 },
+    { "CMUS",                   "CMUS",                         "CMUS",         T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
     { "Surf",                   "surf",                         NULL,           T_MAIL,         0,              -1 },
     { "NEWSBEUTER",             "NEWSBEUTER",                   "NEWSBEUTER",   T_MAIL,         0,              -1 },
     { "PODBEUTER",              "PODBEUTER",                    "PODBEUTER",    T_MAIL,         0,              -1 },
-    { "Steam",                  NULL,                           NULL,           T_STEAM,        1,              -1 },
+    { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
+    { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
     { "HTOP",                   "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
 };
 
@@ -70,8 +71,8 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[]=",      tile },    /* first entry is default */
     { "[M]",      monocle },
+    { "[]=",      tile },    /* first entry is default */
     { "><>",      NULL },    /* no layout function means floating behavior */
 };
 
