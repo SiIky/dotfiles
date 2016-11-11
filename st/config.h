@@ -32,7 +32,7 @@ static float chscale = 1.0;
  *
  * More advanced example: " `'\"()[]{}"
  */
-static char worddelimiters[] = " ";
+static char worddelimiters[] = " `'\"()[]{}<>,.;:-=+\\/|~!#$%^&*";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -49,7 +49,7 @@ static unsigned int actionfps = 30;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 0;
 
 /*
  * thickness of underline and bar cursors
@@ -82,6 +82,10 @@ static char termname[] = "st-meta-256color";
  */
 static unsigned int tabspaces = 8;
 
+#define COL_GRAY        "#272822"
+#define COL_GREEN       "#A6E22E"
+#define COL_MAGENTA     "#F92672"
+#define COL_ORANGE      "#FD971F"
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
@@ -93,7 +97,6 @@ static const char *colorname[] = {
 	"magenta3",
 	"cyan3",
 	"gray90",
-
 	/* 8 bright colors */
 	"gray50",
 	"red",
@@ -103,12 +106,12 @@ static const char *colorname[] = {
 	"magenta",
 	"cyan",
 	"white",
-
-	[255] = 0,
-
+	[255] = NULL,
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	[82]  = COL_GREEN,
+	[197] = COL_MAGENTA,
+	[208] = COL_ORANGE,
+	[232] = COL_GRAY,
 };
 
 
@@ -116,10 +119,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-static unsigned int defaultfg = 2;
-static unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+static unsigned int defaultbg = 232;
+static unsigned int defaultfg = 82;
+static unsigned int defaultcs = 208;
+static unsigned int defaultrcs = 197;
 
 /*
  * Default shape of cursor

@@ -7,15 +7,26 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Hermit:size=10" };
 static const char dmenufont[]       = "Hermit:size=10";
-static const char col_gray1[]       = "#333333";
-static const char col_gray2[]       = "#222222";
-static const char col_gray3[]       = "#00ff00";
-static const char col_gray4[]       = "#00ff00";
-static const char col_cyan[]        = "#000000"; /* ff0000 */
-static const char *colors[SchemeLast][3]      = {
-    /*               fg         bg         border   */
-    [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-    [SchemeSel] =  { col_gray4, col_cyan,  col_cyan  },
+
+/* Monokai */
+#define COL_BLACK       "#000000"
+#define COL_GRAY        "#272822"
+#define COL_BLUE        "#66D9EF"
+#define COL_GREEN       "#A6E22E"
+#define COL_MAGENTA     "#F92672"
+#define COL_ORANGE      "#FD971F"
+
+static const char col0[] = COL_GRAY;
+static const char col1[] = COL_BLUE;
+static const char col2[] = COL_GREEN;
+static const char col3[] = COL_MAGENTA;
+static const char col4[] = COL_ORANGE;
+static const char col5[] = COL_BLACK;
+
+static const char *colors[SchemeLast][3] = {
+    /*               fg    bg    border */
+    [SchemeNorm] = { col2, col0, col1 },
+    [SchemeSel]  = { col3, col5, col4 },
 };
 
 /* False means using the scroll wheel on a window will not change focus */
@@ -98,24 +109,24 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[] = { "st", NULL };
-static const char *htopcmd[] = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
-static const char *rangercmd[] = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
+static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
+static const char *termcmd[]    = { "st", NULL };
+static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
+static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
 
 /* volume controls */
-static const char *volup[]   = { "amixer", "set", "Master", "5%+",  NULL };
-static const char *voldown[] = { "amixer", "set", "Master", "5%-",  NULL };
-static const char *volmute[] = { "amixer", "set", "Master", "toggle", NULL };
+static const char *volup[]      = { "amixer", "set", "Master", "5%+",  NULL };
+static const char *voldown[]    = { "amixer", "set", "Master", "5%-",  NULL };
+static const char *volmute[]    = { "amixer", "set", "Master", "toggle", NULL };
 
 /* cmus controls */
-static const char *cmus_play[] = { "cmus-remote", "-u", NULL };
-static const char *cmus_stop[] = { "cmus-remote", "-s", NULL };
-static const char *cmus_prev[] = { "cmus-remote", "-n", NULL };
-static const char *cmus_next[] = { "cmus-remote", "-r", NULL };
+static const char *cmus_play[]  = { "cmus-remote", "-u", NULL };
+static const char *cmus_stop[]  = { "cmus-remote", "-s", NULL };
+static const char *cmus_prev[]  = { "cmus-remote", "-n", NULL };
+static const char *cmus_next[]  = { "cmus-remote", "-r", NULL };
 
-static Key keys[] = {
+static const Key keys[] = {
     /*modifier                  key                     function                argument */
     { WinKey,                   XK_h,                   togglebar,              {0} },
     { LAlt,                     XK_Tab,                 focusstack,             {.i = +1 } },
@@ -144,10 +155,6 @@ static Key keys[] = {
     TAGKEYS(                    XK_8,                                           7),
     TAGKEYS(                    XK_9,                                           8),
     TAGKEYS(                    XK_0,                                           9),
-    /*
-    { WinKey,                   XK_0,                   view,                   {.ui = ~0 } },
-    { WinKey|ShiftMask,         XK_0,                   tag,                    {.ui = ~0 } },
-    */
     { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
     { WinKey,                   XK_t,                   spawn,                  {.v = termcmd } },
     { ShiftMask|ControlMask,    XK_Delete,              spawn,                  {.v = htopcmd } },
@@ -164,7 +171,7 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
     /* click            event mask    button      function           argument */
     { ClkClientWin,     WinKey,       Button1,    movemouse,         {0} },
     { ClkClientWin,     WinKey,       Button2,    togglefloating,    {0} },
