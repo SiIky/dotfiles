@@ -11,7 +11,7 @@ sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
 echo 'setup bashrc'
 wget -q -O ~/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
 cp -i $REPODIR/bash/.bashrc $HOME
-cp -i $REPODIR/bash/aliases ~/.config
+cp -i $REPODIR/bash/aliases.sh ~/.config
 
 # create user bin folder
 cp -r $REPODIR/bin $HOME

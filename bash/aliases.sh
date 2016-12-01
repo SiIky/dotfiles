@@ -20,6 +20,7 @@ alias vi='vim -p'
 alias vim='vim -p'
 alias vimup='vim +PlugUpgrade +PlugInstall +PlugUpdate'
 alias wget='wget -c'
+alias mpv='mpv --fs --no-audio-display'
 
 # Git aliases (if no hub replace with git)
 if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
