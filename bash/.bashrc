@@ -31,11 +31,15 @@ if [ -f $HOME/.config/stuff.sh ]; then
     . $HOME/.config/stuff.sh
 fi
 
+if [ -f $HOME/projects/minoca/minoca.sh ]; then
+    . $HOME/projects/minoca/minoca.sh
+fi
+
 stty -ixon
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin
 export VISUAL=vim
 export EDITOR=vim
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH: # Add libs here
 export STEAM_FRAME_FORCE_CLOSE=1
 export RANGER_LOAD_DEFAULT_RC=FALSE
 if [ -f $HOME/.config/dircolors ]; then

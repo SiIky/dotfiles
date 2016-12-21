@@ -84,6 +84,9 @@ Plug 'tomasr/molokai'
 " async execution lib
 "Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
+" Processing support
+Plug 'sophacles/vim-processing'
+
 call plug#end()
 
 " general ==================================================
@@ -171,6 +174,10 @@ nnoremap <F7> :cprev<CR>
 nnoremap <F8> :cnext<CR>
 nnoremap <F9> :cclose<CR>
 
+" clipboard bindings
+vnoremap <F11> :!xclip -f -sel clip<CR>
+nnoremap <F12> mz:-1r !xclip -o -sel clip<CR>`z
+
 " leader/localleader
 let mapleader = ','
 let maplocalleader = ''
@@ -232,14 +239,16 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " search
-nnoremap <C-H> :se hlsearch!<CR>
-nnoremap <silent><BS> :se hlsearch!<CR>
+nnoremap <silent><BS> :se hls!<CR>
 
-vnoremap / y/<C-R>"<CR>:se hlsearch<CR>
-nnoremap / :se hlsearch<CR>/
-nnoremap n :se hlsearch<CR>n
-nnoremap N :se hlsearch<CR>N
-nnoremap * :se hlsearch<CR>*
+vnoremap / y/<C-R>"<CR>:se hls<CR>
+nnoremap / :se hls<CR>/
+nnoremap n :se hls<CR>n
+nnoremap N :se hls<CR>N
+nnoremap * :se hls<CR>*
+
+" search and replace
+vnoremap <C-S> y:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " vimrc edit
 nnoremap <LEADER>ev :e $MYVIMRC<CR>

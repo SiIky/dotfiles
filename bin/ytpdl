@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-youtube-dl --restrict-filenames -o "~/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"
+youtube-dl --restrict-filenames -o "~/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"

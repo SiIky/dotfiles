@@ -1,0 +1,6 @@
+sequence default {
+	utf_8;
+	safe;
+	wipeup;
+        lower;
+};
