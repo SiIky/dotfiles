@@ -1,7 +1,7 @@
 scriptencoding utf-8
 se nocompatible
 " vim-plug =================================================
-let g:plug_threads = 2
+let g:plug_threads=2
 
 call plug#begin('~/.vim/plugged')
 " terminal -------------------------------------------------
@@ -10,9 +10,6 @@ call plug#begin('~/.vim/plugged')
 " indentation display --------------------------------------
 "Plug 'Yggdroot/indentLine', { 'for': ['python', 'haskell', 'c', 'cpp'] }
 "Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
-
-" elixir ---------------------------------------------------
-"Plug 'elixir-lang/vim-elixir', { 'for': ['elixir'] }
 
 " toml -----------------------------------------------------
 " for cargo (rust) files
@@ -73,19 +70,13 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 "Plug 'szw/vim-ctrlspace'
 
 " parens/brackets auto closing
-"Plug 'Raimondi/delimitMate'
-
-" completion engine -- req python2+
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'for': ['haskell', 'python', 'c'] } 
+Plug 'Raimondi/delimitMate'
 
 " Molokai coloscheme
 Plug 'tomasr/molokai'
 
 " async execution lib
 "Plug 'Shougo/vimproc.vim', { 'do': 'make'}
-
-" Processing support
-Plug 'sophacles/vim-processing'
 
 call plug#end()
 
@@ -110,14 +101,14 @@ se fileencoding=utf-8
 se foldenable
 se foldmethod=manual
 se hidden
-se nohlsearch
 se incsearch
 se laststatus=2
 se linebreak
 se noerrorbells
+se nohlsearch
 se noruler
-se showmode
 se nospell
+se novisualbell
 se nowrap
 se number
 se omnifunc=syntaxcomplete#Complete
@@ -127,6 +118,7 @@ se scrolloff=5
 se shiftwidth=4
 se shortmess=at
 se showcmd
+se showmode
 se showtabline=2
 se smartindent
 se smarttab
@@ -134,6 +126,7 @@ se softtabstop=0
 se splitbelow
 se splitright
 se t_Co=256
+se t_vb=
 se tabpagemax=30
 se tabstop=8
 se ttimeoutlen=0 " status bar change mode delay (ms)
@@ -155,14 +148,14 @@ se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
 
 " vim -b : edit binary using xxd-format --------------------
 augroup Binary
-  au!
-  au BufReadPre  *.o,*.dbg,*.x,*.out let &bin = 1
-  au BufReadPost *.o,*.dbg,*.x,*.out if &bin | %!xxd
-  au BufReadPost *.o,*.dbg,*.x,*.out set filetype = xxd | endif
-  au BufWritePre *.o,*.dbg,*.x,*.out if &bin | %!xxd -r
-  au BufWritePre *.o,*.dbg,*.x,*.out endif
-  au BufWritePost *.o,*.dbg,*.x,*.out if &bin | %!xxd
-  au BufWritePost *.o,*.dbg,*.x,*.out set nomod | endif
+    au!
+    au BufReadPre  *.o,*.dbg,*.x,*.out let &bin=1
+    au BufReadPost *.o,*.dbg,*.x,*.out if &bin | %!xxd
+    au BufReadPost *.o,*.dbg,*.x,*.out set filetype=xxd | endif
+    au BufWritePre *.o,*.dbg,*.x,*.out if &bin | %!xxd -r
+    au BufWritePre *.o,*.dbg,*.x,*.out endif
+    au BufWritePost *.o,*.dbg,*.x,*.out if &bin | %!xxd
+    au BufWritePost *.o,*.dbg,*.x,*.out set nomod | endif
 augroup END
 
 " bindings -------------------------------------------------
@@ -179,8 +172,8 @@ vnoremap <F11> :!xclip -f -sel clip<CR>
 nnoremap <F12> mz:-1r !xclip -o -sel clip<CR>`z
 
 " leader/localleader
-let mapleader = ','
-let maplocalleader = ''
+let mapleader=','
+let maplocalleader=''
 
 " = buffer/function
 nnoremap <LEADER>M maggVG=`a_zz
@@ -190,23 +183,23 @@ nnoremap ZZ :w<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
 
-"movement keys
+" movement keys
 nnoremap <C-J> 5j
 nnoremap <C-K> 5k
 vnoremap <C-J> 5j
 vnoremap <C-K> 5k
-nnoremap w W
-nnoremap b B
-nnoremap W w
 nnoremap B b
-nnoremap e E
 nnoremap E e
-vnoremap w W
-vnoremap b B
-vnoremap W w
+nnoremap W w
+nnoremap b B
+nnoremap e E
+nnoremap w W
 vnoremap B b
-vnoremap e E
 vnoremap E e
+vnoremap W w
+vnoremap b B
+vnoremap e E
+vnoremap w W
 
 "bye bye arrow keys
 "inoremap <DOWN> <NOP>
@@ -234,13 +227,12 @@ vnoremap gl $
 vnoremap gj G
 vnoremap gk gg
 
-" visual
+" swap visual and visual block
 nnoremap v <C-V>
 nnoremap <C-V> v
 
 " search
-nnoremap <silent><BS> :se hls!<CR>
-
+nnoremap <BS> :se hls!<CR>
 vnoremap / y/<C-R>"<CR>:se hls<CR>
 nnoremap / :se hls<CR>/
 nnoremap n :se hls<CR>n
@@ -248,6 +240,7 @@ nnoremap N :se hls<CR>N
 nnoremap * :se hls<CR>*
 
 " search and replace
+nnoremap <C-S> viwy:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 vnoremap <C-S> y:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " vimrc edit
@@ -277,17 +270,17 @@ nnoremap <C-W>v :vnew<CR>
 nnoremap <C-L> :ls<CR>
 
 " put stuff around words
-nnoremap <LEADER>" viw<ESC>a"<ESC>bi"<ESC>el
-nnoremap <LEADER>' viw<ESC>a'<ESC>bi'<ESC>el
-nnoremap <LEADER>` viw<ESC>a`<ESC>bi`<ESC>el
-nnoremap <LEADER>( viw<ESC>a)<ESC>bi(<ESC>el
-nnoremap <LEADER>) viw<ESC>a)<ESC>bi(<ESC>el
-nnoremap <LEADER>[ viw<ESC>a]<ESC>bi[<ESC>el
-nnoremap <LEADER>] viw<ESC>a]<ESC>bi[<ESC>el
-nnoremap <LEADER>{ viw<ESC>a}<ESC>bi{<ESC>el
-nnoremap <LEADER>} viw<ESC>a}<ESC>bi{<ESC>el
-nnoremap <LEADER>< viw<ESC>a><ESC>bi<<ESC>el
-nnoremap <LEADER>> viw<ESC>a><ESC>bi<<ESC>el
+nnoremap <LEADER>" viW<ESC>`>a"<ESC>`<i"<ESC>
+nnoremap <LEADER>' viW<ESC>`>a'<ESC>`<i'<ESC>
+nnoremap <LEADER>` viW<ESC>`>a`<ESC>`<i`<ESC>
+nnoremap <LEADER>( viW<ESC>`>a)<ESC>`<i(<ESC>
+nnoremap <LEADER>) viW<ESC>`>a)<ESC>`<i(<ESC>
+nnoremap <LEADER>[ viW<ESC>`>a]<ESC>`<i[<ESC>
+nnoremap <LEADER>] viW<ESC>`>a]<ESC>`<i[<ESC>
+nnoremap <LEADER>{ viW<ESC>`>a}<ESC>`<i{<ESC>
+nnoremap <LEADER>} viW<ESC>`>a}<ESC>`<i{<ESC>
+nnoremap <LEADER>< viW<ESC>`>a><ESC>`<i<<ESC>
+nnoremap <LEADER>> viW<ESC>`>a><ESC>`<i<<ESC>
 
 " put stuff around selected text
 vnoremap <LEADER>" <ESC>`>a"<ESC>`<i"<ESC>
@@ -315,54 +308,57 @@ iabbrev flaot float
 
 " invisibles ===============================================
 se nolist
-se listchars=tab:\|▸,eol:¬,trail:∙
-"se listchars=tab:>~,trail:.
-nnoremap <C-P> :se list!<CR>
+if expand('fileencoding') == 'utf-8'
+    se listchars=tab:\|▸,eol:¬,trail:∙
+else
+    se listchars=tab:>~,trail:.
+endif
+nnoremap <SILENT><C-P> :se list!<CR>
 
 " indentline ===============================================
-"nnoremap <silent><TAB> :IndentLinesToggle<CR>
-"let g:indentLine_char = '|'
-"let g:indentLine_color_term = 239
-"let g:indentLine_color_dark = 2
-"let g:indentLine_leadingSpaceChar = '▸'
-"let g:indentLine_leadingSpaceEnabled = 0
-"let g:indentLine_enabled = 0
+"nnoremap <SILENT><TAB> :IndentLinesToggle<CR>
+"let g:indentLine_char='|'
+"let g:indentLine_color_term=239
+"let g:indentLine_color_dark=2
+"let g:indentLine_leadingSpaceChar='▸'
+"let g:indentLine_leadingSpaceEnabled=0
+"let g:indentLine_enabled=0
 
 " NETRW files browser ===============================
-let g:netrw_liststyle = 3 " listing style
-let g:netrw_browse_split = 0 " opening behaviour
-map <silent><C-E> :Explore<CR>
+let g:netrw_liststyle=3 " listing style
+let g:netrw_browse_split=0 " opening behaviour
+map <SILENT><C-E> :Explore<CR>
 
 " monokai theme ============================================
 colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 0
+let g:molokai_original=1
+let g:rehash256=0
 
 " vimwiki ==================================================
 "nmap <LOCALLEADER>es :VimwikiUISelect<CR>
 "au BufNewFile,BufRead,BufReadPost *.wiki set filetype=vimwiki
-"let g:vimwiki_hl_headers = 0
-"let g:vimwiki_hl_cb_checked = 1
-"let g:vimwiki_global_ext = 0
+"let g:vimwiki_hl_headers=0
+"let g:vimwiki_hl_cb_checked=1
+"let g:vimwiki_global_ext=0
 "let g:vimwiki_ext2syntax = {
 "    \ '.md': 'markdown',
 "    \ '.wiki': 'default'
 "    \ }
-"let g:vimwiki_menu = '' " 'Vimwiki'
-"let g:vimwiki_listsyms = ' .oOX'
-"let g:vimwiki_listsyms = '✗○◐●✓'
-"let g:vimwiki_use_mouse = 0
-"let g:vimwiki_folding = ''
-"let g:vimwiki_use_calendar = 0
-"let g:vimwiki_table_mappings = 0
-"let g:vimwiki_table_auto_fmt = 1
-"let g:vimwiki_CJK_length = 0 " UTF8 related
-"let g:vimwiki_dir_link = ''
-"let g:vimwiki_conceallevel = 2
-"let g:vimwiki_autowriteall = 0
-"let g:vimwiki_url_maxsave = 15 "default
-"let g:vimwiki_map_prefix = '<LOCALLEADER>e'
-"let g:vimwiki_auto_chdir = 1
+"let g:vimwiki_menu='' " 'Vimwiki'
+"let g:vimwiki_listsyms=' .oOX'
+"let g:vimwiki_listsyms='✗○◐●✓'
+"let g:vimwiki_use_mouse=0
+"let g:vimwiki_folding=''
+"let g:vimwiki_use_calendar=0
+"let g:vimwiki_table_mappings=0
+"let g:vimwiki_table_auto_fmt=1
+"let g:vimwiki_CJK_length=0 " UTF8 related
+"let g:vimwiki_dir_link=''
+"let g:vimwiki_conceallevel=2
+"let g:vimwiki_autowriteall=0
+"let g:vimwiki_url_maxsave=15 "default
+"let g:vimwiki_map_prefix='<LOCALLEADER>e'
+"let g:vimwiki_auto_chdir=1
 "
 "" change 'path' if needed
 "let g:vimwiki_list = [{
@@ -376,22 +372,16 @@ let g:rehash256 = 0
 "    \ 'list_margin': -1
 "    \ }]
 
-" delimitmate ==============================================
-"let delimitMate_expand_cr = 1
-
 " tabular ==================================================
-let g:tabular_loaded = 1
+let g:tabular_loaded=1
 
 " vim-markdown =============================================
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_folding_style_pythonic = 0
-let g:vim_markdown_folding_level = 1
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_emphasis_multiline = 0
-let g:vim_markdown_math = 0
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_style_pythonic=0
+let g:vim_markdown_folding_level=1
+let g:vim_markdown_no_default_key_mappings=1
+let g:vim_markdown_toc_autofit=1
+let g:vim_markdown_emphasis_multiline=0
+let g:vim_markdown_math=0
 
 autocmd VimEnter * echo "Fuck You Human .l."
-
-" stuff to remember
-" :h session-file

@@ -23,7 +23,8 @@ static const char col3[] = COL_MAGENTA;
 static const char col4[] = COL_ORANGE;
 static const char col5[] = COL_BLACK;
 
-static const char *colors[SchemeLast][3] = {
+//static const char *colors[SchemeLast][3] = {
+static const char *colors[][3] = {
     /*               fg    bg    border */
     [SchemeNorm] = { col2, col0, col1 },
     [SchemeSel]  = { col3, col5, col4 },
@@ -49,6 +50,8 @@ static const Bool focusonwheelscroll = False;
 static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7, TAG8, TAG9, TAG0 };
 
 /* tabs */
+#define T_VIM           (1 << 0)
+#define T_TERM          (1 << 1)
 #define T_MEDIA         (1 << 2)
 #define T_WEB           (1 << 3)
 #define T_MAIL          (1 << 4)
@@ -63,16 +66,20 @@ static const Rule rules[] = {
     /*class                     instance                        title           tags mask       isfloating      monitor */
     { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
     { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
+    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
     { "Spotify",                "spotify",                      "Spotify",      T_MEDIA,        0,              -1 },
     { "CMUS",                   "CMUS",                         "CMUS",         T_MEDIA,        0,              -1 },
+    { "MPV",                    "MPV",                          "MPV",          T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
     { "Surf",                   "surf",                         NULL,           T_MAIL,         0,              -1 },
     { "NEWSBEUTER",             "NEWSBEUTER",                   "NEWSBEUTER",   T_MAIL,         0,              -1 },
     { "PODBEUTER",              "PODBEUTER",                    "PODBEUTER",    T_MAIL,         0,              -1 },
     { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
+    { "MUTT",                   "MUTT",                         "MUTT",         T_MAIL,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
     { "HTOP",                   "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
+    { "WICD",                   "WICD",                         "WICD",         T_VOID,         0,              -1 },
 };
 
 /* layout(s) */
@@ -111,9 +118,10 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
-static const char *termcmd[]    = { "st", NULL };
+static const char *termcmd[]    = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
 static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
+static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
 
 /* volume controls */
 static const char *volup[]      = { "amixer", "set", "Master", "5%+",  NULL };
@@ -155,6 +163,7 @@ static const Key keys[] = {
     TAGKEYS(                    XK_8,                                           7),
     TAGKEYS(                    XK_9,                                           8),
     TAGKEYS(                    XK_0,                                           9),
+    { WinKey,                   XK_v,                   spawn,                  {.v = vimcmd } },
     { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
     { WinKey,                   XK_t,                   spawn,                  {.v = termcmd } },
     { ShiftMask|ControlMask,    XK_Delete,              spawn,                  {.v = htopcmd } },

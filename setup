@@ -57,13 +57,13 @@ git clone http://git.suckless.org/dmenu
 git clone http://git.suckless.org/dwm
 git clone http://git.suckless.org/slock
 git clone http://git.suckless.org/st
+git clone http://git.suckless.org/tabbed
 git clone https://github.com/drkh5h/slstatus
-git clone https://github.com/knopwob/dunst
+git clone https://github.com/martanne/abduco
 
 ############################################################
 cp -ri $REPODIR/dmenu/* $SETUPDIR/dmenu
-cp -ri $REPODIR/dunst/* $SETUPDIR/dunst
 cp -ri $REPODIR/dwm/* $SETUPDIR/dwm
 cp -ri $REPODIR/slock/* $SETUPDIR/slock
-cp -ri $REPODIR/slstatus/* $SETUPDIR/slstatus
 cp -ri $REPODIR/st/* $SETUPDIR/st
+cp -ri $REPODIR/slstatus/* $SETUPDIR/slstatus
