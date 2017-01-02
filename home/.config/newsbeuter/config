@@ -6,7 +6,7 @@ auto-reload true
 bookmark-autopilot false
 bookmark-cmd ""
 bookmark-interactive false
-browser "w3m" # default: lynx
+browser "firefox" # default: lynx
 cache-file "~/.config/newsbeuter/cache.db"
 cleanup-on-quit true
 confirm-exit true

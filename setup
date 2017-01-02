@@ -9,12 +9,9 @@ sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
 
 # setup bash env
 wget -q -O $HOME/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
-cp -i $REPODIR/bash/.bashrc $HOME
-cp -i $REPODIR/bash/aliases.sh $HOME/.config
-cp -i $REPODIR/detox/* $HOME/.config
 
 # create user bin folder
-cp -r $REPODIR/bin $HOME
+mkdir $HOME/bin
 
 ############################################################
 VIMFILES=$HOME/.vim
@@ -27,13 +24,9 @@ mkdir -p $SWP $AUTO
 # get Vim-Plug
 wget -q -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-cp -o $REPODIR/vim/vimrc $VIMFILES/vimrc
-vim -c "PlugInstall"
-
 ############################################################
 # setup newsbeuter
 mkdir -p $HOME/.local/share/newsbeuter
-cp -ri $REPODIR/newsbeuter $HOME/.config
 
 ############################################################
 # create temporary setup folder
@@ -47,7 +40,7 @@ sudo mkdir -p /usr/share/fonts/opentype/hermit
 sudo cp $SETUPDIR/hermit/*.otf /usr/share/fonts/opentype/hermit
 
 # copy dwm entry for lightdm
-cp $REPODIR/dwm/dwm.desktop /usr/share/xsessions/
+cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/
 
 ############################################################
 # clone git repos
@@ -62,8 +55,6 @@ git clone https://github.com/drkh5h/slstatus
 git clone https://github.com/martanne/abduco
 
 ############################################################
-cp -ri $REPODIR/dmenu/* $SETUPDIR/dmenu
-cp -ri $REPODIR/dwm/* $SETUPDIR/dwm
-cp -ri $REPODIR/slock/* $SETUPDIR/slock
-cp -ri $REPODIR/st/* $SETUPDIR/st
-cp -ri $REPODIR/slstatus/* $SETUPDIR/slstatus
+cd $REPODIR
+stow -v -t $HOME home
+stow -v -t $SETUPDIR repos

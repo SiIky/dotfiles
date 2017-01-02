@@ -3,5 +3,7 @@ TOHASTEDIR=$HOME/Downloads/haste/to/
 if [ ! -d $TOHASTEDIR ]; then
     mkdir -p $TOHASTEDIR
 fi
-cp $1 $TOHASTEDIR
+if [ -f $1 ]; then
+    cp $1 $TOHASTEDIR
+fi
 cat $1 | haste

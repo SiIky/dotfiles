@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
 # keyboard layout
 # `$ grep "grp:.*toggle" /usr/share/X11/xkb/rules/base.lst`
@@ -15,8 +15,10 @@ exec xset m 0 0 & # disable mouse accel
 exec redshift &
 exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose &
 
-if [ -f ~/.fehbg ]; then
-    . ~/.fehbg # wallpaper
+# set wallpaper with feh
+if [ -f ~/.config/fehbg ]; then
+    . ~/.config/fehbg
 fi
 
-exec dwm # window manager
+# run the DWM window manager
+exec dwm

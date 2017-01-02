@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+[ "$#" == 0 ] && exit
+
+NOTE=~/.note.txt
+if [ "$1" == "-c" ]; then
+    [ -f $NOTE ] && rm $NOTE
+elif [ "$1" == "-s" ]; then
+    [ -f $NOTE ] && cat $NOTE
+else
+    echo "---------------------------" >> $NOTE
+    echo "$(date '+%d(%a)/%m(%b)/%y %R:%S')" >> $NOTE
+    echo "$@" >> $NOTE
+fi
