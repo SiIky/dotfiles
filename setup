@@ -56,5 +56,10 @@ git clone https://github.com/martanne/abduco
 
 ############################################################
 cd $REPODIR
-stow -v -t $HOME home
-stow -v -t $SETUPDIR repos
+# dry run
+stow -nv -t $HOME home
+stow -nv -t $SETUPDIR repos
+
+echo 'to apply these changes do:'
+echo "stow -v -t $HOME home"
+echo "stow -v -t $SETUPDIR repos"

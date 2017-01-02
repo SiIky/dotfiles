@@ -6,7 +6,7 @@
 /* text to show if no value can be retrieved */
 #define UNKNOWN_STR     "n/a"
 
-#define SEP     "\u2329 " /* 〈 */
+#define SEP     "\u2329" /* 〈 */
 
 #define WIFI_F  "\u2387 " /* ⎇  */
 #define CPU_F   "\u231A " /* ⌚ */

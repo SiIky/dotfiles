@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec st -c MUTT -t MUTT -n MUTT mutt
+exec st -c MUTT -t MUTT -n Mail mutt

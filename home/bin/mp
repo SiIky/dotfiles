@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec st -c CMUS -t CMUS -n CMUS cmus
+exec st -c Media -t CMUS -n CMUS cmus

@@ -10,7 +10,7 @@ HISTFILESIZE=500
 # cool stuff, check `man bash`
 shopt -s autocd cdspell checkhash checkjobs checkwinsize cmdhist direxpand dirspell dotglob execfail extglob globstar histappend hostcomplete no_empty_cmd_completion nocaseglob progcomp
 
-export PS1=$'exit:$?\n\u250F[\[\033[1;32m\]\u\[\033[0m\]]@[\[\033[0;31m\]\h\[\033[0m\]]:[\[\033[1;34m\]\w\[\033[0m\]]\n\u2517[\A] \u21DD '
+export PS1=$'\u250F[\[\033[1;32m\]\u\[\033[0m\]]@[\[\033[0;31m\]\h\[\033[0m\]]:[\[\033[1;34m\]\w\[\033[0m\]]\n\u2517[\A] ($?) \u21DD '
 export PS2=$'\u21AA '
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

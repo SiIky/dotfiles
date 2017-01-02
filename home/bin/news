@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec st -c NEWSBEUTER -t NEWSBEUTER -n NEWSBEUTER newsbeuter
+exec st -c News -t NEWSBEUTER -n NEWSBEUTER newsbeuter

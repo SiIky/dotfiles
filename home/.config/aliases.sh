@@ -10,15 +10,19 @@ VIM='vim -p'
 alias ed='$VIM'
 alias vi='$VIM'
 alias vim='$VIM'
-alias vimup='vim +PlugUpgrade +PlugInstall +PlugUpdate'
+alias vimup='vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate'
 
 # Git aliases (if no hub replace with git)
+if [ -f ~/bin/hub ]; then
+    GIT='hub'
+else
+    GIT='git'
+fi
+
 if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
     . ~/.config/hub/hub.bash_completion.sh
 fi
 
-GIT='git'
-#GIT='hub'
 alias git='$GIT'
 alias gadd='$GIT add'
 alias gmv='$GIT mv'
@@ -33,15 +37,14 @@ alias gblame='$GIT blame'
 alias gclone='$GIT clone'
 alias gconfig='$GIT config'
 
-alias ..='cd ..'
 alias cp='cp -ri'
+alias mv='mv -i'
+alias rm='rm -ri'
 alias detox='detox -f ~/.config/detoxrc'
 alias less='less -N'
 alias lessn='less'
 alias lynx='lynx -vikeys'
 alias mk='make'
-alias mv='mv -i'
-alias rm='rm -ri'
 alias tmux='tmux -2u'
 alias wget='wget -c'
 alias mpv='mpv --fs --no-audio-display'
