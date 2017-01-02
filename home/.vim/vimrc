@@ -308,12 +308,9 @@ iabbrev flaot float
 
 " invisibles ===============================================
 se nolist
-if expand('fileencoding') == 'utf-8'
-    se listchars=tab:\|▸,eol:¬,trail:∙
-else
-    se listchars=tab:>~,trail:.
-endif
-nnoremap <SILENT><C-P> :se list!<CR>
+se listchars=tab:\|▸,eol:¬,trail:∙
+"se listchars=tab:>~,trail:.
+nnoremap <C-P> :se list!<CR>
 
 " indentline ===============================================
 "nnoremap <SILENT><TAB> :IndentLinesToggle<CR>

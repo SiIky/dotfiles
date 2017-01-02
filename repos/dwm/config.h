@@ -64,7 +64,6 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /*class                     instance                        title           tags mask       isfloating      monitor */
-    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
     { "Media",                  NULL,                           NULL,           T_MEDIA,        0,              -1 },
     { "Spotify",                "spotify",                      "Spotify",      T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
@@ -75,6 +74,7 @@ static const Rule rules[] = {
     { "WICD",                   "WICD",                         "WICD",         T_VOID,         0,              -1 },
     { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
+    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
     { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
     { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
 };
@@ -114,11 +114,11 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, NULL };
+static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
 static const char *termcmd[]    = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
 static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
-static const char *vimcmd[]     = { "tabbed", "-r", "2", "st", "-w", "''", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
+static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
 
 /* volume controls */
 static const char *volup[]      = { "amixer", "set", "Master", "5%+",  NULL };
