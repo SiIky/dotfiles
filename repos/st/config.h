@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char font[] = "Hermit:pixelsize=14:antialias=true";
+static char font[] = "Hermit:pixelsize=15:antialias=true";
 static int borderpx = 0;
 
 /*
@@ -142,7 +142,7 @@ static unsigned int cursorshape = 2;
  */
 
 static unsigned int cols = 80;
-static unsigned int rows = 24;
+static unsigned int rows = 40;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -163,8 +163,6 @@ static unsigned int defaultattr = 11;
  */
 static MouseShortcut mshortcuts[] = {
 	/* button               mask            string */
-	//{ Button4,              XK_ANY_MOD,     "\031" },
-	//{ Button5,              XK_ANY_MOD,     "\005" },
 	{ 0,                    XK_ANY_MOD,     NULL   },
 };
 
@@ -179,13 +177,6 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
-	//{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	//{ MODKEY,               XK_Print,       toggleprinter,  {.i =  0} },
-	//{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	//{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	//{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	//{ MODKEY|ShiftMask,     XK_Insert,      clippaste,      {.i =  0} },
-	//{ MODKEY|XK_Alt_L,      XK_X,           iso14755,       {.i =  0} },
 };
 
 /*
@@ -471,4 +462,3 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
-

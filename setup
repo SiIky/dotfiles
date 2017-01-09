@@ -8,10 +8,13 @@ SETUPDIR=$REPODIR/.setup
 sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
 
 # setup bash env
-wget -q -O $HOME/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+wget -nv --show-progress -O $HOME/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+
+# create folder for abduco sessions if $ABDUCO_SOCKET_DIR exists
+[ "$ABDUCO_SOCKET_DIR" != "" ] && [ ! -d $ABDUCO_SOCKET_DIR ] && mkdir -p -m 0700 "$ABDUCO_SOCKET_DIR"
 
 # create user bin folder
-mkdir $HOME/bin
+[ ! -d $HOME/bin ] && mkdir -m 0700 $HOME/bin
 
 ############################################################
 VIMFILES=$HOME/.vim
@@ -19,28 +22,32 @@ SWP=$VIMFILES/swp
 AUTO=$VIMFILES/autoload
 
 # create necessary folders in ~/.vim
-mkdir -p $SWP $AUTO
+mkdir -m 0700 -p $SWP $AUTO
 
 # get Vim-Plug
-wget -q -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+wget -nv --show-progress -O $AUTO/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 ############################################################
 # setup newsbeuter
-mkdir -p $HOME/.local/share/newsbeuter
+mkdir -m 0700 -p $HOME/.local/share/newsbeuter
+
+############################################################
+# set up pomodoro
+git clone https://github.com/rukshn/pomodoro $HOME/.config/pomodoro
 
 ############################################################
 # create temporary setup folder
-mkdir -p $SETUPDIR/hermit
+mkdir -m 0700 -p $SETUPDIR/hermit
 
 # install Hermit font
 cd $SETUPDIR/hermit
-wget 'https://pcaro.es/d/otf-hermit-1.21.tar.gz'
-tar xvzf *hermit*.tar.gz
+wget -nv --show-progress -O hermit.tar.gz 'https://pcaro.es/d/otf-hermit-1.21.tar.gz'
+tar xvzf hermit.tar.gz
 sudo mkdir -p /usr/share/fonts/opentype/hermit
 sudo cp $SETUPDIR/hermit/*.otf /usr/share/fonts/opentype/hermit
 
 # copy dwm entry for lightdm
-cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/
+sudo cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/
 
 ############################################################
 # clone git repos
@@ -53,6 +60,10 @@ git clone http://git.suckless.org/st
 git clone http://git.suckless.org/tabbed
 git clone https://github.com/drkh5h/slstatus
 git clone https://github.com/martanne/abduco
+git clone https://github.com/martanne/dvtm
+
+[ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path
+[ -f dmenu/dmenu_run ] && rm dmenu/dmenu_run
 
 ############################################################
 cd $REPODIR
@@ -61,5 +72,4 @@ stow -nv -t $HOME home
 stow -nv -t $SETUPDIR repos
 
 echo 'to apply these changes do:'
-echo "stow -v -t $HOME home"
-echo "stow -v -t $SETUPDIR repos"
+echo "stow -v -t $HOME home; stow -v -t $SETUPDIR repos"

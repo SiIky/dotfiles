@@ -9,16 +9,16 @@ exec setxkbmap -layout pt,us -option grp:sclk_toggle &
 # 15-key pad
 #exec setxkbmap -device 18 -layout us &
 
-#exec xsetroot -name " " &
-exec slstatus -d & # status bar
 exec xset m 0 0 & # disable mouse accel
-exec redshift &
-exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose &
+
+pgrep redshift > /dev/null || exec redshift &
+pgrep slstatus > /dev/null || exec slstatus -d || xsetroot -name ' ' & # status bar
+pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose & 
 
 # set wallpaper with feh
-if [ -f ~/.config/fehbg ]; then
-    . ~/.config/fehbg
-fi
+[ -f ~/.config/fehbg ] && . ~/.config/fehbg
+
+exec xmodmap ~/.config/xmodmap &
 
 # run the DWM window manager
 exec dwm

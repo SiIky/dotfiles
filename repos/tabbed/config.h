@@ -22,6 +22,7 @@ static const char titletrim[]   = "...";
 static const int  tabwidth      = 200;
 static const Bool foreground    = True;
 static       Bool urgentswitch  = False;
+static       Bool should_draw_bar = False;
 
 /*
  * Where to place a new tab when it is opened. When npisrelative is True,
@@ -53,5 +54,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,     XK_k,      movetab,     { .i = +1 } },
 	{ MODKEY,               XK_Tab,    rotate,      { .i = 0 } },
 	{ MODKEY,               XK_q,      killclient,  { 0 } },
+	{ MODKEY,               XK_h,      toggle,      { .v = (void*) &should_draw_bar } },
 	{ 0,                    XK_F11,    fullscreen,  { 0 } },
 };

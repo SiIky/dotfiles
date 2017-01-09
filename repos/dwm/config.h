@@ -70,6 +70,7 @@ static const Rule rules[] = {
     { "News",                   NULL,                           NULL,           T_MAIL,         0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
     { "Surf",                   "surf",                         NULL,           T_MAIL,         0,              -1 },
+    { "Hexchat",                "hexchat",                      NULL,           T_MAIL,         0,              -1 }, /* Arduino IDE */
     { "HTOP",                   "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
     { "WICD",                   "WICD",                         "WICD",         T_VOID,         0,              -1 },
     { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
@@ -115,15 +116,16 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
-static const char *termcmd[]    = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
+//static const char *termcmd[]    = { "st", NULL };
+static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", NULL };
 static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
 static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
 
 /* volume controls */
-static const char *volup[]      = { "amixer", "set", "Master", "5%+",  NULL };
-static const char *voldown[]    = { "amixer", "set", "Master", "5%-",  NULL };
-static const char *volmute[]    = { "amixer", "set", "Master", "toggle", NULL };
+static const char *amvolup[]      = { "amixer", "set", "Master", "5%+",  NULL };
+static const char *amvoldown[]    = { "amixer", "set", "Master", "5%-",  NULL };
+static const char *amvolmute[]    = { "amixer", "set", "Master", "toggle", NULL };
 
 /* cmus controls */
 static const char *cmus_play[]  = { "cmus-remote", "-u", NULL };
@@ -140,15 +142,10 @@ static const Key keys[] = {
     { WinKey,                   XK_d,                   incnmaster,             {.i = -1 } },
     { WinKey|ShiftMask,         XK_h,                   setmfact,               {.f = -0.05 } },
     { WinKey|ShiftMask,         XK_l,                   setmfact,               {.f = +0.05 } },
-    { WinKey,                   XK_Return,              zoom,                   {0} },
     { WinKey,                   XK_Tab,                 view,                   {0} },
     { LAlt,                     XK_F4,                  killclient,             {0} },
     { WinKey,                   XK_space,               setlayout,              {0} },
     { WinKey|ShiftMask,         XK_space,               togglefloating,         {0} },
-    { WinKey,                   XK_comma,               focusmon,               {.i = -1 } },
-    { WinKey,                   XK_period,              focusmon,               {.i = +1 } },
-    { WinKey|ShiftMask,         XK_comma,               tagmon,                 {.i = -1 } },
-    { WinKey|ShiftMask,         XK_period,              tagmon,                 {.i = +1 } },
     { WinKey|ShiftMask,         XK_F4,                  quit,                   {0} },
     TAGKEYS(                    XK_1,                                           0),
     TAGKEYS(                    XK_2,                                           1),
@@ -162,13 +159,13 @@ static const Key keys[] = {
     TAGKEYS(                    XK_0,                                           9),
     { WinKey,                   XK_v,                   spawn,                  {.v = vimcmd } },
     { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
-    { WinKey,                   XK_t,                   spawn,                  {.v = termcmd } },
+    { WinKey,                   XK_t,                   spawn,                  {.v = stcmd } },
     { ShiftMask|ControlMask,    XK_Delete,              spawn,                  {.v = htopcmd } },
     { WinKey,                   XK_e,                   spawn,                  {.v = rangercmd } },
     /* Volume & CMUS controls */
-    { 0,                        XF86AudioRaiseVolume,   spawn,                  {.v = volup } },
-    { 0,                        XF86AudioLowerVolume,   spawn,                  {.v = voldown } },
-    { 0,                        XF86AudioMute,          spawn,                  {.v = volmute } },
+    { 0,                        XF86AudioRaiseVolume,   spawn,                  {.v = amvolup } },
+    { 0,                        XF86AudioLowerVolume,   spawn,                  {.v = amvoldown } },
+    { 0,                        XF86AudioMute,          spawn,                  {.v = amvolmute } },
     { 0,                        XF86AudioPlay,          spawn,                  {.v = cmus_play } },
     { 0,                        XF86AudioStop,          spawn,                  {.v = cmus_stop } },
     { 0,                        XF86AudioPrev,          spawn,                  {.v = cmus_prev } },

@@ -7,21 +7,15 @@ alias lh='$LS -ABFGghl'
 alias ll='$LS -AFl'
 
 VIM='vim -p'
-alias ed='$VIM'
+#alias ed='$VIM'
 alias vi='$VIM'
 alias vim='$VIM'
 alias vimup='vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate'
 
 # Git aliases (if no hub replace with git)
-if [ -f ~/bin/hub ]; then
-    GIT='hub'
-else
-    GIT='git'
-fi
-
-if [ -f ~/.config/hub/hub.bash_completion.sh ]; then
-    . ~/.config/hub/hub.bash_completion.sh
-fi
+GIT='git'
+[ -f ~/bin/hub ] && GIT='hub'
+[ -f ~/bin/hub ] && [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
 
 alias git='$GIT'
 alias gadd='$GIT add'

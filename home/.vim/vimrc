@@ -32,9 +32,10 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " rust stuff -----------------------------------------------
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " haskell stuff --------------------------------------------
-Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
+"Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 "Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }" GHC-Mod integration
 " completion plugin for haskell
 "Plug 'eagletmt/neco-ghc', { 'for': 'haskell' } " (requires GHC-Mod: cabal install ghc-mod)
@@ -44,15 +45,20 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 " files browser
 "Plug 'Shougo/vimfiler.vim'
 "Plug 'scrooloose/nerdtree'
-"Plug 'bling/vim-bufferline'
-"Plug 'jlanzarotta/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'
 
 " general --------------------------------------------------
 " auto-window resize
-"Plug 'justincampbell/vim-eighties'
+Plug 'justincampbell/vim-eighties'
+
+" Underline words under the cursor
+Plug 'itchyny/vim-cursorword'
 
 " visual increment
 "Plug 'triglav/vim-visual-increment'
+
+" alignment stuff
+"Plug 'junegunn/vim-easy-align'
 
 " sideways
 "Plug 'AndrewRadev/sideways.vim'
@@ -72,11 +78,12 @@ Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
 " parens/brackets auto closing
 Plug 'Raimondi/delimitMate'
 
-" Molokai coloscheme
+" Molokai colorscheme
 Plug 'tomasr/molokai'
+"Plug 'rafi/awesome-vim-colorschemes'
 
 " async execution lib
-"Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
 call plug#end()
 
@@ -138,13 +145,20 @@ syntax on
 "se mouse=a
 
 " Status Line ==============================================
-se statusline=\ 
-se statusline+=%([%n]\ %f%)\  " [buf#] fname
+se statusline=%(#%n\ %f%)\  " #buf fname
 se statusline+=%(%m%r%h%w%) " modified/modifiable/etc
 se statusline+=%=%y\  " ftype
 se statusline+=%{strlen(&fenc)?&fenc:'none'}: "file encoding
 se statusline+=%{&ff}\ \|\  "file format
 se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
+
+" Rust Settings ============================================
+" rustfmt
+let g:rustfmt_autosave=1
+
+" racer
+let g:racer_cmd="~/.cargo/bin/racer"
+let g:racer_experimental_completer=0
 
 " vim -b : edit binary using xxd-format --------------------
 augroup Binary
