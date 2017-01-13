@@ -76,6 +76,7 @@ static const Rule rules[] = {
     { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
     { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
+    { "mpv",                    "gl",                           NULL,           T_MEDIA,        0,              -1 },
     { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
     { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
 };
