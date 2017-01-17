@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "~/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"

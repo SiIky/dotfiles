@@ -117,10 +117,9 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
-//static const char *termcmd[]    = { "st", NULL };
-static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", NULL };
 static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
+static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
 static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
 
 /* volume controls */

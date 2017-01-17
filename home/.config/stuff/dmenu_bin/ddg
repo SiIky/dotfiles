@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec surf "https://duckduckgo.com/?q=$@"

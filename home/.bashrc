@@ -11,7 +11,7 @@ shopt -s autocd cdspell checkhash checkjobs checkwinsize cmdhist direxpand dirsp
 stty -ixon
 
 # fancy prompt
-export PS1=$'\u250F[\[\033[1;32m\]\u\[\033[0m\]]@[\[\033[0;31m\]\h\[\033[0m\]]:[\[\033[1;34m\]\w\[\033[0m\]]\n\u2517[\A] ($?) \u21DD '
+export PS1=$'\u250F[\[\033[1;32m\]\u\[\033[0m\]]@[\[\033[0;31m\]\h\[\033[0m\]]:[\[\033[1;34m\]\w\[\033[0m\]] $(__git_ps1 "(%s)")\n\u2517[\A] ($?) \u21DD '
 export PS2=$'\u21AA '
 
 export HISTCONTROL=ignoreboth
@@ -19,7 +19,7 @@ export HISTFILE=$HOME/.config/bash_history
 export HISTFILESIZE=500
 export HISTSIZE=250
 
-export ABDUCO_SOCKET_DIR=$HOME/.config/abduco # directory abduco will use to save sessions
+export ABDUCO_SOCKET_DIR=$HOME/.config # directory abduco will use to save sessions
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
 export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin
@@ -38,9 +38,10 @@ if ! shopt -oq posix; then
     fi
 fi
 
-[ -f $HOME/.config/extras.sh ] && source $HOME/.config/extras.sh
-[ -f $HOME/.config/dircolors ] && eval $(dircolors -b $HOME/.config/dircolors)
-[ -f $HOME/.config/aliases.sh ] && source $HOME/.config/aliases.sh
-[ -f $HOME/.config/stuff.sh ] && source $HOME/.config/stuff.sh # load extra stuff (i.e. not ont the public repo)
+[ -f $HOME/.config/stuff/git-prompt.sh ] && source $HOME/.config/stuff/git-prompt.sh
+[ -f $HOME/.config/stuff/extras.sh ] && source $HOME/.config/stuff/extras.sh
+[ -f $HOME/.config/stuff/dircolors ] && eval $(dircolors -b $HOME/.config/stuff/dircolors)
+[ -f $HOME/.config/stuff/aliases.sh ] && source $HOME/.config/stuff/aliases.sh
+[ -f $HOME/.config/stuff/stuff.sh ] && source $HOME/.config/stuff/stuff.sh # load extra stuff (i.e. not on the public repo)
 [ -f $HOME/.config/pomodoro/pomodoro.sh ] && source $HOME/.config/pomodoro/pomodoro.sh # load the pomodoro script
 [ -f $HOME/projects/minoca/minoca.sh ] && source $HOME/projects/minoca/minoca.sh # stuff for minoca

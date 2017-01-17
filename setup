@@ -3,12 +3,14 @@
 ############################################################
 REPODIR=$(pwd)
 SETUPDIR=$REPODIR/.setup
+mkdir -m 0700 -p $HOME/.config/stuff
 
 # disable mouse accel
 sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
 
 # setup bash env
-wget -nv --show-progress -O $HOME/.config/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+wget -nv --show-progress -O $HOME/.config/stuff/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
+wget -nv --show-progress -O $HOME/.config/stuff/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 # create folder for abduco sessions if $ABDUCO_SOCKET_DIR exists
 [ "$ABDUCO_SOCKET_DIR" != "" ] && [ ! -d $ABDUCO_SOCKET_DIR ] && mkdir -p -m 0700 "$ABDUCO_SOCKET_DIR"

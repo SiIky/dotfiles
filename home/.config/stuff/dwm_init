@@ -16,9 +16,9 @@ pgrep slstatus > /dev/null || exec slstatus -d || xsetroot -name ' ' & # status 
 pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose & 
 
 # set wallpaper with feh
-[ -f ~/.config/fehbg ] && . ~/.config/fehbg
+[ -f ~/.config/stuff/fehbg ] && . ~/.config/stuff/fehbg
 
-exec xmodmap ~/.config/xmodmap &
+exec xmodmap ~/.config/stuff/xmodmap &
 
 # run the DWM window manager
 exec dwm
