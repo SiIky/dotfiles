@@ -4,12 +4,6 @@ se nocompatible
 let g:plug_threads=2
 
 call plug#begin('~/.vim/plugged')
-" terminal -------------------------------------------------
-"Plug 'mattn/vim-terminal'
-
-" indentation display --------------------------------------
-"Plug 'Yggdroot/indentLine', { 'for': ['python', 'haskell', 'c', 'cpp'] }
-"Plug 'nathanaelkane/vim-indent-guides', { 'for': ['haskell', 'python', 'c'] }
 
 " toml -----------------------------------------------------
 " for cargo (rust) files
@@ -19,33 +13,9 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'godlygeek/tabular', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
-" git integration ------------------------------------------
-"Plug 'tpope/vim-fugitive' " git wrapper
-"Plug 'junegunn/vim-github-dashboard' " GH events browser
-"Plug 'junegunn/gv.vim' " light git repo browser
-"Plug 'gregsexton/gitv' " git repo browser
-"Plug 'mattn/gist-vim'
-
-" some random settings -------------------------------------
-"Plug 'tpope/vim-sensible'
-"Plug 'tpope/vim-obsession'
-
 " rust stuff -----------------------------------------------
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-
-" haskell stuff --------------------------------------------
-"Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' } " syntax for haskell
-"Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }" GHC-Mod integration
-" completion plugin for haskell
-"Plug 'eagletmt/neco-ghc', { 'for': 'haskell' } " (requires GHC-Mod: cabal install ghc-mod)
-"Plug 'lukerandall/haskellmode-vim', { 'for': 'haskell' }
-"Plug 'dag/vim2hs', { 'for': 'haskell' } " Fancy Stuff
-
-" files browser
-"Plug 'Shougo/vimfiler.vim'
-"Plug 'scrooloose/nerdtree'
-Plug 'jlanzarotta/bufexplorer'
 
 " general --------------------------------------------------
 " auto-window resize
@@ -53,37 +23,15 @@ Plug 'justincampbell/vim-eighties'
 
 " Underline words under the cursor
 Plug 'itchyny/vim-cursorword'
-
-" visual increment
-"Plug 'triglav/vim-visual-increment'
-
-" alignment stuff
-"Plug 'junegunn/vim-easy-align'
-
-" sideways
-"Plug 'AndrewRadev/sideways.vim'
-
-" yankring
-"Plug 'vim-scripts/YankRing.vim'
-
-" vimwiki
-"Plug 'vimwiki/vimwiki', { 'for': ['vimwiki', 'wiki'], 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote', 'VimwikiTabMakeDiaryNote', 'VimwikiFollowLink', 'VimwikiGoBackLink', 'VimwikiSplitLink', 'VimwikiVSplitLink', 'VimwikiTabnewLink', 'VimwikiNextLink', 'VimwikiPrevLink', 'VimwikiGoto', 'VimwikiDeleteLink', 'VimwikiRenameLink', 'Vimwiki2HTML', 'Vimwiki2HTMLBrowse', 'VimwikiAll2HTML', 'VimwikiToggleListItem', 'VimwikiListChangeLevel', 'VimwikiSearch', 'VimwikiBacklinks', 'VimwikiTable', 'VimwikiTableMoveColumnLeft', 'VimwikiGenerateLinks', 'VimwikiDiaryGenerateLinks', 'VimwikiDiaryNextDay', 'VimwikiDiaryPrevDay', 'VimwikiTOC', 'VimwikiCheckLinks', 'VimwikiRebuildTags', 'VimwikiSearchTags', 'VimwikiGenerateTags'] }
-
-" windowswap
-"Plug 'wesQ3/vim-windowswap'
-
-" fuzzy finder n stuff
-"Plug 'szw/vim-ctrlspace'
-
-" parens/brackets auto closing
-Plug 'Raimondi/delimitMate'
+Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
 " Molokai colorscheme
 Plug 'tomasr/molokai'
-"Plug 'rafi/awesome-vim-colorschemes'
-
-" async execution lib
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+Plug 'ajh17/VimCompletesMe'
+Plug 'mbbill/undotree'
+Plug 'romainl/vim-cool'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -105,19 +53,24 @@ se dir=~/.vim/swp//
 se encoding=utf-8
 se expandtab
 se fileencoding=utf-8
+se foldcolumn=1
 se foldenable
-se foldmethod=manual
+se foldmethod=indent
+se foldnestmax=3
 se hidden
 se incsearch
 se laststatus=2
 se linebreak
 se noerrorbells
-se nohlsearch
+se hlsearch
 se noruler
 se nospell
 se novisualbell
 se nowrap
 se number
+se numberwidth=1
+se complete=.,w,b,u,U,t
+se nrformats=alpha,hex,bin
 se omnifunc=syntaxcomplete#Complete
 se relativenumber
 se scrolljump=10
@@ -126,7 +79,7 @@ se shiftwidth=4
 se shortmess=at
 se showcmd
 se showmode
-se showtabline=2
+se showtabline=1
 se smartindent
 se smarttab
 se softtabstop=0
@@ -140,17 +93,37 @@ se ttimeoutlen=0 " status bar change mode delay (ms)
 se viminfo+=n~/.vim/viminfo
 se wildignore+=*.swp,*.o
 se wildmenu
+se matchpairs=(:),[:],{:},<:>
 highlight comment cterm=italic
 syntax on
 "se mouse=a
 
+if has("persistent_undo")
+    set undodir=~/.vim/undo
+    set undofile
+endif
+
 " Status Line ==============================================
 se statusline=%(#%n\ %f%)\  " #buf fname
 se statusline+=%(%m%r%h%w%) " modified/modifiable/etc
-se statusline+=%=%y\  " ftype
+se statusline+=%y%=\  " ftype
 se statusline+=%{strlen(&fenc)?&fenc:'none'}: "file encoding
 se statusline+=%{&ff}\ \|\  "file format
 se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
+
+" leader/localleader
+let mapleader=','
+let maplocalleader=''
+
+" undotree settings
+nnoremap <LOCALLEADER>u :EightiesDisable<CR>:UndotreeToggle<CR>:EightiesEnable<CR>
+let g:undotree_WindowLayout=2
+let g:undotree_SetFocusWhenToggle=1
+let g:undotree_HighlightChangedText=0
+let g:undotree_ShortIndicators=1
+
+" sneak
+let g:sneak#label = 1
 
 " Rust Settings ============================================
 " rustfmt
@@ -160,35 +133,7 @@ let g:rustfmt_autosave=1
 let g:racer_cmd="~/.cargo/bin/racer"
 let g:racer_experimental_completer=0
 
-" vim -b : edit binary using xxd-format --------------------
-augroup Binary
-    au!
-    au BufReadPre  *.o,*.dbg,*.x,*.out let &bin=1
-    au BufReadPost *.o,*.dbg,*.x,*.out if &bin | %!xxd
-    au BufReadPost *.o,*.dbg,*.x,*.out set filetype=xxd | endif
-    au BufWritePre *.o,*.dbg,*.x,*.out if &bin | %!xxd -r
-    au BufWritePre *.o,*.dbg,*.x,*.out endif
-    au BufWritePost *.o,*.dbg,*.x,*.out if &bin | %!xxd
-    au BufWritePost *.o,*.dbg,*.x,*.out set nomod | endif
-augroup END
-
 " bindings -------------------------------------------------
-" quickfix
-nnoremap <F4> :cwindow<CR>
-nnoremap <F5> :make<CR>:cwindow<CR>
-nnoremap <F6> :make clean<CR>:cwindow<CR>
-nnoremap <F7> :cprev<CR>
-nnoremap <F8> :cnext<CR>
-nnoremap <F9> :cclose<CR>
-
-" clipboard bindings
-vnoremap <F11> :!xclip -f -sel clip<CR>
-nnoremap <F12> mz:-1r !xclip -o -sel clip<CR>`z
-
-" leader/localleader
-let mapleader=','
-let maplocalleader=''
-
 " = buffer/function
 nnoremap <LEADER>M maggVG=`a_zz
 nnoremap <LEADER>m ma]][[V%=`a_zz
@@ -246,20 +191,14 @@ nnoremap v <C-V>
 nnoremap <C-V> v
 
 " search
-nnoremap <BS> :se hls!<CR>
-vnoremap / y/<C-R>"<CR>:se hls<CR>
-nnoremap / :se hls<CR>/
-nnoremap n :se hls<CR>n
-nnoremap N :se hls<CR>N
-nnoremap * :se hls<CR>*
+vnoremap / y/<C-R>"<CR>
 
 " search and replace
-nnoremap <C-S> viwy:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
+nnoremap <C-S> :%s/<cword>//cg<LEFT><LEFT><LEFT>
 vnoremap <C-S> y:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " vimrc edit
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
-nnoremap <LEADER>sv :source $MYVIMRC<CR>
 
 " tabs
 nnoremap <LOCALLEADER>1 1gt
@@ -279,8 +218,8 @@ nnoremap <C-W>tq :tabclose<CR>
 " windows
 nnoremap <C-W>tf <C-W>f<C-W>T
 nnoremap <C-W>q :bdelete<CR>
-nnoremap <C-W>n :new<CR>
-nnoremap <C-W>v :vnew<CR>
+nnoremap <C-W>n :new 
+nnoremap <C-W>v :vnew 
 nnoremap <C-L> :ls<CR>
 
 " put stuff around words
@@ -326,68 +265,21 @@ se listchars=tab:\|▸,eol:¬,trail:∙
 "se listchars=tab:>~,trail:.
 nnoremap <C-P> :se list!<CR>
 
-" indentline ===============================================
-"nnoremap <SILENT><TAB> :IndentLinesToggle<CR>
-"let g:indentLine_char='|'
-"let g:indentLine_color_term=239
-"let g:indentLine_color_dark=2
-"let g:indentLine_leadingSpaceChar='▸'
-"let g:indentLine_leadingSpaceEnabled=0
-"let g:indentLine_enabled=0
-
 " NETRW files browser ===============================
 let g:netrw_liststyle=3 " listing style
 let g:netrw_browse_split=0 " opening behaviour
-map <SILENT><C-E> :Explore<CR>
+map <C-E> :Explore<CR>
 
 " monokai theme ============================================
 colorscheme molokai
 let g:molokai_original=1
-let g:rehash256=0
-
-" vimwiki ==================================================
-"nmap <LOCALLEADER>es :VimwikiUISelect<CR>
-"au BufNewFile,BufRead,BufReadPost *.wiki set filetype=vimwiki
-"let g:vimwiki_hl_headers=0
-"let g:vimwiki_hl_cb_checked=1
-"let g:vimwiki_global_ext=0
-"let g:vimwiki_ext2syntax = {
-"    \ '.md': 'markdown',
-"    \ '.wiki': 'default'
-"    \ }
-"let g:vimwiki_menu='' " 'Vimwiki'
-"let g:vimwiki_listsyms=' .oOX'
-"let g:vimwiki_listsyms='✗○◐●✓'
-"let g:vimwiki_use_mouse=0
-"let g:vimwiki_folding=''
-"let g:vimwiki_use_calendar=0
-"let g:vimwiki_table_mappings=0
-"let g:vimwiki_table_auto_fmt=1
-"let g:vimwiki_CJK_length=0 " UTF8 related
-"let g:vimwiki_dir_link=''
-"let g:vimwiki_conceallevel=2
-"let g:vimwiki_autowriteall=0
-"let g:vimwiki_url_maxsave=15 "default
-"let g:vimwiki_map_prefix='<LOCALLEADER>e'
-"let g:vimwiki_auto_chdir=1
-"
-"" change 'path' if needed
-"let g:vimwiki_list = [{
-"    \ 'path': '~/Documents/my_stuff/vim/wiki',
-"    \ 'auto_export': 0,
-"    \ 'auto_toc': 1,
-"    \ 'syntax': 'default',
-"    \ 'ext': '.wiki',
-"    \ 'maxhl': 1,
-"    \ 'auto_tags': 1,
-"    \ 'list_margin': -1
-"    \ }]
+let g:rehash256=1
 
 " tabular ==================================================
 let g:tabular_loaded=1
 
 " vim-markdown =============================================
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled=0
 let g:vim_markdown_folding_style_pythonic=0
 let g:vim_markdown_folding_level=1
 let g:vim_markdown_no_default_key_mappings=1
@@ -395,4 +287,7 @@ let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_emphasis_multiline=0
 let g:vim_markdown_math=0
 
+runtime macros/matchit.vim
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 autocmd VimEnter * echo "Fuck You Human .l."

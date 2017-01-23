@@ -120,7 +120,7 @@ static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dm
 static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
 static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
-static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
+static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "dvtm", "vim", NULL };
 
 /* volume controls */
 static const char *amvolup[]      = { "amixer", "set", "Master", "5%+",  NULL };

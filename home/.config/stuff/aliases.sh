@@ -3,31 +3,58 @@ alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 # Git aliases (if no hub replace with git)
 [ -f $HOME/bin/hub ] && [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
 
-function gadd() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT add "$@"; }
-function gblame() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT blame "$@"; }
-function gclone() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT clone "$@"; }
-function gcommit() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT commit -v "$@"; }
-function gconfig() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT config "$@"; }
-function gdiff() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT diff "$@"; }
-function git() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT "$@"; }
-function glog() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT log "$@"; }
-function gmv() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT mv "$@"; }
-function gpull() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT pull --stat "$@"; }
-function gpush() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT push "$@"; }
-function grm() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT rm "$@"; }
-function gstatus() { GIT='git'; [ -f $HOME/bin/hub ] && GIT='hub'; $GIT status "$@"; }
+if [ -f $HOME/bin/hub ]; then
+    [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
+    function gadd() { hub add "$@"; }
+    function gblame() { hub blame "$@"; }
+    function gclone() { hub clone "$@"; }
+    function gcommit() { hub commit -v "$@"; }
+    function gconfig() { hub config "$@"; }
+    function gdiff() { hub diff "$@"; }
+    function git() { hub "$@"; }
+    function glog() { hub log "$@"; }
+    function gmv() { hub mv "$@"; }
+    function gpull() { hub pull --stat "$@"; }
+    function gpush() { hub push "$@"; }
+    function grm() { hub rm "$@"; }
+    function gstatus() { hub status "$@"; }
+else
+    function gadd() { git add "$@"; }
+    function gblame() { git blame "$@"; }
+    function gclone() { git clone "$@"; }
+    function gcommit() { git commit -v "$@"; }
+    function gconfig() { git config "$@"; }
+    function gdiff() { git diff "$@"; }
+    function git() { git "$@"; }
+    function glog() { git log "$@"; }
+    function gmv() { git mv "$@"; }
+    function gpull() { git pull --stat "$@"; }
+    function gpush() { git push "$@"; }
+    function grm() { git rm "$@"; }
+    function gstatus() { git status "$@"; }
+fi
+
+if [ -f $HOME/bin/exa ]; then
+    function l()    { command exa --group-directories-first --color=automatic "$@"; }
+    function l1()    { command exa --group-directories-first --color=automatic -1 "$@"; }
+    function lh()   { command exa --group-directories-first --color=automatic -al "$@"; }
+    function ll()   { command exa --group-directories-first --color=automatic -agl "$@"; }
+    function ls()   { command exa --group-directories-first --color=automatic -a "$@"; }
+    function tree() { command exa -T --group-directories-first --color=automatic "$@"; }
+else
+    function l() { command ls --group-directories-first --color=auto -CF "$@"; }
+    function l1() { command ls --group-directories-first --color=auto -1CF "$@"; }
+    function lh() { command ls --group-directories-first --color=auto -ABFGghl "$@"; }
+    function ll() { command ls --group-directories-first --color=auto -AFl "$@"; }
+    function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
+fi
 
 function vi() { command vim -p "$@"; }
 function vim() { command vim -p "$@"; }
 function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate "$@"; }
 
-function l() { command ls --group-directories-first --color=auto -CF "$@"; }
-function lh() { command ls --group-directories-first --color=auto -ABFGghl "$@"; }
-function ll() { command ls --group-directories-first --color=auto -AFl "$@"; }
-function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
-
-function cp() { command cp -ri "$@"; }
 function mk() { command make "$@"; }
+function cp() { command cp -ri "$@"; }
 function mv() { command mv -i "$@"; }
 function rm() { command rm -ri "$@"; }
 
@@ -41,7 +68,6 @@ function lessn() { command less "$@"; }
 function lynx() { command lynx -vikeys "$@"; }
 function mpv() { command mpv --fs --no-audio-display "$@"; }
 function rexp() { command rustc --explain "$@" | less "$@"; }
-function tmux() { command tmux -2u "$@"; }
 function wget() { command wget -c "$@"; }
 function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }

@@ -1,19 +1,19 @@
 always-display-description true
 article-sort-order "date-desc"
-articlelist-format "%4i %f %D %6L  %?T?|%-17T|  &?%t"
-articlelist-title-format "%N %V - Articles in feed '%T' (%u unread, %t total) - %U"
+articlelist-format "%i %f%D%?T? |%T|&?%?a? %a:&? %t"
+articlelist-title-format "(%u/%t) %T: %U"
 auto-reload true
 bookmark-autopilot false
 bookmark-cmd ""
 bookmark-interactive false
-browser "firefox" # default: lynx
+browser "firefox"
 cache-file "~/.config/newsbeuter/cache.db"
 cleanup-on-quit true
 confirm-exit true
 cookie-cache "~/.config/newsbeuter/cookies.txt"
 datetime-format "%Y年%m月%d日 %H時%M分"
 delete-read-articles-on-quit false
-dialogs-title-format "%N %V - Dialogs"
+dialogs-title-format "Dialogs"
 display-article-progress true
 download-full-page true
 download-path "~/Podcasts/%n"
@@ -30,17 +30,17 @@ feedhq-password ""
 feedhq-passwordfile ""
 feedhq-show-special-feeds true
 feedhq-url "https://feedhq.org/"
-feedlist-format "%4i %n %11u %t"
-feedlist-title-format "%N %V - Your feeds (%u unread, %t total)%?T? - tag `%T'&?"
-filebrowser-title-format "%N %V - %?O?Open File&Save File? - %f"
+feedlist-format "%i %u%S%t%?l? %l&?"
+feedlist-title-format "%u/%t unread feeds%?T? - tag '%T'&?"
+filebrowser-title-format "%?O?Open File&Save File? - %f"
 goto-first-unread true
 goto-next-feed false
-help-title-format "%N %V - Help"
+help-title-format "Help"
 history-limit 0
 html-renderer "internal"
 http-auth-method "any"
-ignore-mode "download" 
-itemview-title-format "%N %V - Article '%T' (%u unread, %t total)"
+ignore-mode "download"
+itemview-title-format "Article '%T' (%u unread, %t total)"
 keep-articles-days 0
 mark-as-read-on-hover false
 markfeedread-jumps-to-next-unread true
@@ -53,7 +53,7 @@ newsblur-password ""
 newsblur-url "https://newsblur.com"
 notify-always false
 notify-beep false
-notify-format "newsbeuter: finished reload, %f unread feeds (%n unread articles total)"
+notify-format "%f unread feeds (%n unread articles)"
 notify-program ""
 notify-screen false
 notify-xterm false
@@ -68,40 +68,39 @@ openbrowser-and-mark-jumps-to-next-unread true
 opml-url ""
 pager "internal"
 player "mplayer"
-podcast-auto-enqueue false
+podcast-auto-enqueue true
 prepopulate-query-feeds false
 proxy ""
 proxy-auth ""
 proxy-auth-method "any"
-proxy-type "http" 
-refresh-on-startup true
+proxy-type "http"
+refresh-on-startup false
 reload-only-visible-feeds false
 reload-threads 2
 reload-time 60
-save-path "~/.config/newsbeuter/saved" # default: ~/
-search-highlight-colors "black" "yellow" "bold" 
-searchresult-title-format "%N %V - Search result (%u unread, %t total)"
-selectfilter-title-format "%N %V - Select Filter"
-selecttag-title-format "%N %V - Select Tag"
+save-path "~/.config/newsbeuter/saved"
+search-highlight-colors "black" "yellow" "bold"
+searchresult-title-format "Search result (%u unread, %t total)"
+selectfilter-title-format "Select Filter"
+selecttag-title-format "Select Tag"
 show-keymap-hint true
 show-read-articles false
 show-read-feeds false
 suppress-first-reload false
 swap-title-and-hints false
-text-width 60
+text-width 70
 toggleitemread-jumps-to-next-unread true
 ttrss-flag-publish ""
 ttrss-flag-star ""
 ttrss-login ""
-ttrss-mode "multi" 
+ttrss-mode "multi"
 ttrss-password ""
 ttrss-passwordfile ""
 ttrss-url ""
 urls-source "local"
-urlview-title-format "%N %V - URLs"
+urlview-title-format "URLs"
 use-proxy false
 user-agent ""
 
-# extra files, to be included after the rest
 include "~/.config/newsbeuter/colors"
 include "~/.config/newsbeuter/binds"
