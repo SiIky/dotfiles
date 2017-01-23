@@ -60,13 +60,17 @@ git clone http://git.suckless.org/dwm
 git clone http://git.suckless.org/slock
 git clone http://git.suckless.org/st
 git clone http://git.suckless.org/tabbed
+
+git clone https://github.com/BurntSushi/ripgrep
+git clone https://github.com/arzzen/git-quick-stats
 git clone https://github.com/drkh5h/slstatus
 git clone https://github.com/martanne/abduco
 git clone https://github.com/martanne/dvtm
-git clone https://github.com/BurntSushi/ripgrep
+git clone https://github.com/ogham/exa
 
 [ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path
 [ -f dmenu/dmenu_run ] && rm dmenu/dmenu_run
+[ -f $REPODIR/install.sh ] && cp $REPODIR/install.sh $SETUPDIR
 
 ############################################################
 cd $REPODIR

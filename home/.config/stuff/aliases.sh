@@ -1,8 +1,6 @@
 alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 
 # Git aliases (if no hub replace with git)
-[ -f $HOME/bin/hub ] && [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
-
 if [ -f $HOME/bin/hub ]; then
     [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
     function gadd() { hub add "$@"; }
@@ -37,7 +35,7 @@ fi
 if [ -f $HOME/bin/exa ]; then
     function l()    { command exa --group-directories-first --color=automatic "$@"; }
     function l1()    { command exa --group-directories-first --color=automatic -1 "$@"; }
-    function lh()   { command exa --group-directories-first --color=automatic -al "$@"; }
+    function lh()   { command exa --group-directories-first --color=automatic -aBl "$@"; }
     function ll()   { command exa --group-directories-first --color=automatic -agl "$@"; }
     function ls()   { command exa --group-directories-first --color=automatic -a "$@"; }
     function tree() { command exa -T --group-directories-first --color=automatic "$@"; }
@@ -61,13 +59,14 @@ function rm() { command rm -ri "$@"; }
 # https://github.com/ogeno/oneliners
 function adm() { command abduco -A $(echo "$(abduco | sed -r 's/Active sessions.*//g;s/\*.*//g;s/\t/ /g' | dmenu)" | sed 's/.* //g'); }
 
-function bandit() { TERM=xterm256 ssh bandit$1@bandit.labs.overthewire.org "$@"; }
+function dfh() { command df -h "$@"; }
+function bandit() { TERM=xterm256 command ssh bandit$1@bandit.labs.overthewire.org; }
 function detox() { command detox -f $HOME/.config/stuff/detoxrc "$@"; }
 function less() { command less -N "$@"; }
 function lessn() { command less "$@"; }
 function lynx() { command lynx -vikeys "$@"; }
 function mpv() { command mpv --fs --no-audio-display "$@"; }
-function rexp() { command rustc --explain "$@" | less "$@"; }
+function rexp() { command rustc --explain "$@" | less; }
 function wget() { command wget -c "$@"; }
 function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }

@@ -5,8 +5,10 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 8;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hermit:size=10" };
-static const char dmenufont[]       = "Hermit:size=10";
+
+#define DEFAULT_FONT "Hermit:size=10"
+static const char *fonts[]          = { DEFAULT_FONT };
+static const char dmenufont[]       = DEFAULT_FONT;
 
 /* Monokai */
 #define COL_BLACK       "#000000"
@@ -23,7 +25,6 @@ static const char col3[] = COL_MAGENTA;
 static const char col4[] = COL_ORANGE;
 static const char col5[] = COL_BLACK;
 
-//static const char *colors[SchemeLast][3] = {
 static const char *colors[][3] = {
     /*               fg    bg    border */
     [SchemeNorm] = { col2, col0, col1 },
@@ -65,7 +66,6 @@ static const Rule rules[] = {
      */
     /*class                     instance                        title           tags mask       isfloating      monitor */
     { "Media",                  NULL,                           NULL,           T_MEDIA,        0,              -1 },
-    { "Spotify",                "spotify",                      "Spotify",      T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
     { "News",                   NULL,                           NULL,           T_MAIL,         0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
