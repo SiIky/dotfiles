@@ -6,21 +6,23 @@
 /* text to show if no value can be retrieved */
 #define UNKNOWN_STR     "n/a"
 
-#define SEP     "\u2329" /* 〈 */
+#define SEP     "\u2329 " /* 〈 */
 
+#define RUN_F   "\u266B " /* ♫ */
 #define WIFI_F  "\u2387 " /* ⎇  */
-#define CPU_F   "\u231A " /* ⌚ */
-#define RAM_F   "\u2328 " /* ⌨  */
-#define BAT_F   "bat "
+#define CPU_F   "" /* "\u231A " */ /* ⌚ */
+#define RAM_F   "" /* "\u2328 " */ /* ⌨  */
+#define BAT_F   "" /* "bat " */
 #define VOL_F   "vol "
 #define TIME_F  "" /*"\u231B "*/ /* ⌛ */
 
+#define RUN_A   "~/bin/cmus-status.sh"
 #define WIFI_A  "wlan0"
 #define CPU_A   NULL
 #define RAM_A   NULL
 #define BAT_A   "BAT0"
 #define VOL_A   "/dev/mixer"
-#define TIME_A  "%R" /* "%d(%a)/%m(%b)/%y %R" */
+#define TIME_A  "%R"
 
 /* statusbar
 - battery_perc (battery percentage) [argument: battery name]
@@ -55,11 +57,12 @@
 - wifi_perc (wifi signal in percent) [argument: wifi card interface name]
 - wifi_essid (wifi essid) [argument: wifi card interface name] */
 static const struct arg args[] = {
-    /* function         format                  argument */
-    { wifi_essid,       SEP WIFI_F "%s ",       WIFI_A },
-    { cpu_perc,         SEP CPU_F  "%s ",       CPU_A },
-    { ram_perc,         SEP RAM_F  "%s ",       RAM_A },
-    { battery_perc,     SEP BAT_F  "%s ",       BAT_A },
+    /* function         format          argument */
+    { run_command,      SEP "%s ",      RUN_A },
+    { wifi_essid,       SEP "%s ",      WIFI_A },
+    { cpu_perc,         SEP "%s ",      CPU_A },
+    { ram_perc,         SEP "%s ",      RAM_A },
+    { battery_perc,     SEP "%s ",      BAT_A },
     //{ vol_perc,         SEP VOL_F  "%s ",       VOL_A },
-    { datetime,         SEP TIME_F "%s ",       TIME_A },
+    { datetime,         SEP "%s ",      TIME_A },
 };

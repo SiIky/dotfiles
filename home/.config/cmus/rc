@@ -96,7 +96,7 @@ set skip_track_info=false
 set smart_artist_sort=true
 set softvol=false
 set softvol_state=0 0
-set status_display_program=
+set status_display_program=~/.config/cmus/status
 set wrap_search=true
 bind browser backspace browser-up
 bind browser i toggle show_hidden
