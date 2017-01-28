@@ -1,2 +1,8 @@
 #!/usr/bin/env sh
-[ -f /tmp/cmus-status ] && cat /tmp/cmus-status
+# script run by slstatus to show the song currently playing on cmus
+F=/tmp/cmus-status
+if [ $(pgrep cmus) ]; then
+    [ -f $F ] && cat $F
+else
+    [ -f $F ] && rm $F
+fi
