@@ -203,6 +203,8 @@ vnoremap / y/<C-R>"<CR>
 " search and replace
 nnoremap <C-S> :%s/<cword>//cg<LEFT><LEFT><LEFT>
 vnoremap <C-S> y:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
+nnoremap <F7> :cprevious<CR>
+nnoremap <F8> :cnext<CR>
 
 " vimrc edit
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
