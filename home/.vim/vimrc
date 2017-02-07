@@ -32,6 +32,7 @@ Plug 'mbbill/undotree'
 Plug 'romainl/vim-cool'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 

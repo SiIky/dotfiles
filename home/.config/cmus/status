@@ -16,6 +16,9 @@
 #   - other keys/values are given only if they are available
 #  
 
+# in case songs have no title/album name, delete the previous entry
+[ -f /tmp/cmus-status ] && rm /tmp/cmus-status
+
 output()
 {
     # write status to ~/cmus-status.txt (not very useful though)

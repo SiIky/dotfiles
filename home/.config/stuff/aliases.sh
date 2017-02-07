@@ -71,3 +71,20 @@ function wget() { command wget -c "$@"; }
 function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+
+# functions to manage remote host
+function tradd() {
+    if [ "$RUSER" != "" ] && [ "$RHOSTNAME" != "" ] && [ "$RWDIR" != "" ]; then
+        scp "$@" $RUSER@$RHOSTNAME:$RWDIR
+    else
+        echo "set the required environment variables"
+    fi
+}
+
+function trclean() {
+    if [ "$RUSER" != "" ] && [ "$RHOSTNAME" != "" ] && [ "$RWDIR" != "" ] && [ "$REXT" != "" ]; then
+        ssh $RUSER@$RHOSTNAME rm $RWDIR/*.$REXT
+    else
+        echo "set the required environment variables"
+    fi
+}
