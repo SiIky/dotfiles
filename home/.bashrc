@@ -25,7 +25,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
 export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
-export RUST_SRC_PATH=$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 export NOTE=~/.config/note.txt
 
 export EDITOR=vim

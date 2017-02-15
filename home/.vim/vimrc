@@ -18,21 +18,20 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " general --------------------------------------------------
-" auto-window resize
-Plug 'justincampbell/vim-eighties'
-
 " Underline words under the cursor
 Plug 'itchyny/vim-cursorword'
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
 " Molokai colorscheme
 Plug 'tomasr/molokai'
+
+Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 Plug 'ajh17/VimCompletesMe'
 Plug 'mbbill/undotree'
 Plug 'romainl/vim-cool'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-scripts/haskell.vim'
 
 call plug#end()
 
@@ -222,7 +221,7 @@ nnoremap <LOCALLEADER>8 8gt
 nnoremap <LOCALLEADER>9 9gt
 nnoremap <LOCALLEADER>l gt
 nnoremap <LOCALLEADER>h gT
-nnoremap <C-W>tn :tabnew<CR>
+nnoremap <C-W>tn :tabnew 
 nnoremap <C-W>tq :tabclose<CR>
 
 " windows
@@ -296,6 +295,10 @@ let g:vim_markdown_no_default_key_mappings=1
 let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_emphasis_multiline=0
 let g:vim_markdown_math=0
+
+" tags support for Rust
+autocmd BufRead *.rs :setlocal tags=./.tags;/,$RUST_SRC_PATH/.tags
+autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
 
 runtime macros/matchit.vim
 autocmd QuickFixCmdPost [^l]* nested cwindow

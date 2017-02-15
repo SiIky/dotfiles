@@ -1,6 +1,5 @@
 iabbrev <buffer> fun <ESC>A(){}<ESC><UP><UP>t)i
 iabbrev <buffer> for for (;;) {}<ESC><UP>f(a
-iabbrev <buffer> ret return ;<LEFT>
 iabbrev <buffer> switch switch {case :break;}<ESC><UP><UP><UP>t{i
 iabbrev <buffer> ()? () ? : <ESC>F)i
 iabbrev <buffer> if if () {}<ESC><UP>f(a

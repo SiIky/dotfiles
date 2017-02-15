@@ -13,7 +13,7 @@ wget -nv --show-progress -O $HOME/.config/stuff/dircolors https://raw.githubuser
 wget -nv --show-progress -O $HOME/.config/stuff/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 # create folder for abduco sessions if $ABDUCO_SOCKET_DIR exists
-[ "$ABDUCO_SOCKET_DIR" != "" ] && [ ! -d $ABDUCO_SOCKET_DIR ] && mkdir -p -m 0700 "$ABDUCO_SOCKET_DIR"
+[ "$ABDUCO_SOCKET_DIR" != "" ] && [ ! -d "$ABDUCO_SOCKET_DIR" ] && mkdir -p -m 0700 "$ABDUCO_SOCKET_DIR"
 
 # create user bin folder
 [ ! -d $HOME/bin ] && mkdir -m 0700 $HOME/bin
@@ -61,13 +61,11 @@ git clone http://git.suckless.org/slock
 git clone http://git.suckless.org/st
 git clone http://git.suckless.org/tabbed
 
-git clone https://github.com/BurntSushi/ripgrep
 git clone https://github.com/arzzen/git-quick-stats
 git clone https://github.com/cmus/cmus
 git clone https://github.com/drkh5h/slstatus
 git clone https://github.com/martanne/abduco
 git clone https://github.com/martanne/dvtm
-git clone https://github.com/ogham/exa
 
 [ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path
 [ -f dmenu/dmenu_run ] && rm dmenu/dmenu_run

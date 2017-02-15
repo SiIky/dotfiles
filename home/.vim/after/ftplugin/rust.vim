@@ -1,6 +1,5 @@
 iabbrev <buffer> fun fn() {}<ESC><UP>f(i
 iabbrev <buffer> for for in  {}<ESC><UP>tii
-iabbrev <buffer> ret return
 iabbrev <buffer> => =>,<LEFT>
 iabbrev <buffer> match match {}<ESC><UP>t{i
 iabbrev <buffer> if if {}<ESC><UP>t{i
