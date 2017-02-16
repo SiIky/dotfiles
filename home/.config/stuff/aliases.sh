@@ -1,7 +1,7 @@
 alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 
 # Git aliases (if no hub replace with git)
-if [ -f $HOME/bin/hub ]; then
+if $(hash hub); then
     [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
     function gadd() { hub add "$@"; }
     function gblame() { hub blame "$@"; }
@@ -32,7 +32,7 @@ else
     function gstatus() { git status "$@"; }
 fi
 
-if [ -f $HOME/bin/exa ]; then
+if $(hash exa); then
     function l()    { command exa --group-directories-first --color=automatic "$@"; }
     function l1()    { command exa --group-directories-first --color=automatic -1 "$@"; }
     function lh()   { command exa --group-directories-first --color=automatic -aBl "$@"; }
@@ -71,6 +71,7 @@ function wget() { command wget -c "$@"; }
 function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+function podsclear() { [ -f ~/.local/share/newsbeuter/queue ] && command ex ~/.local/share/newsbeuter/queue -c 'g/downloaded$/d' +x; }
 
 # functions to manage remote host
 function tradd() {
