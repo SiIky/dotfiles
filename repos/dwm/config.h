@@ -37,12 +37,12 @@ static const Bool focusonwheelscroll = False;
 /* tagging */
 #define SEP     "\u232A" /* 〉 */
 
-#define TAG1    "ViM"   SEP
-#define TAG2    "term"  SEP
-#define TAG3    "media" SEP
-#define TAG4    "W"     SEP
-#define TAG5    "M"     SEP
-#define TAG6    "steam" SEP
+#define TAG1    "ViM"
+#define TAG2    "term"
+#define TAG3    "media"
+#define TAG4    "W"
+#define TAG5    "M"
+#define TAG6    "steam"
 #define TAG7    "v"
 #define TAG8    "o"
 #define TAG9    "i"
@@ -101,6 +101,7 @@ static const Layout layouts[] = {
 #define XF86AudioStop           0x1008ff15
 #define XF86AudioNext           0x1008ff16
 #define XF86AudioPrev           0x1008ff17
+#define PrintScreen             0x1008ff61
 
 #define LAlt           Mod1Mask
 #define WinKey         Mod4Mask
@@ -121,6 +122,7 @@ static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTO
 static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
 static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
 static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "dvtm", "vim", NULL };
+static const char *printsc[]    = { "maim", "--hidecursor", "~/Pictures/maim/$(date +%Y%m%d%H%M%S).png", NULL };
 
 /* volume controls */
 static const char *amvolup[]      = { "amixer", "set", "Master", "5%+",  NULL };
@@ -170,6 +172,7 @@ static const Key keys[] = {
     { 0,                        XF86AudioStop,          spawn,                  {.v = cmus_stop } },
     { 0,                        XF86AudioPrev,          spawn,                  {.v = cmus_prev } },
     { 0,                        XF86AudioNext,          spawn,                  {.v = cmus_next } },
+    { WinKey,                   PrintScreen,            spawn,                  {.v = printsc } },
 };
 
 /* button definitions */

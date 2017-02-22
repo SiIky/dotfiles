@@ -89,3 +89,8 @@ function trclean() {
         echo "set the required environment variables"
     fi
 }
+
+function rp() {
+    local file=${1:-/dev/stdin}
+    curl --data-binary @${file} https://paste.rs
+}

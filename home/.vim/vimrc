@@ -17,6 +17,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
+" haskell --------------------------------------------------
+Plug 'vim-scripts/haskell.vim'
+
 " general --------------------------------------------------
 " Underline words under the cursor
 Plug 'itchyny/vim-cursorword'
@@ -31,7 +34,6 @@ Plug 'romainl/vim-cool'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-scripts/haskell.vim'
 
 call plug#end()
 
@@ -134,18 +136,26 @@ let g:sneak#label = 1
 
 " Rust Settings ============================================
 " rustfmt
-let g:rustfmt_autosave=1
+let g:rustfmt_autosave=0
 
 " racer
 let g:racer_cmd="~/.cargo/bin/racer"
 let g:racer_experimental_completer=0
+
+" tags support for Rust
+autocmd BufRead *.rs :setlocal tags=./.tags;/,$RUST_SRC_PATH/.tags
+autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
+
+nnoremap <LEADER>R :redraw!<CR>
+
+set foldtext=getline(v:foldstart)
 
 " bindings -------------------------------------------------
 " = buffer/function
 nnoremap <LEADER>M maggVG=`a_zz
 nnoremap <LEADER>m ma]][[V%=`a_zz
 
-nnoremap ZZ :w<CR>
+nnoremap ZZ :up<CR>
 nnoremap QQ :q!<CR>
 nnoremap ZQ :x<CR>
 
@@ -295,10 +305,6 @@ let g:vim_markdown_no_default_key_mappings=1
 let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_emphasis_multiline=0
 let g:vim_markdown_math=0
-
-" tags support for Rust
-autocmd BufRead *.rs :setlocal tags=./.tags;/,$RUST_SRC_PATH/.tags
-autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
 
 runtime macros/matchit.vim
 autocmd QuickFixCmdPost [^l]* nested cwindow

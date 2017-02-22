@@ -4,7 +4,7 @@ for D in *; do
         echo "$D" >> log
         cd $D
         [ -d .git ] && git pull >> ../log
-        [ -f $D-install.sh ] && sh $D-install.sh
+        #[ -f $D-install.sh ] && sh $D-install.sh
         cd ..
     fi
 done
