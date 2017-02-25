@@ -33,6 +33,7 @@ export VISUAL=vim
 
 export ANDROID_HOME=$HOME/.config/android/sdk
 export NDK_HOME=$HOME/.config/android/ndk
+export ESCDELAY=100
 
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then

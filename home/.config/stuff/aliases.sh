@@ -47,8 +47,6 @@ else
     function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
 fi
 
-function vi() { command vim -p "$@"; }
-function vim() { command vim -p "$@"; }
 function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate "$@"; }
 
 function mk() { command make "$@"; }

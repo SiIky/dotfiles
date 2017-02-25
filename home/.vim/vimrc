@@ -1,41 +1,4 @@
 scriptencoding utf-8
-se nocompatible
-" vim-plug =================================================
-let g:plug_threads=2
-
-call plug#begin('~/.vim/plugged')
-
-" toml -----------------------------------------------------
-" for cargo (rust) files
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-
-" markdown -------------------------------------------------
-Plug 'godlygeek/tabular', { 'for': 'markdown' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
-" rust stuff -----------------------------------------------
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-
-" haskell --------------------------------------------------
-Plug 'vim-scripts/haskell.vim'
-
-" general --------------------------------------------------
-" Underline words under the cursor
-Plug 'itchyny/vim-cursorword'
-
-" Molokai colorscheme
-Plug 'tomasr/molokai'
-
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
-Plug 'ajh17/VimCompletesMe'
-Plug 'mbbill/undotree'
-Plug 'romainl/vim-cool'
-Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-surround'
-Plug 'editorconfig/editorconfig-vim'
-
-call plug#end()
 
 " general ==================================================
 filetype plugin indent on
@@ -47,6 +10,7 @@ se backspace=2
 se clipboard=unnamed
 se cmdheight=1
 se colorcolumn=60
+se complete=.,w,b,u,U,t
 se conceallevel=0
 se confirm
 se cursorcolumn
@@ -59,20 +23,22 @@ se foldcolumn=1
 se foldenable
 se foldmethod=indent
 se foldnestmax=3
+se foldtext=getline(v:foldstart)
 se hidden
+se hlsearch
 se incsearch
 se laststatus=2
 se linebreak
+se matchpairs=(:),[:],{:},<:>
+se nocompatible
 se noerrorbells
-se hlsearch
 se noruler
 se nospell
 se novisualbell
 se nowrap
+se nrformats=alpha,hex,bin
 se number
 se numberwidth=1
-se complete=.,w,b,u,U,t
-se nrformats=alpha,hex,bin
 se omnifunc=syntaxcomplete#Complete
 se relativenumber
 se scrolljump=10
@@ -95,7 +61,6 @@ se ttimeoutlen=0 " status bar change mode delay (ms)
 se viminfo+=n~/.vim/viminfo
 se wildignore+=*.swp,*.o
 se wildmenu
-se matchpairs=(:),[:],{:},<:>
 highlight comment cterm=italic
 syntax on
 "se mouse=a
@@ -113,47 +78,55 @@ se statusline+=%{strlen(&fenc)?&fenc:'none'}: "file encoding
 se statusline+=%{&ff}\ \|\  "file format
 se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
 
+" vim-plug =================================================
+let g:plug_threads=2
+
+call plug#begin('~/.vim/plugged')
+
+" toml -----------------------------------------------------
+" for cargo (rust) files
+source ~/.vim/pconfigs/toml.vim
+
+" markdown -------------------------------------------------
+source ~/.vim/pconfigs/tabular.vim
+source ~/.vim/pconfigs/markdown.vim
+
+" rust stuff -----------------------------------------------
+source ~/.vim/pconfigs/rust.vim
+source ~/.vim/pconfigs/racer.vim
+
+" haskell --------------------------------------------------
+source ~/.vim/pconfigs/haskell.vim
+
+" general --------------------------------------------------
+" Underline words under the cursor
+source ~/.vim/pconfigs/cursorword.vim
+
+" Molokai colorscheme
+source ~/.vim/pconfigs/molokai.vim
+
+source ~/.vim/pconfigs/vimproc.vim
+source ~/.vim/pconfigs/vimcompletesme.vim
+source ~/.vim/pconfigs/buftabline.vim
+source ~/.vim/pconfigs/editorconfig.vim
+source ~/.vim/pconfigs/sneak.vim
+source ~/.vim/pconfigs/undotree.vim
+source ~/.vim/pconfigs/cool.vim
+source ~/.vim/pconfigs/multiple-cursors.vim
+source ~/.vim/pconfigs/surround.vim
+
+call plug#end()
+
 " leader/localleader
 let mapleader=','
 let maplocalleader=''
 
-" undotree settings
-nnoremap <LOCALLEADER>u :UndotreeToggle<CR>
-let g:undotree_WindowLayout=2
-let g:undotree_SetFocusWhenToggle=1
-let g:undotree_HighlightChangedText=0
-let g:undotree_ShortIndicators=1
-
-" vim-eighties
-let g:eighties_enabled = 1
-let g:eighties_minimum_width = 65
-let g:eighties_extra_width = 0 " Increase this if you want some extra room
-let g:eighties_compute = 0 " Disable this if you just want the minimum + extra
-let g:eighties_bufname_additional_patterns = [] " Defaults to [], 'fugitiveblame' is only an example. Takes a comma delimited list of bufnames as strings.
-
-" sneak
-let g:sneak#label = 1
-
-" Rust Settings ============================================
-" rustfmt
-let g:rustfmt_autosave=0
-
-" racer
-let g:racer_cmd="~/.cargo/bin/racer"
-let g:racer_experimental_completer=0
-
-" tags support for Rust
-autocmd BufRead *.rs :setlocal tags=./.tags;/,$RUST_SRC_PATH/.tags
-autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
-
-nnoremap <LEADER>R :redraw!<CR>
-
-set foldtext=getline(v:foldstart)
+nnoremap <silent> <LEADER>R :redraw!<CR>
 
 " bindings -------------------------------------------------
 " = buffer/function
 nnoremap <LEADER>M maggVG=`a_zz
-nnoremap <LEADER>m ma]][[V%=`a_zz
+nnoremap <LEADER>m ma][[[V%=`a_zz
 
 nnoremap ZZ :up<CR>
 nnoremap QQ :q!<CR>
@@ -177,20 +150,6 @@ vnoremap b B
 vnoremap e E
 vnoremap w W
 
-"bye bye arrow keys
-"inoremap <DOWN> <NOP>
-"nnoremap <DOWN> <NOP>
-"vnoremap <DOWN> <NOP>
-"inoremap <LEFT> <NOP>
-"nnoremap <LEFT> <NOP>
-"vnoremap <LEFT> <NOP>
-"inoremap <RIGHT> <NOP>
-"nnoremap <RIGHT> <NOP>
-"vnoremap <RIGHT> <NOP>
-"inoremap <UP> <NOP>
-"nnoremap <UP> <NOP>
-"vnoremap <UP> <NOP>
-
 nnoremap <SPACE> za
 
 " move cursor to the beggining/end of the line
@@ -211,12 +170,14 @@ nnoremap <C-V> v
 vnoremap / y/<C-R>"<CR>
 
 " search and replace
-nnoremap <C-S> :%s/<cword>//cg<LEFT><LEFT><LEFT>
-vnoremap <C-S> y:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
-nnoremap <F7> :cprevious<CR>
-nnoremap <F8> :cnext<CR>
+nnoremap <C-S> :%s/<C-R><C-W>//cg<LEFT><LEFT><LEFT>
+vnoremap <C-S> "yy:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 
-" vimrc edit
+" quickfix navigation
+nnoremap <silent> <F7> :cprevious<CR>
+nnoremap <silent> <F8> :cnext<CR>
+
+noremap <LEADER>s :sort<CR>
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
 
 " tabs
@@ -229,17 +190,21 @@ nnoremap <LOCALLEADER>6 6gt
 nnoremap <LOCALLEADER>7 7gt
 nnoremap <LOCALLEADER>8 8gt
 nnoremap <LOCALLEADER>9 9gt
-nnoremap <LOCALLEADER>l gt
-nnoremap <LOCALLEADER>h gT
 nnoremap <C-W>tn :tabnew 
-nnoremap <C-W>tq :tabclose<CR>
+
+nnoremap <LOCALLEADER>j gt
+nnoremap <LOCALLEADER>k gT
+nnoremap <silent> <LOCALLEADER>l :bnext<CR>
+nnoremap <silent> <LOCALLEADER>h :bprev<CR>
 
 " windows
 nnoremap <C-W>tf <C-W>f<C-W>T
-nnoremap <C-W>q :bdelete<CR>
 nnoremap <C-W>n :new 
 nnoremap <C-W>v :vnew 
 nnoremap <C-L> :ls<CR>
+
+nnoremap <C-W>q :bdelete<CR>
+nnoremap <C-W>tq :tabclose<CR>
 
 " put stuff around words
 nnoremap <LEADER>" viW<ESC>`>a"<ESC>`<i"<ESC>
@@ -289,24 +254,11 @@ let g:netrw_liststyle=3 " listing style
 let g:netrw_browse_split=0 " opening behaviour
 map <C-E> :Explore<CR>
 
-" monokai theme ============================================
 colorscheme molokai
-let g:molokai_original=1
-let g:rehash256=1
 
-" tabular ==================================================
-let g:tabular_loaded=1
-
-" vim-markdown =============================================
-let g:vim_markdown_folding_disabled=0
-let g:vim_markdown_folding_style_pythonic=0
-let g:vim_markdown_folding_level=1
-let g:vim_markdown_no_default_key_mappings=1
-let g:vim_markdown_toc_autofit=1
-let g:vim_markdown_emphasis_multiline=0
-let g:vim_markdown_math=0
-
+runtime ftplugin/man.vim
 runtime macros/matchit.vim
+
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd VimEnter * echo "Fuck You Human .l."
