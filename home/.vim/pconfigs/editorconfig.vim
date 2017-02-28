@@ -1,2 +1,1 @@
 Plug 'editorconfig/editorconfig-vim'
-

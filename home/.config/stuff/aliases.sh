@@ -3,33 +3,33 @@ alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 # Git aliases (if no hub replace with git)
 if $(hash hub); then
     [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
-    function gadd() { hub add "$@"; }
-    function gblame() { hub blame "$@"; }
-    function gclone() { hub clone "$@"; }
-    function gcommit() { hub commit -v "$@"; }
-    function gconfig() { hub config "$@"; }
-    function gdiff() { hub diff "$@"; }
-    function git() { hub "$@"; }
-    function glog() { hub log "$@"; }
-    function gmv() { hub mv "$@"; }
-    function gpull() { hub pull --stat "$@"; }
-    function gpush() { hub push "$@"; }
-    function grm() { hub rm "$@"; }
-    function gstatus() { hub status "$@"; }
-else
-    function gadd() { git add "$@"; }
-    function gblame() { git blame "$@"; }
-    function gclone() { git clone "$@"; }
-    function gcommit() { git commit -v "$@"; }
-    function gconfig() { git config "$@"; }
-    function gdiff() { git diff "$@"; }
-    function git() { git "$@"; }
-    function glog() { git log "$@"; }
-    function gmv() { git mv "$@"; }
-    function gpull() { git pull --stat "$@"; }
-    function gpush() { git push "$@"; }
-    function grm() { git rm "$@"; }
-    function gstatus() { git status "$@"; }
+    function gadd() { command hub add "$@"; }
+    function gblame() { command hub blame "$@"; }
+    function gclone() { command hub clone "$@"; }
+    function gcommit() { command hub commit -v "$@"; }
+    function gconfig() { command hub config "$@"; }
+    function gdiff() { command hub diff "$@"; }
+    function git() { command hub "$@"; }
+    function glog() { command hub log "$@"; }
+    function gmv() { command hub mv "$@"; }
+    function gpull() { command hub pull --stat "$@"; }
+    function gpush() { command hub push "$@"; }
+    function grm() { command hub rm "$@"; }
+    function gstatus() { command hub status "$@"; }
+elif $(hash git); then
+    function gadd() { command git add "$@"; }
+    function gblame() { command git blame "$@"; }
+    function gclone() { command git clone "$@"; }
+    function gcommit() { command git commit -v "$@"; }
+    function gconfig() { command git config "$@"; }
+    function gdiff() { command git diff "$@"; }
+    function git() { command git "$@"; }
+    function glog() { command git log "$@"; }
+    function gmv() { command git mv "$@"; }
+    function gpull() { command git pull --stat "$@"; }
+    function gpush() { command git push "$@"; }
+    function grm() { command git rm "$@"; }
+    function gstatus() { command git status "$@"; }
 fi
 
 if $(hash exa); then
@@ -47,29 +47,49 @@ else
     function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
 fi
 
-function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate "$@"; }
+function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
 
 function mk() { command make "$@"; }
 function cp() { command cp -ri "$@"; }
 function mv() { command mv -i "$@"; }
 function rm() { command rm -ri "$@"; }
 
-# https://github.com/ogeno/oneliners
-function adm() { command abduco -A $(echo "$(abduco | sed -r 's/Active sessions.*//g;s/\*.*//g;s/\t/ /g' | dmenu)" | sed 's/.* //g'); }
-
 function dfh() { command df -h "$@"; }
 function bandit() { TERM=xterm256 command ssh bandit$1@bandit.labs.overthewire.org; }
-function detox() { command detox -f $HOME/.config/stuff/detoxrc "$@"; }
 function less() { command less -N "$@"; }
 function lessn() { command less "$@"; }
-function lynx() { command lynx -vikeys "$@"; }
-function mpv() { command mpv --fs --no-audio-display "$@"; }
-function rexp() { command rustc --explain "$@" | less; }
 function wget() { command wget -c "$@"; }
-function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
-function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
-function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
-function podsclear() { [ -f ~/.local/share/newsbeuter/queue ] && command ex ~/.local/share/newsbeuter/queue -c 'g/downloaded$/d' +x; }
+
+# https://github.com/ogeno/oneliners
+if $(hash abduco); then
+    function adm() { command abduco -A $(echo "$(abduco | sed -r 's/Active sessions.*//g;s/\*.*//g;s/\t/ /g' | dmenu)" | sed 's/.* //g'); }
+fi
+
+if $(hash detox); then
+    function detox() { command detox -f $HOME/.config/stuff/detoxrc "$@"; }
+fi
+
+if $(hash podbeuter); then
+    function podsclear() { [ -f ~/.local/share/newsbeuter/queue ] && command ex ~/.local/share/newsbeuter/queue -c 'g/downloaded$/d' +x; }
+fi
+
+if $(hash mpv); then
+    function mpv() { command mpv --fs --no-audio-display "$@"; }
+fi
+
+if $(hash rustc); then
+    function rexp() { command rustc --explain "$@" | less; }
+fi
+
+if $(hash youtube-dl); then
+    function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+    function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+    function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+fi
+
+if $(hash lynx); then
+    function lynx() { command lynx -vikeys "$@"; }
+fi
 
 # functions to manage remote host
 function tradd() {

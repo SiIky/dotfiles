@@ -1,4 +1,6 @@
 scriptencoding utf-8
+let mapleader=','
+let maplocalleader=''
 
 " general ==================================================
 filetype plugin indent on
@@ -57,6 +59,7 @@ se t_Co=256
 se t_vb=
 se tabpagemax=30
 se tabstop=8
+se tags=./.tags;
 se ttimeoutlen=0 " status bar change mode delay (ms)
 se viminfo+=n~/.vim/viminfo
 se wildignore+=*.swp,*.o
@@ -77,49 +80,6 @@ se statusline+=%y%=\  " ftype
 se statusline+=%{strlen(&fenc)?&fenc:'none'}: "file encoding
 se statusline+=%{&ff}\ \|\  "file format
 se statusline+=%(%l:%c\ \|\ %L\ \|\ %) " #L:#C | #TL |
-
-" vim-plug =================================================
-let g:plug_threads=2
-
-call plug#begin('~/.vim/plugged')
-
-" toml -----------------------------------------------------
-" for cargo (rust) files
-source ~/.vim/pconfigs/toml.vim
-
-" markdown -------------------------------------------------
-source ~/.vim/pconfigs/tabular.vim
-source ~/.vim/pconfigs/markdown.vim
-
-" rust stuff -----------------------------------------------
-source ~/.vim/pconfigs/rust.vim
-source ~/.vim/pconfigs/racer.vim
-
-" haskell --------------------------------------------------
-source ~/.vim/pconfigs/haskell.vim
-
-" general --------------------------------------------------
-" Underline words under the cursor
-source ~/.vim/pconfigs/cursorword.vim
-
-" Molokai colorscheme
-source ~/.vim/pconfigs/molokai.vim
-
-source ~/.vim/pconfigs/vimproc.vim
-source ~/.vim/pconfigs/vimcompletesme.vim
-source ~/.vim/pconfigs/buftabline.vim
-source ~/.vim/pconfigs/editorconfig.vim
-source ~/.vim/pconfigs/sneak.vim
-source ~/.vim/pconfigs/undotree.vim
-source ~/.vim/pconfigs/cool.vim
-source ~/.vim/pconfigs/multiple-cursors.vim
-source ~/.vim/pconfigs/surround.vim
-
-call plug#end()
-
-" leader/localleader
-let mapleader=','
-let maplocalleader=''
 
 nnoremap <silent> <LEADER>R :redraw!<CR>
 
@@ -254,10 +214,49 @@ let g:netrw_liststyle=3 " listing style
 let g:netrw_browse_split=0 " opening behaviour
 map <C-E> :Explore<CR>
 
-colorscheme molokai
-
 runtime ftplugin/man.vim
 runtime macros/matchit.vim
+
+" vim-plug =================================================
+let g:plug_threads=2
+
+call plug#begin('~/.vim/plugged')
+
+" toml -----------------------------------------------------
+" for cargo (rust) files
+source ~/.vim/pconfigs/toml.vim
+
+" markdown -------------------------------------------------
+source ~/.vim/pconfigs/tabular.vim
+source ~/.vim/pconfigs/markdown.vim
+
+" rust stuff -----------------------------------------------
+source ~/.vim/pconfigs/rust.vim
+source ~/.vim/pconfigs/racer.vim
+
+" haskell --------------------------------------------------
+source ~/.vim/pconfigs/haskell.vim
+
+" general --------------------------------------------------
+" Underline words under the cursor
+source ~/.vim/pconfigs/cursorword.vim
+
+" Molokai colorscheme
+source ~/.vim/pconfigs/molokai.vim
+
+source ~/.vim/pconfigs/vimproc.vim
+source ~/.vim/pconfigs/vimcompletesme.vim
+source ~/.vim/pconfigs/buftabline.vim
+source ~/.vim/pconfigs/editorconfig.vim
+source ~/.vim/pconfigs/sneak.vim
+source ~/.vim/pconfigs/undotree.vim
+source ~/.vim/pconfigs/cool.vim
+source ~/.vim/pconfigs/multiple-cursors.vim
+source ~/.vim/pconfigs/surround.vim
+"source ~/.vim/pconfigs/covim.vim
+call plug#end()
+
+colorscheme molokai
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
