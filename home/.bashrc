@@ -28,12 +28,17 @@ export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the 
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 export NOTE=~/.config/note.txt
 
+if $(hash nvim); then
+export EDITOR=nvim
+export VISUAL=nvim
+else
 export EDITOR=vim
 export VISUAL=vim
+fi
 
 export ANDROID_HOME=$HOME/.config/android/sdk
 export NDK_HOME=$HOME/.config/android/ndk
-export ESCDELAY=100
+export JCD_DIR=$HOME/.config/jcd
 
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then

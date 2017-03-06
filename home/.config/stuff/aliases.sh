@@ -1,43 +1,57 @@
 alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 
 # Git aliases (if no hub replace with git)
-if $(hash hub); then
-    [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
-    function gadd() { command hub add "$@"; }
-    function gblame() { command hub blame "$@"; }
-    function gclone() { command hub clone "$@"; }
-    function gcommit() { command hub commit -v "$@"; }
-    function gconfig() { command hub config "$@"; }
-    function gdiff() { command hub diff "$@"; }
-    function git() { command hub "$@"; }
-    function glog() { command hub log "$@"; }
-    function gmv() { command hub mv "$@"; }
-    function gpull() { command hub pull --stat "$@"; }
-    function gpush() { command hub push "$@"; }
-    function grm() { command hub rm "$@"; }
-    function gstatus() { command hub status "$@"; }
-elif $(hash git); then
-    function gadd() { command git add "$@"; }
-    function gblame() { command git blame "$@"; }
-    function gclone() { command git clone "$@"; }
-    function gcommit() { command git commit -v "$@"; }
-    function gconfig() { command git config "$@"; }
-    function gdiff() { command git diff "$@"; }
-    function git() { command git "$@"; }
-    function glog() { command git log "$@"; }
-    function gmv() { command git mv "$@"; }
-    function gpull() { command git pull --stat "$@"; }
-    function gpush() { command git push "$@"; }
-    function grm() { command git rm "$@"; }
-    function gstatus() { command git status "$@"; }
+if $(hash git); then
+    # execute git pull on all 
+    function gitup() {
+        for D in *; do
+            if [ -d "$D" ] && [ -d "$D/.git" ]; then
+                echo "Updating $D"
+                cd "$D"
+                git pull
+                cd ..
+            fi
+        done
+    }
+
+    if $(hash hub); then
+        [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
+        function gadd() { command hub add "$@"; }
+        function gblame() { command hub blame "$@"; }
+        function gclone() { command hub clone "$@"; }
+        function gcommit() { command hub commit -v "$@"; }
+        function gconfig() { command hub config "$@"; }
+        function gdiff() { command hub diff "$@"; }
+        function git() { command hub "$@"; }
+        function glog() { command hub log "$@"; }
+        function gmv() { command hub mv "$@"; }
+        function gpull() { command hub pull --stat "$@"; }
+        function gpush() { command hub push "$@"; }
+        function grm() { command hub rm "$@"; }
+        function gstatus() { command hub status "$@"; }
+    else
+        function gadd() { command git add "$@"; }
+        function gblame() { command git blame "$@"; }
+        function gclone() { command git clone "$@"; }
+        function gcommit() { command git commit -v "$@"; }
+        function gconfig() { command git config "$@"; }
+        function gdiff() { command git diff "$@"; }
+        function git() { command git "$@"; }
+        function glog() { command git log "$@"; }
+        function gmv() { command git mv "$@"; }
+        function gpull() { command git pull --stat "$@"; }
+        function gpush() { command git push "$@"; }
+        function grm() { command git rm "$@"; }
+        function gstatus() { command git status "$@"; }
+    fi
 fi
 
 if $(hash exa); then
-    function l()    { command exa --group-directories-first --color=automatic "$@"; }
-    function l1()    { command exa --group-directories-first --color=automatic -1 "$@"; }
-    function lh()   { command exa --group-directories-first --color=automatic -aBl "$@"; }
-    function ll()   { command exa --group-directories-first --color=automatic -agl "$@"; }
-    function ls()   { command exa --group-directories-first --color=automatic -a "$@"; }
+    function l() { command exa --group-directories-first --color=automatic "$@"; }
+    function l1() { command exa --group-directories-first --color=automatic -1 "$@"; }
+    function lh() { command exa --group-directories-first --color=automatic -aBl "$@"; }
+    function ll() { command exa --group-directories-first --color=automatic -agl "$@"; }
+    function ls() { command exa --group-directories-first --color=automatic -a "$@"; }
     function tree() { command exa -T --group-directories-first --color=automatic "$@"; }
 else
     function l() { command ls --group-directories-first --color=auto -CF "$@"; }
@@ -47,7 +61,15 @@ else
     function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
 fi
 
-function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
+if $(hash nvim); then
+    function vim() { command nvim "$@"; }
+    function vi() { command nvim "$@"; }
+    function ex() { command nvim -E "$@"; }
+    function vimup() { command nvim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
+else
+    function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
+fi
+
 
 function mk() { command make "$@"; }
 function cp() { command cp -ri "$@"; }

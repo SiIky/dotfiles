@@ -17,7 +17,6 @@ se conceallevel=0
 se confirm
 se cursorcolumn
 se cursorline
-se dir=~/.vim/swp//
 se encoding=utf-8
 se expandtab
 se fileencoding=utf-8
@@ -59,17 +58,30 @@ se t_Co=256
 se t_vb=
 se tabpagemax=30
 se tabstop=8
-se tags=./.tags;
+se tags=.tags;
 se ttimeoutlen=0 " status bar change mode delay (ms)
-se viminfo+=n~/.vim/viminfo
 se wildignore+=*.swp,*.o
 se wildmenu
 highlight comment cterm=italic
 syntax on
 "se mouse=a
 
+if has('nvim')
+    se dir=~/.config/nvim/swp//
+else
+    se dir=~/.vim/swp//
+endif
+
+if !has('nvim')
+    se viminfo+=n~/.vim/viminfo
+endif
+
 if has("persistent_undo")
-    set undodir=~/.vim/undo
+    if has('nvim')
+        set undodir=~/.config/nvim/undo
+    else
+        set undodir=~/.vim/undo
+    endif
     set undofile
 endif
 
@@ -141,27 +153,44 @@ noremap <LEADER>s :sort<CR>
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
 
 " tabs
-nnoremap <LOCALLEADER>1 1gt
-nnoremap <LOCALLEADER>2 2gt
-nnoremap <LOCALLEADER>3 3gt
-nnoremap <LOCALLEADER>4 4gt
-nnoremap <LOCALLEADER>5 5gt
-nnoremap <LOCALLEADER>6 6gt
-nnoremap <LOCALLEADER>7 7gt
-nnoremap <LOCALLEADER>8 8gt
-nnoremap <LOCALLEADER>9 9gt
-nnoremap <C-W>tn :tabnew 
+if has('nvim')
+    nnoremap <M-1> 1gt
+    nnoremap <M-2> 2gt
+    nnoremap <M-3> 3gt
+    nnoremap <M-4> 4gt
+    nnoremap <M-5> 5gt
+    nnoremap <M-6> 6gt
+    nnoremap <M-7> 7gt
+    nnoremap <M-8> 8gt
+    nnoremap <M-9> 9gt
+    nnoremap <M-j> gt
+    nnoremap <M-k> gT
+    nnoremap <silent> <M-l> :bnext<CR>
+    nnoremap <silent> <M-h> :bprev<CR>
+else
+    nnoremap <LOCALLEADER>1 1gt
+    nnoremap <LOCALLEADER>2 2gt
+    nnoremap <LOCALLEADER>3 3gt
+    nnoremap <LOCALLEADER>4 4gt
+    nnoremap <LOCALLEADER>5 5gt
+    nnoremap <LOCALLEADER>6 6gt
+    nnoremap <LOCALLEADER>7 7gt
+    nnoremap <LOCALLEADER>8 8gt
+    nnoremap <LOCALLEADER>9 9gt
+    nnoremap <LOCALLEADER>j gt
+    nnoremap <LOCALLEADER>k gT
+    nnoremap <silent> <LOCALLEADER>l :bnext<CR>
+    nnoremap <silent> <LOCALLEADER>h :bprev<CR>
+endif
 
-nnoremap <LOCALLEADER>j gt
-nnoremap <LOCALLEADER>k gT
-nnoremap <silent> <LOCALLEADER>l :bnext<CR>
-nnoremap <silent> <LOCALLEADER>h :bprev<CR>
+nnoremap <C-W>tn :tabnew 
 
 " windows
 nnoremap <C-W>tf <C-W>f<C-W>T
 nnoremap <C-W>n :new 
 nnoremap <C-W>v :vnew 
 nnoremap <C-L> :ls<CR>
+nnoremap <C-C> :pwd<CR>
 
 nnoremap <C-W>q :bdelete<CR>
 nnoremap <C-W>tq :tabclose<CR>
@@ -220,7 +249,11 @@ runtime macros/matchit.vim
 " vim-plug =================================================
 let g:plug_threads=2
 
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+    call plug#begin('~/.config/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
 " toml -----------------------------------------------------
 " for cargo (rust) files
@@ -257,6 +290,13 @@ source ~/.vim/pconfigs/surround.vim
 call plug#end()
 
 colorscheme molokai
+
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading\ $*
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif filereadable("/usr/local/bin/grep")
+    set grepprg=/usr/local/bin/grep
+endif
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
