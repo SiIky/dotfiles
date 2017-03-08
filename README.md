@@ -7,12 +7,12 @@
 * [Vim-Plug][vplug]
 * [Molokai][molokai]
 
-## [ST](st)
+## [ST][st]
 
 Patches:
 * [Hide Cursor](http://st.suckless.org/patches/hidecursor)
 
-## [DWM](dwm)
+## [DWM][dwm]
 
 Patches:
 * [Focus on click](http://dwm.suckless.org/patches/focusonclick)
