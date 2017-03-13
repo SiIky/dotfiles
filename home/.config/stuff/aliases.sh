@@ -8,7 +8,7 @@ if $(hash git); then
             if [ -d "$D" ] && [ -d "$D/.git" ]; then
                 echo "Updating $D"
                 cd "$D"
-                git pull
+                git pull --all -q
                 cd ..
             fi
         done
@@ -16,19 +16,20 @@ if $(hash git); then
 
     if $(hash hub); then
         [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
+        eval "$(hub alias -s)"
         function gadd() { command hub add "$@"; }
         function gblame() { command hub blame "$@"; }
         function gclone() { command hub clone "$@"; }
         function gcommit() { command hub commit -v "$@"; }
         function gconfig() { command hub config "$@"; }
         function gdiff() { command hub diff "$@"; }
-        function git() { command hub "$@"; }
         function glog() { command hub log "$@"; }
         function gmv() { command hub mv "$@"; }
         function gpull() { command hub pull --stat "$@"; }
         function gpush() { command hub push "$@"; }
         function grm() { command hub rm "$@"; }
         function gstatus() { command hub status "$@"; }
+        function gui() { command hub gui "$@" & }
     else
         function gadd() { command git add "$@"; }
         function gblame() { command git blame "$@"; }
@@ -36,13 +37,13 @@ if $(hash git); then
         function gcommit() { command git commit -v "$@"; }
         function gconfig() { command git config "$@"; }
         function gdiff() { command git diff "$@"; }
-        function git() { command git "$@"; }
         function glog() { command git log "$@"; }
         function gmv() { command git mv "$@"; }
         function gpull() { command git pull --stat "$@"; }
         function gpush() { command git push "$@"; }
         function grm() { command git rm "$@"; }
         function gstatus() { command git status "$@"; }
+        function gui() { command git gui "$@" & }
     fi
 fi
 
@@ -62,14 +63,14 @@ else
 fi
 
 if $(hash nvim); then
-    function vim() { command nvim "$@"; }
-    function vi() { command nvim "$@"; }
     function ex() { command nvim -E "$@"; }
+    function vi() { command nvim "$@"; }
+    function view() { command nvim -R "$@"; }
+    function vim() { command nvim "$@"; }
     function vimup() { command nvim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
-else
+elif $(hash vim); then
     function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
 fi
-
 
 function mk() { command make "$@"; }
 function cp() { command cp -ri "$@"; }

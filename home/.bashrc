@@ -29,11 +29,11 @@ export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 export NOTE=~/.config/note.txt
 
 if $(hash nvim); then
-export EDITOR=nvim
-export VISUAL=nvim
+    export EDITOR=nvim
+    export VISUAL=nvim
 else
-export EDITOR=vim
-export VISUAL=vim
+    export EDITOR=vim
+    export VISUAL=vim
 fi
 
 export ANDROID_HOME=$HOME/.config/android/sdk
