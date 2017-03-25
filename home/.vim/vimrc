@@ -1,5 +1,5 @@
 scriptencoding utf-8
-let mapleader=','
+let mapleader=' '
 let maplocalleader=''
 
 " general ==================================================
@@ -9,7 +9,7 @@ se autochdir
 se autoindent
 se autoread
 se backspace=2
-se clipboard=unnamed
+se clipboard=unnamedplus
 se cmdheight=1
 se colorcolumn=60
 se complete=.,w,b,u,U,t
@@ -62,9 +62,10 @@ se tags=.tags;
 se ttimeoutlen=0 " status bar change mode delay (ms)
 se wildignore+=*.swp,*.o
 se wildmenu
+se wildmode=longest:full
 highlight comment cterm=italic
-syntax on
-"se mouse=a
+syntax off
+se mouse=r
 
 if has('nvim')
     se dir=~/.config/nvim/swp//
@@ -73,7 +74,7 @@ else
 endif
 
 if !has('nvim')
-    se viminfo+=n~/.vim/viminfo
+    se viminfo=~/.vim/viminfo
 endif
 
 if has("persistent_undo")
@@ -100,9 +101,10 @@ nnoremap <silent> <LEADER>R :redraw!<CR>
 nnoremap <LEADER>M maggVG=`a_zz
 nnoremap <LEADER>m ma][[[V%=`a_zz
 
-nnoremap ZZ :up<CR>
+nnoremap <LEADER>W :up<CR>
+nnoremap <LEADER>X :x<CR>
+
 nnoremap QQ :q!<CR>
-nnoremap ZQ :x<CR>
 
 " movement keys
 nnoremap <C-J> 5j
@@ -122,7 +124,7 @@ vnoremap b B
 vnoremap e E
 vnoremap w W
 
-nnoremap <SPACE> za
+nnoremap <LEADER><SPACE> za
 
 " move cursor to the beggining/end of the line
 nnoremap gh _
@@ -146,11 +148,17 @@ nnoremap <C-S> :%s/<C-R><C-W>//cg<LEFT><LEFT><LEFT>
 vnoremap <C-S> "yy:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " quickfix navigation
+nnoremap <silent> <F4> :cwindow<CR>
 nnoremap <silent> <F7> :cprevious<CR>
 nnoremap <silent> <F8> :cnext<CR>
+nnoremap <silent> <F9> :cclose<CR>
 
 noremap <LEADER>s :sort<CR>
 nnoremap <LEADER>ev :e $MYVIMRC<CR>
+
+" remap :
+nnoremap - :
+vnoremap - :
 
 " tabs
 if has('nvim')
@@ -165,8 +173,8 @@ if has('nvim')
     nnoremap <M-9> 9gt
     nnoremap <M-j> gt
     nnoremap <M-k> gT
-    nnoremap <silent> <M-l> :bnext<CR>
-    nnoremap <silent> <M-h> :bprev<CR>
+    nnoremap <M-l> :bnext<CR>
+    nnoremap <M-h> :bprev<CR>
 else
     nnoremap <LOCALLEADER>1 1gt
     nnoremap <LOCALLEADER>2 2gt
@@ -268,7 +276,7 @@ source ~/.vim/pconfigs/rust.vim
 source ~/.vim/pconfigs/racer.vim
 
 " haskell --------------------------------------------------
-source ~/.vim/pconfigs/haskell.vim
+"source ~/.vim/pconfigs/haskell.vim
 
 " general --------------------------------------------------
 " Underline words under the cursor
@@ -278,7 +286,6 @@ source ~/.vim/pconfigs/cursorword.vim
 source ~/.vim/pconfigs/molokai.vim
 
 source ~/.vim/pconfigs/vimproc.vim
-source ~/.vim/pconfigs/vimcompletesme.vim
 source ~/.vim/pconfigs/buftabline.vim
 source ~/.vim/pconfigs/editorconfig.vim
 source ~/.vim/pconfigs/sneak.vim
@@ -286,9 +293,12 @@ source ~/.vim/pconfigs/undotree.vim
 source ~/.vim/pconfigs/cool.vim
 source ~/.vim/pconfigs/multiple-cursors.vim
 source ~/.vim/pconfigs/surround.vim
+source ~/.vim/pconfigs/startify.vim
+"source ~/.vim/pconfigs/gtd.vim
 "source ~/.vim/pconfigs/covim.vim
 call plug#end()
 
+"let g:gtd#dir = '~/.config/notes'
 colorscheme molokai
 
 if executable("rg")

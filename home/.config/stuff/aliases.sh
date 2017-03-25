@@ -2,13 +2,13 @@ alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 
 # Git aliases (if no hub replace with git)
 if $(hash git); then
-    # execute git pull on all 
+    # execute git pull on all directories
     function gitup() {
         for D in *; do
             if [ -d "$D" ] && [ -d "$D/.git" ]; then
                 echo "Updating $D"
                 cd "$D"
-                git pull --all -q
+                git pull "$@"
                 cd ..
             fi
         done
@@ -17,6 +17,7 @@ if $(hash git); then
     if $(hash hub); then
         [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
         eval "$(hub alias -s)"
+        function g() { command hub "$@";}
         function gadd() { command hub add "$@"; }
         function gblame() { command hub blame "$@"; }
         function gclone() { command hub clone "$@"; }
@@ -31,6 +32,7 @@ if $(hash git); then
         function gstatus() { command hub status "$@"; }
         function gui() { command hub gui "$@" & }
     else
+        function g() { command git "$@";}
         function gadd() { command git add "$@"; }
         function gblame() { command git blame "$@"; }
         function gclone() { command git clone "$@"; }
