@@ -1,7 +1,7 @@
 alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
 
 # Git aliases (if no hub replace with git)
-if $(hash git); then
+if $(hash git 2> /dev/null); then
     # execute git pull on all directories
     function gitup() {
         for D in *; do
@@ -14,7 +14,7 @@ if $(hash git); then
         done
     }
 
-    if $(hash hub); then
+    if $(hash hub 2> /dev/null); then
         [ -f $HOME/.config/hub/hub.bash_completion.sh ] && source $HOME/.config/hub/hub.bash_completion.sh
         eval "$(hub alias -s)"
         function g() { command hub "$@";}
@@ -49,7 +49,7 @@ if $(hash git); then
     fi
 fi
 
-if $(hash exa); then
+if $(hash exa 2> /dev/null); then
     function l() { command exa --group-directories-first --color=automatic "$@"; }
     function l1() { command exa --group-directories-first --color=automatic -1 "$@"; }
     function lh() { command exa --group-directories-first --color=automatic -aBl "$@"; }
@@ -64,13 +64,13 @@ else
     function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
 fi
 
-if $(hash nvim); then
+if $(hash nvim 2> /dev/null); then
     function ex() { command nvim -E "$@"; }
     function vi() { command nvim "$@"; }
     function view() { command nvim -R "$@"; }
     function vim() { command nvim "$@"; }
     function vimup() { command nvim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
-elif $(hash vim); then
+elif $(hash vim 2> /dev/null); then
     function vimup() { command vim +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +PlugDiff "$@"; }
 fi
 
@@ -86,33 +86,33 @@ function lessn() { command less "$@"; }
 function wget() { command wget -c "$@"; }
 
 # https://github.com/ogeno/oneliners
-if $(hash abduco); then
+if $(hash abduco 2> /dev/null); then
     function adm() { command abduco -A $(echo "$(abduco | sed -r 's/Active sessions.*//g;s/\*.*//g;s/\t/ /g' | dmenu)" | sed 's/.* //g'); }
 fi
 
-if $(hash detox); then
+if $(hash detox 2> /dev/null); then
     function detox() { command detox -f $HOME/.config/stuff/detoxrc "$@"; }
 fi
 
-if $(hash podbeuter); then
+if $(hash podbeuter 2> /dev/null); then
     function podsclear() { [ -f ~/.local/share/newsbeuter/queue ] && command ex ~/.local/share/newsbeuter/queue -c 'g/downloaded$/d' +x; }
 fi
 
-if $(hash mpv); then
+if $(hash mpv 2> /dev/null); then
     function mpv() { command mpv --fs --no-audio-display "$@"; }
 fi
 
-if $(hash rustc); then
+if $(hash rustc 2> /dev/null); then
     function rexp() { command rustc --explain "$@" | less; }
 fi
 
-if $(hash youtube-dl); then
+if $(hash youtube-dl 2> /dev/null); then
     function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
     function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
     function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
 fi
 
-if $(hash lynx); then
+if $(hash lynx 2> /dev/null); then
     function lynx() { command lynx -vikeys "$@"; }
 fi
 
