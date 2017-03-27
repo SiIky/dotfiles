@@ -82,3 +82,31 @@ crontab -e
 # PATH is not set
 @daily /absolute/path/to/executable/is/preferred --arguments-allowed
 ```
+
+# Filesystem checking
+
+```sh
+# device cannot be mounted
+man ext4
+man fsck
+fsck device
+```
+
+# Changing settings on ext2, ext3 and ext4 filesystems
+
+```sh
+man tune2fs
+tune2fs [OPTIONS] device
+
+# change the error behavior with `-e`
+tune2fs -e remount-ro
+
+# set default mount options with `-o`
+tune2fs -o nodelalloc
+
+# set filesystem features with `-O`
+# allow files larger than 2GB
+tune2fs -O large_file
+# store checksums of metadata blocks
+tune2fs -O metadata_csum
+```
