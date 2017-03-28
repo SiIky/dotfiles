@@ -137,3 +137,11 @@ function rp() {
     local file=${1:-/dev/stdin}
     curl --data-binary @${file} https://paste.rs
 }
+
+function tags() {
+    if [ -f Cargo.toml ]; then
+        rusty-tags vi
+    else
+        ctags -R -f .tags .
+    fi
+}

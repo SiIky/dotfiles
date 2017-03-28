@@ -170,11 +170,11 @@ MouseShortcut mshortcuts[] = {
 #define MODKEY ControlMask
 #define TERMMOD (ControlMask|ShiftMask)
 
-static Shortcut shortcuts[] = {
+Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
-	{ MODKEY|ShiftMask,     XK_Prior,       xzoom,          {.f = +1} },
-	{ MODKEY|ShiftMask,     XK_Next,        xzoom,          {.f = -1} },
-	{ MODKEY|ShiftMask,     XK_Home,        xzoomreset,     {.f =  0} },
+	{ MODKEY|ShiftMask,     XK_Prior,       zoom,          {.f = +1} },
+	{ MODKEY|ShiftMask,     XK_Next,        zoom,          {.f = -1} },
+	{ MODKEY|ShiftMask,     XK_Home,        zoomreset,     {.f =  0} },
 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
