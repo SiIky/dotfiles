@@ -29,6 +29,7 @@ se hidden
 se hlsearch
 se incsearch
 se laststatus=2
+se lazyredraw
 se linebreak
 se matchpairs=(:),[:],{:},<:>
 se nocompatible
@@ -71,19 +72,17 @@ if has('nvim')
     se dir=~/.config/nvim/swp//
 else
     se dir=~/.vim/swp//
-endif
-
-if !has('nvim')
-    se viminfo=~/.vim/viminfo
+    se viminfo+=n~/.vim/viminfo
+    se ttyfast
 endif
 
 if has("persistent_undo")
     if has('nvim')
-        set undodir=~/.config/nvim/undo
+        se undodir=~/.config/nvim/undo
     else
-        set undodir=~/.vim/undo
+        se undodir=~/.vim/undo
     endif
-    set undofile
+    se undofile
 endif
 
 " Status Line ==============================================
@@ -258,10 +257,12 @@ runtime macros/matchit.vim
 let g:plug_threads=2
 
 if has('nvim')
-    call plug#begin('~/.config/nvim/plugged')
+    let g:plug_dir='~/.config/nvim/plugged'
 else
-    call plug#begin('~/.vim/plugged')
+    let g:plug_dir='~/.vim/plugged'
 endif
+
+call plug#begin(g:plug_dir)
 
 " toml -----------------------------------------------------
 " for cargo (rust) files
@@ -286,12 +287,11 @@ source ~/.vim/pconfigs/cursorword.vim
 source ~/.vim/pconfigs/molokai.vim
 
 source ~/.vim/pconfigs/vimproc.vim
-source ~/.vim/pconfigs/buftabline.vim
 source ~/.vim/pconfigs/editorconfig.vim
 source ~/.vim/pconfigs/sneak.vim
 source ~/.vim/pconfigs/undotree.vim
 source ~/.vim/pconfigs/cool.vim
-source ~/.vim/pconfigs/multiple-cursors.vim
+"source ~/.vim/pconfigs/multiple-cursors.vim
 source ~/.vim/pconfigs/surround.vim
 source ~/.vim/pconfigs/startify.vim
 "source ~/.vim/pconfigs/gtd.vim
@@ -302,11 +302,13 @@ call plug#end()
 colorscheme molokai
 
 if executable("rg")
-    set grepprg=rg\ --vimgrep\ --no-heading\ $*
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+    se grepprg=rg\ --vimgrep\ --no-heading\ $*
+    se grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif filereadable("/usr/local/bin/grep")
-    set grepprg=/usr/local/bin/grep
+    se grepprg=/usr/local/bin/grep
 endif
+
+nnoremap <leader>d I/***/<C-O>O
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
