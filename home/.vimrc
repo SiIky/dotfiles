@@ -308,6 +308,8 @@ elseif filereadable("/usr/local/bin/grep")
     se grepprg=/usr/local/bin/grep
 endif
 
+nnoremap <leader>d I/***/<C-O>O
+
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd VimEnter * echo "Fuck You Human .l."

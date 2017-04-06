@@ -1,8 +1,8 @@
-iabbrev <buffer> fun <ESC>A(){}<ESC><UP><UP>t)hi
-iabbrev <buffer> for for (;;) {}<ESC><UP>f(a
-iabbrev <buffer> switch switch {case :break;}<ESC><UP><UP><UP>t{i
+iabbrev <buffer> fun <ESC>A()<CR>{<CR>}<ESC><UP><UP>t)hi
+iabbrev <buffer> for for (;;) {<CR>}<ESC><UP>f(a
+iabbrev <buffer> switch switch {<CR>case :<CR>break;<CR>}<ESC><UP><UP><UP>t{i
 iabbrev <buffer> ()? () ? : <ESC>F)i
-iabbrev <buffer> if if () {}<ESC><UP>f(a
+iabbrev <buffer> if if () {<CR>}<ESC><UP>f(a
 
 setlocal makeprg=make
 
@@ -13,5 +13,5 @@ nnoremap <buffer> <F7> :cprev<CR>
 nnoremap <buffer> <F8> :cnext<CR>
 nnoremap <buffer> <F9> :cclose<CR>
 
-nnoremap <leader>d I/***/<C-O>O
+nnoremap <leader>d I/**<CR>*/<C-O>O
 vnoremap <LEADER>c <ESC>`>a */<ESC>`<i/* <ESC>

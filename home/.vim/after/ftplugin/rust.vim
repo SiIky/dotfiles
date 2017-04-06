@@ -1,8 +1,8 @@
-iabbrev <buffer> fun fn() {}<ESC><UP>f(i
-iabbrev <buffer> for for in  {}<ESC><UP>tii
+iabbrev <buffer> fun fn() {<CR>}<ESC><UP>f(i
+iabbrev <buffer> for for in  {<CR>}<ESC><UP>tii
 iabbrev <buffer> => =>,<LEFT>
-iabbrev <buffer> match match {}<ESC><UP>t{i
-iabbrev <buffer> if if {}<ESC><UP>t{i
+iabbrev <buffer> match match {<CR>}<ESC><UP>t{i
+iabbrev <buffer> if if {<CR>}<ESC><UP>t{i
 
 compiler cargo
 setlocal makeprg=cargo
