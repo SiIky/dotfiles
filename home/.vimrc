@@ -21,7 +21,7 @@ se encoding=utf-8
 se expandtab
 se fileencoding=utf-8
 se foldcolumn=1
-se foldenable
+se nofoldenable
 se foldmethod=indent
 se foldnestmax=3
 se foldtext=getline(v:foldstart)
@@ -46,7 +46,7 @@ se relativenumber
 se scrolljump=10
 se scrolloff=5
 se shiftwidth=4
-se shortmess=at
+se shortmess=atW
 se showcmd
 se showmode
 se showtabline=1
@@ -67,6 +67,10 @@ se wildmode=longest:full
 highlight comment cterm=italic
 syntax off
 se mouse=r
+
+"se cinoptions=>s,ls,+s,(s,)s,us,U1,w1,ks,ms,#s
+se cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,ps,ts,is,+s,c3,C0,/0,(0,u0,U0,w0,Ws,k0,m0,j0,J0,)20,*70,#0
+se cindent
 
 if has('nvim')
     se dir=~/.config/nvim/swp//
@@ -307,8 +311,6 @@ if executable("rg")
 elseif filereadable("/usr/local/bin/grep")
     se grepprg=/usr/local/bin/grep
 endif
-
-nnoremap <leader>d I/***/<C-O>O
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow

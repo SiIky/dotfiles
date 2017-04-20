@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 exec st -c WICD -t WICD -n WICD wicd-curses

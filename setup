@@ -34,10 +34,6 @@ wget -nv --show-progress -O $AUTO/plug.vim https://raw.githubusercontent.com/jun
 mkdir -m 0700 -p $HOME/.local/share/newsbeuter
 
 ############################################################
-# set up pomodoro
-git clone https://github.com/rukshn/pomodoro $HOME/.config/pomodoro
-
-############################################################
 # create temporary setup folder
 mkdir -m 0700 -p $SETUPDIR/hermit
 
@@ -66,6 +62,7 @@ git clone https://github.com/cmus/cmus
 git clone https://github.com/martanne/abduco
 git clone https://github.com/martanne/dvtm
 git clone https://github.com/siiky/slstatus
+git clone https://github.com/siiky/c-utils
 git clone https://github.com/universal-ctags/ctags
 
 [ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path

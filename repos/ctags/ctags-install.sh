@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-./autogen.sh && ./configure && make clean install
+./autogen.sh && ./configure && sudo make clean install

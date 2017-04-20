@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-make clean install
+sudo make clean install
