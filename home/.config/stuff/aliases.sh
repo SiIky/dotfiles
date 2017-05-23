@@ -81,8 +81,8 @@ function rm() { command rm -ri "$@"; }
 
 function dfh() { command df -h "$@"; }
 function bandit() { TERM=xterm256 command ssh bandit$1@bandit.labs.overthewire.org; }
-function less() { command less -N "$@"; }
-function lessn() { command less "$@"; }
+function less() { command less -S "$@"; }
+function lessn() { command less -SN "$@"; }
 function wget() { command wget -c "$@"; }
 
 # https://github.com/ogeno/oneliners

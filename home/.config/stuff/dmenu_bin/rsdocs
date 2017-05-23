@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-exec surf ~/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/std/index.html
+#TC=`rustup show | rg default | cut -d\  -f1 | line`
+exec surf "file:///home/silky/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/share/doc/rust/html/index.html"
