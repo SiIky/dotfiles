@@ -1,0 +1,1 @@
+Plug 'quabug/vim-gdscript'

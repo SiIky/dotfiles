@@ -1,5 +1,3 @@
-alias exit='while true; do echo "^D scrub"; sleep 0.5; done'
-
 # Git aliases (if no hub replace with git)
 if $(hash git 2> /dev/null); then
     # execute git pull on all directories

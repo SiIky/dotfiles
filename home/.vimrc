@@ -283,6 +283,12 @@ source ~/.vim/pconfigs/racer.vim
 " haskell --------------------------------------------------
 "source ~/.vim/pconfigs/haskell.vim
 
+" gdscript syntax highlighting (for Godot)
+source ~/.vim/pconfigs/gdscript.vim
+
+" awk indentation
+source ~/.vim/pconfigs/awk.vim
+
 " general --------------------------------------------------
 " Underline words under the cursor
 source ~/.vim/pconfigs/cursorword.vim

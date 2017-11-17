@@ -5,6 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 8;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int focusonwheel       = 1;
 
 #define DEFAULT_FONT "Hermit:size=10"
 static const char *fonts[]          = { DEFAULT_FONT };
@@ -116,24 +117,26 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
-static const char *htopcmd[]    = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
-static const char *rangercmd[]  = { "st", "-c", "RANGER", "-n", "RANGER", "-t", "RANGER", "ranger", NULL };
-static const char *stcmd[]      = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
-static const char *vimcmd[]     = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "dvtm", "vim", NULL };
-static const char *printsc[]    = { "maim", "--hidecursor", "~/Pictures/maim/$(date +%Y%m%d%H%M%S).png", NULL };
+static char dmenumon[2]       = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
+static const char *htopcmd[]  = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
+static const char *termfm[]   = { "st", "-c", "VIFM", "-n", "VIFM", "-t", "VIFM", "vifm", NULL };
+static const char *guifm[]    = { "spacefm", NULL };
+static const char *termcmd[]  = { "st", "-c", "ST", "-n", "ST", "-t", "ST", NULL };
+static const char *dvtm[]     = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
+static const char *vimcmd[]   = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
+static const char *printsc[]  = { "st", "maim", "--hidecursor", "~/Pictures/maim/$(date +%Y%m%d%H%M%S).png", NULL };
 
 /* volume controls */
-static const char *amvolup[]      = { "amixer", "set", "Master", "5%+",  NULL };
-static const char *amvoldown[]    = { "amixer", "set", "Master", "5%-",  NULL };
-static const char *amvolmute[]    = { "amixer", "set", "Master", "toggle", NULL };
+static const char *amvolup[]   = { "amixer", "set", "Master", "5%+",  NULL };
+static const char *amvoldown[] = { "amixer", "set", "Master", "5%-",  NULL };
+static const char *amvolmute[] = { "amixer", "set", "Master", "toggle", NULL };
 
 /* cmus controls */
-static const char *cmus_play[]  = { "cmus-remote", "-u", NULL };
-static const char *cmus_stop[]  = { "cmus-remote", "-s", NULL };
-static const char *cmus_prev[]  = { "cmus-remote", "-n", NULL };
-static const char *cmus_next[]  = { "cmus-remote", "-r", NULL };
+static const char *cmus_play[] = { "cmus-remote", "-u", NULL };
+static const char *cmus_stop[] = { "cmus-remote", "-s", NULL };
+static const char *cmus_prev[] = { "cmus-remote", "-n", NULL };
+static const char *cmus_next[] = { "cmus-remote", "-r", NULL };
 
 static const Key keys[] = {
     /*modifier                  key                     function                argument */
@@ -161,9 +164,15 @@ static const Key keys[] = {
     TAGKEYS(                    XK_0,                                           9),
     { WinKey,                   XK_v,                   spawn,                  {.v = vimcmd } },
     { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
-    { WinKey,                   XK_t,                   spawn,                  {.v = stcmd } },
+    { WinKey,                   XK_t,                   spawn,                  {.v = termcmd } },
+    { WinKey|ShiftMask,         XK_t,                   spawn,                  {.v = dvtm } },
     { ShiftMask|ControlMask,    XK_Delete,              spawn,                  {.v = htopcmd } },
-    { WinKey,                   XK_e,                   spawn,                  {.v = rangercmd } },
+    { WinKey,                   XK_e,                   spawn,                  {.v = termfm } },
+    { WinKey|ShiftMask,         XK_e,                   spawn,                  {.v = guifm } },
+    { WinKey,                   XK_comma,               focusmon,               {.i = -1 } },
+    { WinKey,                   XK_period,              focusmon,               {.i = +1 } },
+    { WinKey|ShiftMask,         XK_comma,               tagmon,                 {.i = -1 } },
+    { WinKey|ShiftMask,         XK_period,              tagmon,                 {.i = +1 } },
     /* Volume & CMUS controls */
     { 0,                        XF86AudioRaiseVolume,   spawn,                  {.v = amvolup } },
     { 0,                        XF86AudioLowerVolume,   spawn,                  {.v = amvoldown } },

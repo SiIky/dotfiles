@@ -22,7 +22,7 @@ export HISTSIZE=250
 export ABDUCO_SOCKET_DIR=$HOME/.config # directory abduco will use to save sessions
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
-export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin
+export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin:/opt/flutter/bin
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
