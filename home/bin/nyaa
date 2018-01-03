@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+usage() {
+cat << EOF
+Usage:
+\`$(basename $0) -i ID [DESTINATION]\`
+\`$(basename $0) -h HASH [DESTINATION]\`
+EOF
+}
+
+NYAA="https://nyaa.si"
+
+if [ "$2" == "" ] || [[ "$1" != "-i" && "$1" != "-h" ]]; then
+    usage
+    exit 1
+fi
+
+if [ "$3" != "" ]; then
+OUT="$3"
+else
+OUT=.
+fi
+
+cd $OUT
+
+if [ "$1" == "-i" ]; then
+    command wget --quiet --show-progress "$NYAA/download/$2.torrent" -O "$2.torrent"
+elif [ "$1" == "-h" ]; then
+    command wget --quiet --show-progress "$NYAA/?q=$2" -O - | rg download | sed 's!^.*href="\/download!https:\/\/nyaa.si\/download!' | sed 's/".*$//' | wget --quiet --show-progress -i -
+fi
+
+cd -
