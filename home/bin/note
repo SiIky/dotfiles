@@ -1,14 +1,28 @@
 #!/usr/bin/env bash
-[ "$#" == 0 ] && exit
 
-[ "$NOTE" == "" ] && NOTE=$HOME/.config/note.txt
+usage() {
+cat << EOF
+Usage:
+\`$(basename $0) -c\`	Remove notes
+\`$(basename $0) -s\`	Show notes
+\`$(basename $0) -h\`	Show this help message
+\`$(basename $0) TEXT\`	Add text to notes file
+EOF
+}
+
+if [ "$#" == 0 ] || [ "$1" == "-h" ]; then
+    usage
+    exit 1
+fi
+
+[ "$NOTE" == "" ] && NOTE="$HOME/.config/note.txt"
 
 if [ "$1" == "-c" ]; then
-    [ -f $NOTE ] && rm -i $NOTE
+    [ -f "$NOTE" ] && rm -i "$NOTE"
 elif [ "$1" == "-s" ]; then
-    [ -f $NOTE ] && less $NOTE
+    [ -f "$NOTE" ] && less "$NOTE"
 else
-    echo "---------------------------" >> $NOTE
-    echo "$(date '+%d(%a)/%m(%b)/%y %R:%S')" >> $NOTE
-    echo "$@" >> $NOTE
+    echo "---------------------------" >> "$NOTE"
+    echo "$(date '+%d(%a)/%m(%b)/%y %R:%S')" >> "$NOTE"
+    echo "$@" >> "$NOTE"
 fi
