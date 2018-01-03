@@ -13,5 +13,5 @@ nnoremap <buffer> <F7> :cprev<CR>
 nnoremap <buffer> <F8> :cnext<CR>
 nnoremap <buffer> <F9> :cclose<CR>
 
-nnoremap <leader>d I/**<CR>*/<C-O>O
+nnoremap <LEADER>d I/**<CR><BS><BS>*/<C-O>O@brief 
 vnoremap <LEADER>c <ESC>`>a */<ESC>`<i/* <ESC>

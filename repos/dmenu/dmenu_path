@@ -1,5 +1,5 @@
 #!/bin/sh
-PATH=~/.config/stuff/dmenu_bin:$PATH
+PATH=~/.config/stuff/dmenu_bin:$PATH:~/bin
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 if [ -d "$cachedir" ]; then
 	cache=$cachedir/dmenu_run
