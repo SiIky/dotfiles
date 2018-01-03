@@ -22,10 +22,13 @@ export HISTSIZE=250
 export ABDUCO_SOCKET_DIR=$HOME/.config # directory abduco will use to save sessions
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
+export MOSH_PREDICTION_DISPLAY=always
 export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin:/opt/flutter/bin
 export RANGER_LOAD_DEFAULT_RC=FALSE
-export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
+
+export JCD_DIR=$HOME/.config/jcd
 export NOTE=~/.config/note.txt
 
 if $(hash nvim); then
@@ -35,10 +38,6 @@ else
     export EDITOR=vim
     export VISUAL=vim
 fi
-
-export ANDROID_HOME=$HOME/.config/android/sdk
-export NDK_HOME=$HOME/.config/android/ndk
-export JCD_DIR=$HOME/.config/jcd
 
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
