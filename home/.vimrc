@@ -65,7 +65,6 @@ se wildignore+=*.swp,*.o
 se wildmenu
 se wildmode=longest:full
 highlight comment cterm=italic
-syntax off
 se mouse=r
 
 "se cinoptions=>s,ls,+s,(s,)s,us,U1,w1,ks,ms,#s
@@ -317,6 +316,9 @@ if executable("rg")
 elseif filereadable("/usr/local/bin/grep")
     se grepprg=/usr/local/bin/grep
 endif
+
+" syntax at the end because of plugins messing with it
+syntax off
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
