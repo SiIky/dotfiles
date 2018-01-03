@@ -2,6 +2,9 @@ scriptencoding utf-8
 let mapleader=' '
 let maplocalleader=''
 
+" rbpi settings
+let rbpi=0
+
 " general ==================================================
 filetype plugin indent on
 se ambiwidth=single
@@ -318,7 +321,11 @@ elseif filereadable("/usr/local/bin/grep")
 endif
 
 " syntax at the end because of plugins messing with it
-syntax off
+if rbpi == 1
+    syntax off
+else
+    syntax on
+endif
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
