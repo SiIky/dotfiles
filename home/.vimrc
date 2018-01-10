@@ -145,12 +145,17 @@ vnoremap gk gg
 nnoremap v <C-V>
 nnoremap <C-V> v
 
+" very magical
+nnoremap / /\v
+nnoremap ? ?\v
+
 " search
-vnoremap / y/<C-R>"<CR>
+vnoremap / "yy/<C-R>"<CR>
+vnoremap ? "yy?<C-R>"<CR>
 
 " search and replace
-nnoremap <C-S> :%s/<C-R><C-W>//cg<LEFT><LEFT><LEFT>
-vnoremap <C-S> "yy:%s/<C-R>"//cg<LEFT><LEFT><LEFT>
+nnoremap <C-S> :%s/\V<C-R><C-W>//cg<LEFT><LEFT><LEFT>
+vnoremap <C-S> "yy:%s/\V<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " quickfix navigation
 nnoremap <silent> <F4> :cwindow<CR>
