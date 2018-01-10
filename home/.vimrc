@@ -3,7 +3,7 @@ let mapleader=' '
 let maplocalleader=''
 
 " rbpi settings
-let rbpi=0
+let rbpi=1
 
 " general ==================================================
 filetype plugin indent on
@@ -14,7 +14,7 @@ se autoread
 se backspace=2
 se clipboard=unnamedplus
 se cmdheight=1
-se colorcolumn=60
+se colorcolumn=70
 se complete=.,w,b,u,U,t
 se conceallevel=0
 se confirm
@@ -29,7 +29,6 @@ se foldmethod=indent
 se foldnestmax=3
 se foldtext=getline(v:foldstart)
 se hidden
-se hlsearch
 se incsearch
 se laststatus=2
 se lazyredraw
@@ -42,7 +41,6 @@ se nospell
 se novisualbell
 se nowrap
 se nrformats=alpha,hex,bin
-se number
 se numberwidth=1
 se omnifunc=syntaxcomplete#Complete
 se relativenumber
@@ -64,14 +62,22 @@ se tabpagemax=30
 se tabstop=8
 se tags=.tags;
 se ttimeoutlen=0 " status bar change mode delay (ms)
-se wildignore+=*.swp,*.o
+se wildignore+=*.swp,*.o,*.out
 se wildmenu
 se wildmode=longest:full
 highlight comment cterm=italic
 se mouse=r
 
+if rbpi == 1
+    se nohlsearch
+    se nonumber
+else
+    se hlsearch
+    se number
+endif
+
 "se cinoptions=>s,ls,+s,(s,)s,us,U1,w1,ks,ms,#s
-se cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,ps,ts,is,+s,c3,C0,/0,(0,u0,U0,w0,Ws,k0,m0,j0,J0,)20,*70,#0
+"se cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:s,=s,l0,b0,gs,hs,N0,ps,ts,is,+s,c3,C0,/0,(0,u0,U0,w0,Ws,k0,m0,j0,J0,)20,*70,#0
 se cindent
 
 if has('nvim')
@@ -129,7 +135,8 @@ vnoremap b B
 vnoremap e E
 vnoremap w W
 
-nnoremap <LEADER><SPACE> za
+" fold
+"nnoremap <LEADER><SPACE> za
 
 " move cursor to the beggining/end of the line
 nnoremap gh _
@@ -260,7 +267,7 @@ runtime ftplugin/man.vim
 runtime macros/matchit.vim
 
 " vim-plug =================================================
-let g:plug_threads=2
+let g:plug_threads=4
 
 if has('nvim')
     let g:plug_dir='~/.config/nvim/plugged'
@@ -270,50 +277,43 @@ endif
 
 call plug#begin(g:plug_dir)
 
-" toml -----------------------------------------------------
-" for cargo (rust) files
-source ~/.vim/pconfigs/toml.vim
-
-" markdown -------------------------------------------------
-source ~/.vim/pconfigs/tabular.vim
-source ~/.vim/pconfigs/markdown.vim
-
-" rust stuff -----------------------------------------------
-source ~/.vim/pconfigs/rust.vim
-source ~/.vim/pconfigs/racer.vim
-
-" haskell --------------------------------------------------
-"source ~/.vim/pconfigs/haskell.vim
-
-" gdscript syntax highlighting (for Godot)
-source ~/.vim/pconfigs/gdscript.vim
-
-" awk indentation
-source ~/.vim/pconfigs/awk.vim
-
-" general --------------------------------------------------
-" Underline words under the cursor
-source ~/.vim/pconfigs/cursorword.vim
-
-" Molokai colorscheme
-source ~/.vim/pconfigs/molokai.vim
-
-source ~/.vim/pconfigs/vimproc.vim
 source ~/.vim/pconfigs/editorconfig.vim
+source ~/.vim/pconfigs/molokai.vim
 source ~/.vim/pconfigs/sneak.vim
-source ~/.vim/pconfigs/undotree.vim
-source ~/.vim/pconfigs/cool.vim
-"source ~/.vim/pconfigs/multiple-cursors.vim
 source ~/.vim/pconfigs/surround.vim
-source ~/.vim/pconfigs/startify.vim
-"source ~/.vim/pconfigs/gtd.vim
-"source ~/.vim/pconfigs/covim.vim
+source ~/.vim/pconfigs/vimproc.vim
+
+source ~/.vim/pconfigs/awk.vim " awk indentation
+
+" rust -----------------------------------------------------
+source ~/.vim/pconfigs/racer.vim
+source ~/.vim/pconfigs/rust.vim
+source ~/.vim/pconfigs/toml.vim " for cargo (rust) files
+
+if rbpi != 1
+    source ~/.vim/pconfigs/cool.vim " stop highlight after motion
+    source ~/.vim/pconfigs/cursorword.vim " Underline words under the cursor
+    source ~/.vim/pconfigs/undotree.vim
+
+    "source ~/.vim/pconfigs/covim.vim
+    "source ~/.vim/pconfigs/gtd.vim
+    "source ~/.vim/pconfigs/multiple-cursors.vim
+    "source ~/.vim/pconfigs/startify.vim
+
+    " markdown -------------------------------------------------
+    source ~/.vim/pconfigs/tabular.vim
+    source ~/.vim/pconfigs/markdown.vim
+
+    source ~/.vim/pconfigs/haskell.vim
+    source ~/.vim/pconfigs/gdscript.vim " gdscript syntax highlighting (Godot)
+endif
+
 call plug#end()
 
 "let g:gtd#dir = '~/.config/notes'
 colorscheme molokai
 
-if executable("rg")
+if executable("rg") " ripgrep
     se grepprg=rg\ --vimgrep\ --no-heading\ $*
     se grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif filereadable("/usr/local/bin/grep")

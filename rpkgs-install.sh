@@ -12,5 +12,5 @@ for R in \
     "https://github.com/siiky/chop" \
     ; do
 cargo install -f -j1 --git "$R"
-done
+done 2>cargo-rpkgs-install.log
 strip -s ~/.cargo/bin/*
