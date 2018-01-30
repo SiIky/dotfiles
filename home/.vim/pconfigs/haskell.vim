@@ -1,1 +1,1 @@
-Plug 'vim-scripts/haskell.vim', { 'for': 'haskell' }
+Plug 'vim-scripts/haskell.vim', { 'for' : 'haskell' }

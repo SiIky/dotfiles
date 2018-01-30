@@ -1,4 +1,4 @@
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for' : 'rust' }
 
 let g:rustfmt_autosave=0
 

@@ -1,4 +1,4 @@
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for' : 'rust' }
 
 " racer
 let g:racer_cmd="~/.cargo/bin/racer"

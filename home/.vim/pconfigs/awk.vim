@@ -1,1 +1,1 @@
-Plug 'vim-scripts/awk.vim'
+Plug 'vim-scripts/awk.vim', { 'for' : 'awk' }

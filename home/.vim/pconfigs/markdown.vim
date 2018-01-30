@@ -1,4 +1,4 @@
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for' : 'markdown' }
 
 let g:vim_markdown_folding_disabled=0
 let g:vim_markdown_folding_style_pythonic=0

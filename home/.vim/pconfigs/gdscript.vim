@@ -1,1 +1,1 @@
-Plug 'quabug/vim-gdscript'
+Plug 'quabug/vim-gdscript', { 'for' : 'gdscript' }
