@@ -330,6 +330,8 @@ if rbpi == 1
     colorscheme preto
     syntax off
 else
+    "colorscheme molokai
+    colorscheme preto
     syntax on
 endif
 
