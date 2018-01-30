@@ -8,7 +8,6 @@ let rbpi=1
 " general ==================================================
 filetype plugin indent on
 se ambiwidth=single
-se noautochdir
 se autoindent
 se autoread
 se backspace=2
@@ -33,6 +32,7 @@ se laststatus=2
 se lazyredraw
 se linebreak
 se matchpairs=(:),[:],{:},<:>
+se noautochdir
 se nocompatible
 se noerrorbells
 se nofoldenable
