@@ -1,6 +1,16 @@
 # fun for the whole family
 # `telnet nyancat.dakko.us`
 
+# `fbterm` sets `TERM` to `linux` by default but terminal info expects `fbterm`
+case $TERM in
+    linux)
+        if [ -c /dev/fb0 ]; then
+            export TERM=fbterm
+            fbterm
+        fi
+    ;;
+esac
+
 # apply configs for rbpi
 RBPI=yes
 

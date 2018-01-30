@@ -24,7 +24,6 @@ se encoding=utf-8
 se expandtab
 se fileencoding=utf-8
 se foldcolumn=1
-se nofoldenable
 se foldmethod=indent
 se foldnestmax=3
 se foldtext=getline(v:foldstart)
@@ -36,6 +35,7 @@ se linebreak
 se matchpairs=(:),[:],{:},<:>
 se nocompatible
 se noerrorbells
+se nofoldenable
 se noruler
 se nospell
 se novisualbell
@@ -60,7 +60,7 @@ se t_Co=256
 se t_vb=
 se tabpagemax=30
 se tabstop=8
-se tags=.tags;
+se tags+=.tags,rusty-tags.vi
 se ttimeoutlen=0 " status bar change mode delay (ms)
 se wildignore+=*.swp,*.o,*.out
 se wildmenu
@@ -284,6 +284,7 @@ call plug#begin(g:plug_dir)
 
 source ~/.vim/pconfigs/editorconfig.vim
 source ~/.vim/pconfigs/molokai.vim
+source ~/.vim/pconfigs/preto.vim
 source ~/.vim/pconfigs/sneak.vim
 source ~/.vim/pconfigs/surround.vim
 source ~/.vim/pconfigs/vimproc.vim
@@ -316,7 +317,6 @@ endif
 call plug#end()
 
 "let g:gtd#dir = '~/.config/notes'
-colorscheme molokai
 
 if executable("rg") " ripgrep
     se grepprg=rg\ --vimgrep\ --no-heading\ $*
@@ -327,6 +327,7 @@ endif
 
 " syntax at the end because of plugins messing with it
 if rbpi == 1
+    colorscheme preto
     syntax off
 else
     syntax on
