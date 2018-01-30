@@ -8,7 +8,7 @@ let rbpi=1
 " general ==================================================
 filetype plugin indent on
 se ambiwidth=single
-se autochdir
+se noautochdir
 se autoindent
 se autoread
 se backspace=2
