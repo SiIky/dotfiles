@@ -284,6 +284,7 @@ call plug#begin(g:plug_dir)
 
 source ~/.vim/pconfigs/editorconfig.vim
 source ~/.vim/pconfigs/molokai.vim
+source ~/.vim/pconfigs/preto.vim
 source ~/.vim/pconfigs/sneak.vim
 source ~/.vim/pconfigs/surround.vim
 source ~/.vim/pconfigs/vimproc.vim
@@ -316,7 +317,6 @@ endif
 call plug#end()
 
 "let g:gtd#dir = '~/.config/notes'
-colorscheme molokai
 
 if executable("rg") " ripgrep
     se grepprg=rg\ --vimgrep\ --no-heading\ $*
@@ -327,8 +327,11 @@ endif
 
 " syntax at the end because of plugins messing with it
 if rbpi == 1
+    colorscheme preto
     syntax off
 else
+    "colorscheme molokai
+    colorscheme preto
     syntax on
 endif
 
