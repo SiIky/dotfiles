@@ -9,7 +9,6 @@ for R in \
     "https://github.com/nabijaczleweli/cargo-update"   \
     "https://github.com/ogham/exa"                     \
     "https://github.com/rust-lang-nursery/rust-clippy" \
-    "https://github.com/rust-lang-nursery/rustfmt"     \
     "https://github.com/siiky/chop"                    \
     ; do
 cargo install -f -j2 --git "$R"
