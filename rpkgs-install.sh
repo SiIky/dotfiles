@@ -3,7 +3,6 @@ CARGO=~/.cargo/bin/cargo
 for R in \
     "https://github.com/Aaronepower/tokei"             \
     "https://github.com/BurntSushi/ripgrep"            \
-    "https://github.com/cobalt-org/cobalt.rs"          \
     "https://github.com/dan-t/rusty-tags"              \
     "https://github.com/kbknapp/cargo-outdated"        \
     "https://github.com/nabijaczleweli/cargo-update"   \
