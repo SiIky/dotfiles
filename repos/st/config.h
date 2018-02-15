@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-char font[] = "Hermit:pixelsize=14:antialias=true";
+char font[] = "Hermit:pixelsize=12:antialias=true";
 int borderpx = 0;
 
 /*

@@ -7,7 +7,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 1;
 
-#define DEFAULT_FONT "Hermit:size=10"
+#define DEFAULT_FONT "Hermit:size=9"
 static const char *fonts[]          = { DEFAULT_FONT };
 static const char dmenufont[]       = DEFAULT_FONT;
 
