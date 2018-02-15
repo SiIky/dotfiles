@@ -26,7 +26,7 @@ cd $OUT
 if [ "$1" == "-i" ]; then
     command wget --quiet --show-progress "$NYAA/download/$2.torrent" -O "$2.torrent"
 elif [ "$1" == "-h" ]; then
-    command wget --quiet --show-progress "$NYAA/?q=$2" -O - | rg download | sed 's!^.*href="\/download!https:\/\/nyaa.si\/download!' | sed 's/".*$//' | wget --quiet --show-progress -i -
+    command wget --quiet --show-progress "$NYAA/?q=$2" -O - | rg download | sed 's!^.*href="\/download!https:\/\/nyaa.si\/download!; s/".*$//' | wget --quiet --show-progress -i -
 fi
 
 cd -
