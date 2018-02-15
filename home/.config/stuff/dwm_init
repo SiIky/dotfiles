@@ -2,23 +2,24 @@
 
 # keyboard layout
 # `$ grep "grp:.*toggle" /usr/share/X11/xkb/rules/base.lst`
-# set PT as default and bind scroll lock to toggle between layouts
-exec setxkbmap -layout pt,us -option grp:sclk_toggle &
-# cmqfr
-#exec setxkbmap -device 12 -device 13 -layout us &
-# 15-key pad
-#exec setxkbmap -device 18 -layout us &
+# -layout pt                    PT layout
+# -layout us                    US layout
+# -option ctrl:nocaps           CAPS => CTRL
+# -option grp:sclk_toggle       SCR_LK to switch between layouts
+# If external KB set US as default, else PT
+(xinput list | grep -qs QuickFire && exec setxkbmap -layout us,pt -option ctrl:nocaps -option grp:sclk_toggle) || exec setxkbmap -layout pt,us -option ctrl:nocaps -option grp:sclk_toggle &
 
-exec xset m 0 0 & # disable mouse accel
+# disable mouse accel
+exec xset m 0 0 &
 
-pgrep redshift > /dev/null || exec redshift &
-pgrep slstatus > /dev/null || exec slstatus -d || xsetroot -name ' ' & # status bar
+# status bar
+pgrep slstatus > /dev/null || exec slstatus -d || xsetroot -name ' ' &
 pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose & 
+pgrep redshift > /dev/null || exec redshift &
 
 # set wallpaper with feh
 [ -f ~/.config/stuff/fehbg ] && . ~/.config/stuff/fehbg
 
-exec xmodmap ~/.config/stuff/xmodmap &
 #exec oneko -tora -tofocus -bg black -fg red &
 
 # JP IME
