@@ -6,7 +6,7 @@ SETUPDIR=$REPODIR/.setup
 mkdir -m 0700 -p $HOME/.config/stuff
 
 # disable mouse accel
-sudo cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
+cp $REPODIR/xorg/50-mouse-acceleration.conf /usr/share/X11/xorg.conf.d/
 
 # setup bash env
 wget -nv --show-progress -O $HOME/.config/stuff/dircolors https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS
@@ -41,29 +41,32 @@ mkdir -m 0700 -p $SETUPDIR/hermit
 cd $SETUPDIR/hermit
 wget -nv --show-progress -O hermit.tar.gz 'https://pcaro.es/d/otf-hermit-1.21.tar.gz'
 tar xvzf hermit.tar.gz
-sudo mkdir -p /usr/share/fonts/opentype/hermit
-sudo cp $SETUPDIR/hermit/*.otf /usr/share/fonts/opentype/hermit
+mkdir -p /usr/share/fonts/opentype/hermit
+cp $SETUPDIR/hermit/*.otf /usr/share/fonts/opentype/hermit
 
 # copy dwm entry for lightdm
-sudo cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/
+cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/
 
 ############################################################
 # clone git repos
 cd $SETUPDIR
 
-git clone http://git.suckless.org/dmenu
-git clone http://git.suckless.org/dwm
-git clone http://git.suckless.org/slock
-git clone http://git.suckless.org/st
-git clone http://git.suckless.org/tabbed
-
-git clone https://github.com/arzzen/git-quick-stats
-git clone https://github.com/cmus/cmus
-git clone https://github.com/martanne/abduco
-git clone https://github.com/martanne/dvtm
-git clone https://github.com/siiky/slstatus
-git clone https://github.com/siiky/c-utils
-git clone https://github.com/universal-ctags/ctags
+for REPO in \
+    https://git.suckless.org/dmenu            \
+    https://git.suckless.org/dwm              \
+    https://git.suckless.org/slock            \
+    https://git.suckless.org/st               \
+    https://git.suckless.org/tabbed           \
+    https://github.com/arzzen/git-quick-stats \
+    https://github.com/cmus/cmus              \
+    https://github.com/drkhsh/slstatus        \
+    https://github.com/martanne/abduco        \
+    https://github.com/martanne/dvtm          \
+    https://github.com/siiky/c-utils          \
+    https://github.com/universal-ctags/ctags  \
+    ; do
+git clone "$REPO"
+done
 
 [ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path
 [ -f dmenu/dmenu_run ] && rm dmenu/dmenu_run

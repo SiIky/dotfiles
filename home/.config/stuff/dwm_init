@@ -13,7 +13,7 @@
 exec xset m 0 0 &
 
 # status bar
-pgrep slstatus > /dev/null || exec slstatus -d || xsetroot -name ' ' &
+pgrep slstatus > /dev/null || exec slstatus || xsetroot -name ' ' &
 pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose & 
 pgrep redshift > /dev/null || exec redshift &
 

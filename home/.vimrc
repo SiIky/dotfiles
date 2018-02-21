@@ -166,6 +166,8 @@ vnoremap <C-S> "yy:%s/\V<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " quickfix navigation
 nnoremap <silent> <F4> :cwindow<CR>
+nnoremap <silent> <F5> :make<CR>
+nnoremap <silent> <F6> :make clean<CR>
 nnoremap <silent> <F7> :cprevious<CR>
 nnoremap <silent> <F8> :cnext<CR>
 nnoremap <silent> <F9> :cclose<CR>
