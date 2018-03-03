@@ -82,6 +82,7 @@ function bandit() { TERM=xterm256 command ssh bandit$1@bandit.labs.overthewire.o
 function less() { command less -S "$@"; }
 function lessn() { command less -SN "$@"; }
 function wget() { command wget -c "$@"; }
+function sizeof() { command du -bchs "$@"; }
 
 # https://github.com/ogeno/oneliners
 if $(hash abduco 2> /dev/null); then
