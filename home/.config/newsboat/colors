@@ -1,6 +1,6 @@
 # Generic Background
 # First value is not used.
-color background color013 color233
+color background color11 color233
 
 #Text/background when reading an article
 color article color108 color233

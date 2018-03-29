@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec st -c News -t NEWSBEUTER -n NEWSBEUTER newsbeuter -C ~/.config/newsbeuter/config -u ~/.config/newsbeuter/urls
+exec st -c News -t NEWSBEUTER -n NEWSBEUTER newsboat -C ~/.config/newsboat/config -u ~/.config/newsboat/urls

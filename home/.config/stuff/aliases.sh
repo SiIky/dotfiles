@@ -94,7 +94,7 @@ if $(hash detox 2> /dev/null); then
 fi
 
 if $(hash podbeuter 2> /dev/null); then
-    function podsclear() { [ -f ~/.local/share/newsbeuter/queue ] && command ex ~/.local/share/newsbeuter/queue -c 'g/downloaded$/d' +x; }
+    function podsclear() { [ -f ~/.local/share/newsboat/queue ] && command ex ~/.local/share/newsboat/queue -c 'g/downloaded$/d' +x; }
 fi
 
 if $(hash mpv 2> /dev/null); then
@@ -109,6 +109,11 @@ if $(hash youtube-dl 2> /dev/null); then
     function ytadl() { command youtube-dl --restrict-filenames -x --audio-format "best" --audio-quality 0 -o "$HOME/Videos/ytdls/audio/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
     function ytpdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/playlists/%(playlist_title)s/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
     function ytvdl() { command youtube-dl --restrict-filenames -o "$HOME/Videos/ytdls/video/%(upload_date)s-%(title)s-%(id)s.%(ext)s" "$@"; }
+fi
+
+if $(hash mpv 2> /dev/null) && $(hash youtube-dl 2> /dev/null); then
+    function ytv() { command mpv "$@"; }
+    function ytl() { command mpv --no-video "$@"; }
 fi
 
 if $(hash lynx 2> /dev/null); then

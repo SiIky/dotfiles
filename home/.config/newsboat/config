@@ -7,10 +7,10 @@ bookmark-autopilot false
 bookmark-cmd ""
 bookmark-interactive false
 browser "firefox"
-cache-file "~/.config/newsbeuter/cache.db"
+cache-file "~/.config/newsboat/cache.db"
 cleanup-on-quit true
 confirm-exit true
-cookie-cache "~/.config/newsbeuter/cookies.txt"
+cookie-cache "~/.config/newsboat/cookies.txt"
 datetime-format "%Y年%m月%d日 %H時%M分"
 delete-read-articles-on-quit false
 dialogs-title-format "Dialogs"
@@ -19,7 +19,7 @@ download-full-page true
 download-path "~/Podcasts/%n"
 download-retries 2
 download-timeout 30
-error-log "~/.config/newsbeuter/error.log"
+error-log "~/.config/newsboat/error.log"
 external-url-viewer ""
 feed-sort-order "none-desc"
 feedhq-flag-share ""
@@ -78,7 +78,7 @@ refresh-on-startup false
 reload-only-visible-feeds false
 reload-threads 2
 reload-time 60
-save-path "~/.config/newsbeuter/saved"
+save-path "~/.config/newsboat/saved"
 search-highlight-colors "black" "yellow" "bold"
 searchresult-title-format "Search result (%u unread, %t total)"
 selectfilter-title-format "Select Filter"
@@ -102,5 +102,5 @@ urlview-title-format "URLs"
 use-proxy false
 user-agent ""
 
-include "~/.config/newsbeuter/colors"
-include "~/.config/newsbeuter/binds"
+include "~/.config/newsboat/colors"
+include "~/.config/newsboat/binds"
