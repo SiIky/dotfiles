@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec st -c News -t PODBEUTER -n PODBEUTER podbeuter -a
+exec st -c News -t PODBEUTER -n PODBEUTER podboat -a
