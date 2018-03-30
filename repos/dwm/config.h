@@ -44,12 +44,9 @@ static const Bool focusonwheelscroll = False;
 #define TAG4    "W"
 #define TAG5    "M"
 #define TAG6    "steam"
-#define TAG7    "v"
-#define TAG8    "o"
-#define TAG9    "i"
-#define TAG0    "d"
+#define TAG7    "void"
 
-static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7, TAG8, TAG9, TAG0 };
+static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7 };
 
 /* tabs */
 #define T_VIM   (1 << 0)
@@ -66,17 +63,16 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /*class                     instance                        title           tags mask       isfloating      monitor */
+    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
     { "Media",                  NULL,                           NULL,           T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
     { "News",                   NULL,                           NULL,           T_MAIL,         0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
     { "Surf",                   "surf",                         NULL,           T_MAIL,         0,              -1 },
-    { "Hexchat",                "hexchat",                      NULL,           T_MAIL,         0,              -1 }, /* Arduino IDE */
+    { "Hexchat",                "hexchat",                      NULL,           T_MAIL,         0,              -1 },
     { "HTOP",                   "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
     { "WICD",                   "WICD",                         "WICD",         T_VOID,         0,              -1 },
-    { "Gpodder",                "gpodder",                      "gPodder",      T_MAIL,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
-    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
     { "mpv",                    "gl",                           NULL,           T_MEDIA,        0,              -1 },
     { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
     { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
@@ -89,9 +85,8 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[M]",      monocle },
-    { "[]=",      tile },    /* first entry is default */
-    { "><>",      NULL },    /* no layout function means floating behavior */
+    { "[M]",      monocle }, /* first entry is default */
+    { "[]=",      tile },
 };
 
 /* key definitions */
@@ -151,7 +146,6 @@ static const Key keys[] = {
     { LAlt,                     XK_F4,                  killclient,             {0} },
     { WinKey,                   XK_space,               setlayout,              {0} },
     { WinKey|ShiftMask,         XK_space,               togglefloating,         {0} },
-    { WinKey|ShiftMask,         XK_F4,                  quit,                   {0} },
     TAGKEYS(                    XK_1,                                           0),
     TAGKEYS(                    XK_2,                                           1),
     TAGKEYS(                    XK_3,                                           2),
@@ -182,6 +176,7 @@ static const Key keys[] = {
     { 0,                        XF86AudioPrev,          spawn,                  {.v = cmus_prev } },
     { 0,                        XF86AudioNext,          spawn,                  {.v = cmus_next } },
     { WinKey,                   PrintScreen,            spawn,                  {.v = printsc } },
+    { WinKey|ShiftMask,         XK_F4,                  quit,                   {0} },
 };
 
 /* button definitions */
