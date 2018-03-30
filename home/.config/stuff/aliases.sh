@@ -93,7 +93,7 @@ if $(hash detox 2> /dev/null); then
     function detox() { command detox -f $HOME/.config/stuff/detoxrc "$@"; }
 fi
 
-if $(hash podbeuter 2> /dev/null); then
+if $(hash podboat 2> /dev/null); then
     function podsclear() { [ -f ~/.local/share/newsboat/queue ] && command ex ~/.local/share/newsboat/queue -c 'g/downloaded$/d' +x; }
 fi
 
