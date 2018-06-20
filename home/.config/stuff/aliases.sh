@@ -56,7 +56,7 @@ if $(hash exa 2> /dev/null); then
     function tree() { command exa -T --group-directories-first --color=automatic "$@"; }
 else
     function l() { command ls --group-directories-first --color=auto -CF "$@"; }
-    function l1() { command ls --group-directories-first --color=auto -1CF "$@"; }
+    function l1() { command ls --group-directories-first --color=auto -1 -CF "$@"; }
     function lh() { command ls --group-directories-first --color=auto -ABFGghl "$@"; }
     function ll() { command ls --group-directories-first --color=auto -AFl "$@"; }
     function ls() { command ls --group-directories-first --color=auto -ABCF "$@"; }
