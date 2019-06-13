@@ -5,9 +5,8 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 8;        /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int focusonwheel       = 1;
 
-#define DEFAULT_FONT "Hermit:size=9"
+#define DEFAULT_FONT "Hermit:size=10"
 static const char *fonts[]          = { DEFAULT_FONT };
 static const char dmenufont[]       = DEFAULT_FONT;
 
@@ -80,7 +79,7 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 2;    /* number of clients in master area */
+static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
@@ -117,7 +116,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmen
 static const char *htopcmd[]  = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
 static const char *termfm[]   = { "st", "-c", "VIFM", "-n", "VIFM", "-t", "VIFM", "vifm", NULL };
 static const char *guifm[]    = { "spacefm", NULL };
-static const char *termcmd[]  = { "st", "-c", "ST", "-n", "ST", "-t", "ST", NULL };
+static const char *termcmd[]  = { "terminal", NULL };
 static const char *dvtm[]     = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
 static const char *vimcmd[]   = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
 static const char *printsc[]  = { "st", "maim", "--hidecursor", "~/Pictures/maim/$(date +%Y%m%d%H%M%S).png", NULL };
@@ -133,15 +132,22 @@ static const char *cmus_stop[] = { "cmus-remote", "-s", NULL };
 static const char *cmus_prev[] = { "cmus-remote", "-n", NULL };
 static const char *cmus_next[] = { "cmus-remote", "-r", NULL };
 
+static const char * lockcmd[]  = { "slock", NULL };
+static const char * susplockcmd[] = { "slock", "systemctl", "suspend", NULL };
+
+#include "movestack.c"
+
 static const Key keys[] = {
     /*modifier                  key                     function                argument */
     { WinKey,                   XK_h,                   togglebar,              {0} },
     { LAlt,                     XK_Tab,                 focusstack,             {.i = +1 } },
     { LAlt|ShiftMask,           XK_Tab,                 focusstack,             {.i = -1 } },
+    { WinKey,                   XK_j,                   movestack,              {.i = +1 } },
+    { WinKey,                   XK_k,                   movestack,              {.i = -1 } },
     { WinKey,                   XK_i,                   incnmaster,             {.i = +1 } },
     { WinKey,                   XK_d,                   incnmaster,             {.i = -1 } },
-    { WinKey|ShiftMask,         XK_h,                   setmfact,               {.f = -0.05 } },
-    { WinKey|ShiftMask,         XK_l,                   setmfact,               {.f = +0.05 } },
+    { LAlt|ShiftMask,           XK_h,                   setmfact,               {.f = -0.05 } },
+    { LAlt|ShiftMask,           XK_l,                   setmfact,               {.f = +0.05 } },
     { WinKey,                   XK_Tab,                 view,                   {0} },
     { LAlt,                     XK_F4,                  killclient,             {0} },
     { WinKey,                   XK_space,               setlayout,              {0} },
@@ -156,6 +162,8 @@ static const Key keys[] = {
     TAGKEYS(                    XK_8,                                           7),
     TAGKEYS(                    XK_9,                                           8),
     TAGKEYS(                    XK_0,                                           9),
+    { WinKey,                   XK_l,                   spawn,                  {.v = lockcmd } },
+    { WinKey|ShiftMask,         XK_l,                   spawn,                  {.v = susplockcmd } },
     { WinKey,                   XK_v,                   spawn,                  {.v = vimcmd } },
     { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
     { WinKey,                   XK_t,                   spawn,                  {.v = dvtm } },

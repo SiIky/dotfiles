@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec st -c Media -t CMUS -n CMUS cmus
+exec terminal --class Media --title CMUS -e abduco -A cmus cmus

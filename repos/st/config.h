@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hermit:pixelsize=12:antialias=true";
+static char *font = "Hermit:pixelsize=14:antialias=true";
 static int borderpx = 0;
 
 /*
@@ -32,7 +32,7 @@ static float chscale = 1.0;
  *
  * More advanced example: " `'\"()[]{}"
  */
-char *worddelimiters = " `'\"()[]{}<>,.;:-=+\\/|~!#$%^&*";
+wchar_t *worddelimiters = L" `'\"()[]{}<>,.;:-=+\\/|~!#$%^&*";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -42,7 +42,7 @@ static unsigned int tripleclicktimeout = 600;
 int allowaltscreen = 1;
 
 /* frames per second st should at maximum draw to the screen */
-static unsigned int xfps = 60;
+static unsigned int xfps = 30;
 static unsigned int actionfps = 30;
 
 /*
@@ -54,7 +54,7 @@ static unsigned int blinktimeout = 0;
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 2;
+static unsigned int cursorthickness = 5;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -126,10 +126,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 82;
+unsigned int defaultfg = 208;
 unsigned int defaultbg = 0;
 static unsigned int defaultcs = 197;
-static unsigned int defaultrcs = 208;
+static unsigned int defaultrcs = 82;
 
 /*
  * Default shape of cursor

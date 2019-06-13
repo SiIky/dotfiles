@@ -10,6 +10,6 @@ for R in \
     "https://github.com/rust-lang-nursery/rust-clippy" \
     "https://github.com/siiky/chop"                    \
     ; do
-cargo install -f -j2 --git "$R"
+cargo install -f -j4 --git "$R"
 done 2>cargo-rpkgs-install.log
 strip -s ~/.cargo/bin/*

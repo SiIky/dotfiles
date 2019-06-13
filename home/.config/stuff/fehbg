@@ -1,2 +1,2 @@
 #!/bin/sh
-feh  --image-bg black --bg-max '/home/silky/Pictures/wallpapers/landscapes_moon_fields_route_66_roads_desktop_2560x1600_hd-wallpaper-47294.jpg' 
+feh --bg-center '/home/siiky/Pictures/wallpapers/forest.jpg' --bg-fill '/home/siiky/Pictures/wallpapers/mountain.jpg' 

@@ -34,7 +34,7 @@ static Color colors[] = {
 #define BAR_BEGIN       '['
 #define BAR_END         ']'
 /* status bar (command line option -s) position */
-#define BAR_POS         BAR_TOP /* BAR_TOP, BAR_BOTTOM, BAR_OFF */
+#define BAR_POS         BAR_TOP /* BAR_BOTTOM, BAR_OFF */
 /* whether status bar should be hidden if only one client exists */
 #define BAR_AUTOHIDE    true
 /* master width factor [0.1 .. 0.9] */
@@ -42,7 +42,7 @@ static Color colors[] = {
 /* number of clients in master area */
 #define NMASTER 1
 /* scroll back buffer size in lines */
-#define SCROLL_HISTORY 1000
+#define SCROLL_HISTORY 500
 /* printf format string for the tag in the status bar */
 #define TAG_SYMBOL   "[%s]"
 /* curses attributes for the currently selected tags */
@@ -56,17 +56,17 @@ static Color colors[] = {
 
 const char tags[][2] = { "1", "2", "3", "4", "5" };
 
+#include "tile.c"
 #include "grid.c"
 #include "bstack.c"
-#include "tile.c"
 #include "fullscreen.c"
 
 /* by default the first layout entry is used */
 static Layout layouts[] = {
-	{ "[ ]", fullscreen },
 	{ "[]=", tile },
-	//{ "+++", grid },
-	//{ "TTT", bstack },
+	{ "+++", grid },
+	{ "TTT", bstack },
+	{ "[ ]", fullscreen },
 };
 
 #define MOD  CTRL('g')
@@ -82,12 +82,14 @@ static KeyBinding bindings[] = {
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x', 'x',     }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
-	{ { MOD, 'J',          }, { focusnextnm,    { NULL }                    } },
-	{ { MOD, 'K',          }, { focusprevnm,    { NULL }                    } },
+	{ { MOD, 'J',          }, { focusdown,      { NULL }                    } },
+	{ { MOD, 'K',          }, { focusup,        { NULL }                    } },
+	{ { MOD, 'H',          }, { focusleft,      { NULL }                    } },
+	{ { MOD, 'L',          }, { focusright,     { NULL }                    } },
 	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
-	//{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
-	//{ { MOD, 'b',          }, { setlayout,      { "TTT" }                   } },
 	{ { MOD, 'f',          }, { setlayout,      { "[]=" }                   } },
+	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
+	{ { MOD, 'b',          }, { setlayout,      { "TTT" }                   } },
 	{ { MOD, 'm',          }, { setlayout,      { "[ ]" }                   } },
 	{ { MOD, ' ',          }, { setlayout,      { NULL }                    } },
 	{ { MOD, 'i',          }, { incnmaster,     { "+1" }                    } },
@@ -97,6 +99,7 @@ static KeyBinding bindings[] = {
 	{ { MOD, '.',          }, { toggleminimize, { NULL }                    } },
 	{ { MOD, 's',          }, { togglebar,      { NULL }                    } },
 	{ { MOD, 'S',          }, { togglebarpos,   { NULL }                    } },
+	{ { MOD, 'M',          }, { togglemouse,    { NULL }                    } },
 	{ { MOD, '\n',         }, { zoom ,          { NULL }                    } },
 	{ { MOD, '\r',         }, { zoom ,          { NULL }                    } },
 	{ { MOD, '1',          }, { focusn,         { "1" }                     } },
@@ -172,7 +175,20 @@ static const ColorRule colorrules[] = {
  * REPORT_MOUSE_POSITION    report mouse movement
  */
 
-#define ENABLE_MOUSE false /* whether to enable mouse events by default */
+#ifdef NCURSES_MOUSE_VERSION
+# define CONFIG_MOUSE /* compile in mouse support if we build against ncurses */
+#endif
+
+#define ENABLE_MOUSE true /* whether to enable mouse events by default */
+
+#ifdef CONFIG_MOUSE
+static Button buttons[] = {
+	{ BUTTON1_CLICKED,        { mouse_focus,      { NULL  } } },
+	{ BUTTON1_DOUBLE_CLICKED, { mouse_fullscreen, { "[ ]" } } },
+	{ BUTTON2_CLICKED,        { mouse_zoom,       { NULL  } } },
+	{ BUTTON3_CLICKED,        { mouse_minimize,   { NULL  } } },
+};
+#endif /* CONFIG_MOUSE */
 
 static Cmd commands[] = {
 	/* create [cmd]: create a new window, run `cmd` in the shell if specified */

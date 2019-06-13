@@ -3,7 +3,7 @@ let mapleader=' '
 let maplocalleader=''
 
 " rbpi settings
-let rbpi=1
+let rbpi=0
 
 " general ==================================================
 filetype plugin indent on
@@ -166,7 +166,7 @@ vnoremap <C-S> "yy:%s/\V<C-R>"//cg<LEFT><LEFT><LEFT>
 
 " quickfix navigation
 nnoremap <silent> <F4> :cwindow<CR>
-nnoremap <silent> <F5> :make<CR>
+nnoremap <silent> <F5> :make -j<CR>
 nnoremap <silent> <F6> :make clean<CR>
 nnoremap <silent> <F7> :cprevious<CR>
 nnoremap <silent> <F8> :cnext<CR>
@@ -216,6 +216,7 @@ nnoremap <C-W>tn :tabnew
 nnoremap <C-W>tf <C-W>f<C-W>T
 nnoremap <C-W>n :new 
 nnoremap <C-W>v :vnew 
+nnoremap <C-W>] :vert wincmd ]<CR>
 nnoremap <C-L> :ls<CR>
 nnoremap <C-C> :pwd<CR>
 
@@ -314,6 +315,7 @@ if rbpi != 1
 
     source ~/.vim/pconfigs/haskell.vim
     source ~/.vim/pconfigs/gdscript.vim " gdscript syntax highlighting (Godot)
+    source ~/.vim/pconfigs/rainbow_parentheses.vim
 endif
 
 call plug#end()
@@ -332,8 +334,7 @@ if rbpi == 1
     colorscheme preto
     syntax off
 else
-    "colorscheme molokai
-    colorscheme preto
+    colorscheme molokai
     syntax on
 endif
 

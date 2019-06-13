@@ -11,22 +11,18 @@ static const char unknown_str[] = "-";
 
 #define SEP     ""
 
-#define BAT_F   ""
 #define CPU_F   ""
 #define KEY_F   ""
 #define RAM_F   ""
 #define RUN_F   "\u266B " /* ♫ */
 #define TIME_F  ""
-#define WIFI_F  "\u2387 " /* ⎇  */
 #define VOL_F   ""
 
-#define BAT_A   "BAT0"
 #define CPU_A   NULL
 #define KEY_A   NULL
 #define RAM_A   NULL
 #define RUN_A   "~/bin/cmus-status.sh"
 #define TIME_A  "%R"
-#define WIFI_A  "wlan0"
 #define VOL_A   "/dev/snd/hwC0D3" /* FIXME */
 
 /*
@@ -72,10 +68,8 @@ static const char unknown_str[] = "-";
 static const struct arg args[] = {
     /* function         format                 argument */
     { run_command,      SEP RUN_F  "%s ",      RUN_A  }, // cmus status
-    { wifi_essid,       SEP WIFI_F "%s ",      WIFI_A },
     { cpu_perc,         SEP CPU_F  "%s ",      CPU_A  },
     { ram_perc,         SEP RAM_F  "%s ",      RAM_A  },
-    { battery_perc,     SEP BAT_F  "%s ",      BAT_A  },
     { datetime,         SEP TIME_F "%s ",      TIME_A },
     /*{ vol_perc,         SEP VOL_F  "%s ",      VOL_A  },*/
 };

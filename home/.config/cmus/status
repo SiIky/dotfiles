@@ -21,11 +21,7 @@
 
 output()
 {
-    # write status to ~/cmus-status.txt (not very useful though)
     echo "$*" > /tmp/cmus-status 2>&1
-
-    # WMI (http://wmi.modprobe.de/)
-    #wmiremote -t "$*" &> /dev/null
 }
 
 while test $# -ge 2
@@ -37,17 +33,10 @@ done
 
 if test -n "$_file"
 then
-    h=$(($_duration / 3600))
-    m=$(($_duration % 3600))
-
-    duration=""
-    test $h -gt 0 && dur="$h:"
-    duration="$dur$(printf '%02d:%02d' $(($m / 60)) $(($m % 60)))"
-
-    output "$_album | $_title"
+    output "$_artist | $_title"
 elif test -n "$_url"
 then
     output "$_url | $_title"
 else
-    output ""
+    output "-"
 fi

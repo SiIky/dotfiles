@@ -65,7 +65,7 @@ for REPO in \
     https://github.com/siiky/c-utils          \
     https://github.com/universal-ctags/ctags  \
     ; do
-git clone "$REPO"
+git clone --depth=1 "$REPO"
 done
 
 [ -f dmenu/dmenu_path ] && rm dmenu/dmenu_path

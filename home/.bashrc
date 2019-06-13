@@ -1,19 +1,3 @@
-# fun for the whole family
-# `telnet nyancat.dakko.us`
-
-# `fbterm` sets `TERM` to `linux` by default but terminal info expects `fbterm`
-case $TERM in
-    linux)
-        if [ -c /dev/fb0 ]; then
-            export TERM=fbterm
-            fbterm
-        fi
-    ;;
-esac
-
-# apply configs for rbpi
-RBPI=yes
-
 case $- in
     *i*) ;;
     *) return;;
@@ -24,12 +8,7 @@ shopt -s autocd cdspell checkhash checkjobs checkwinsize cmdhist direxpand dirsp
 stty -ixon
 
 # fancy prompt
-if [ "$RBPI" == "yes" ]; then
-    export PS1=$'[\033[1;32m\u\033[0m@\033[0;31m\H\033[0m:\033[1;34m\w\033[0m] $(__git_ps1 "(%s)")\n[\A] ($?) '
-else
-    export PS1=$'[\033[1;32m\u\033[0m@\033[0;31m\H\033[0m:\033[1;34m\w\033[0m] $(__git_ps1 "(%s)")\n[\A] ($?) '
-fi
-
+export PS1=$'[\033[1;32m\u\033[0m@\033[0;31m\H\033[0m:\033[1;34m\w\033[0m] $(__git_ps1 "(%s)")\n[\A] ($?) '
 export PS2=$'\u21AA '
 
 export HISTCONTROL=ignoreboth
@@ -39,11 +18,8 @@ export HISTSIZE=250
 
 export ABDUCO_SOCKET_DIR=$HOME/.config # directory abduco will use to save sessions
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH # Add libs here
 export MOSH_PREDICTION_DISPLAY=always
-export PATH=$HOME/bin:$PATH:$HOME/.cargo/bin
-export RANGER_LOAD_DEFAULT_RC=FALSE
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+#export PATH=$HOME/bin:$HOME/opt/bin:$HOME/.local/bin/:$PATH
 export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
 
 export JCD_DIR=$HOME/.config/jcd
@@ -65,9 +41,12 @@ if ! shopt -oq posix; then
     fi
 fi
 
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 [ -f $HOME/.config/stuff/git-prompt.sh ] && source $HOME/.config/stuff/git-prompt.sh
 [ -f $HOME/.config/stuff/extras.sh ] && source $HOME/.config/stuff/extras.sh
 [ -f $HOME/.config/stuff/dircolors ] && eval $(dircolors -b $HOME/.config/stuff/dircolors)
 [ -f $HOME/.config/stuff/aliases.sh ] && source $HOME/.config/stuff/aliases.sh
 [ -f $HOME/.config/stuff/stuff.sh ] && source $HOME/.config/stuff/stuff.sh # load extra stuff (i.e. not on the public repo)
 [ -f $HOME/.config/pomodoro/pomodoro.sh ] && source $HOME/.config/pomodoro/pomodoro.sh # load the pomodoro script
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+export _JAVA_AWT_WM_NONREPARENTING=1

@@ -12,8 +12,9 @@ static struct Dir {
 	char *env;     /* environment variable to use if (set) */
 	bool personal; /* if false a user owned sub directory will be created */
 } socket_dirs[] = {
-	{ .path = NULL, .env  = "ABDUCO_SOCKET_DIR", .personal = true },
-	{ .path = NULL, .env  = "HOME",              .personal = true },
-	{ .path = NULL, .env  = "TMPDIR",            .personal = true },
-	{ .path = NULL, .path = "/tmp",              .personal = true },
+	{ .path = NULL,                  .env = "ABDUCO_SOCKET_DIR", .personal = true },
+	{ .path = "/home/siiky/.config", .env = NULL,                .personal = true },
+	{ .path = NULL,                  .env = "HOME",              .personal = true },
+	{ .path = NULL,                  .env = "TMPDIR",            .personal = true },
+	{ .path = "/tmp",                .env = NULL,                .personal = true },
 };

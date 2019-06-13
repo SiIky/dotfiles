@@ -47,6 +47,10 @@ if $(hash git 2> /dev/null); then
     fi
 fi
 
+if $(hash mosh 2> /dev/null); then
+    function ssh() { command mosh $@; }
+fi
+
 if $(hash exa 2> /dev/null); then
     function l() { command exa --group-directories-first --color=automatic "$@"; }
     function l1() { command exa --group-directories-first --color=automatic -1 "$@"; }
@@ -120,22 +124,9 @@ if $(hash lynx 2> /dev/null); then
     function lynx() { command lynx -vikeys "$@"; }
 fi
 
-# functions to manage remote host
-function tradd() {
-    if [ "$RUSER" != "" ] && [ "$RHOSTNAME" != "" ] && [ "$RWDIR" != "" ]; then
-        scp "$@" $RUSER@$RHOSTNAME:$RWDIR
-    else
-        echo "set the required environment variables"
-    fi
-}
-
-function trclean() {
-    if [ "$RUSER" != "" ] && [ "$RHOSTNAME" != "" ] && [ "$RWDIR" != "" ] && [ "$REXT" != "" ]; then
-        ssh $RUSER@$RHOSTNAME rm $RWDIR/*.$REXT
-    else
-        echo "set the required environment variables"
-    fi
-}
+if $(hash neomutt 2> /dev/null); then
+    function mutt() { command neomutt "$@"; }
+fi
 
 function rp() {
     local file=${1:-/dev/stdin}

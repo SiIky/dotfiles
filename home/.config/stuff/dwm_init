@@ -6,19 +6,15 @@
 # -layout us                    US layout
 # -option ctrl:nocaps           CAPS => CTRL
 # -option grp:sclk_toggle       SCR_LK to switch between layouts
-# If external KB set US as default, else PT
-(xinput list | grep -qs QuickFire && exec setxkbmap -layout us,pt -option ctrl:nocaps -option grp:sclk_toggle) || exec setxkbmap -layout pt,us -option ctrl:nocaps -option grp:sclk_toggle &
+exec setxkbmap -layout us -option ctrl:nocaps &
 
 # disable mouse accel
 exec xset m 0 0 &
 
 # status bar
-pgrep slstatus > /dev/null || exec slstatus || xsetroot -name ' ' &
-pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose & 
-pgrep redshift > /dev/null || exec redshift &
-
-# set wallpaper with feh
-[ -f ~/.config/stuff/fehbg ] && . ~/.config/stuff/fehbg
+ps -C slstatus > /dev/null || exec slstatus || xsetroot -name ' ' &
+#pgrep xautolock > /dev/null || exec xautolock -time 10 -locker slock -killtime 5 -killer "systemctl suspend" -bell 0 -noclose &
+#pgrep redshift > /dev/null || exec redshift &
 
 #exec oneko -tora -tofocus -bg black -fg red &
 
@@ -27,5 +23,22 @@ pgrep redshift > /dev/null || exec redshift &
 #export QT_IM_MODULE='fcitx'
 #export XMODIFIERS='@im=fcitx'
 
-# run the DWM window manager
+## 1024x768 @ 85.00 Hz (GTF) hsync: 68.60 kHz; pclk: 94.39 MHz
+#xrandr --newmode  "1024x768_85"  94.39  1024 1088 1200 1376  768 769 772 807  -HSync +Vsync
+## 1024x768 @ 100 Hz (GTF) hsync: 81.40 kHz; pclk: 113.31 MHz
+#xrandr --newmode "1024x768_100"  113.31  1024 1096 1208 1392  768 769 772 814  -HSync +Vsync
+## 1024x768 @ 115 Hz (GTF) hsync: 94.42 kHz; pclk: 131.43 MHz
+#xrandr --newmode "1024x768_115"  131.43  1024 1096 1208 1392  768 769 772 821  -HSync +Vsync
+## 1280x1024 @ 90 Hz (GTF) hsync: 97.02 kHz; pclk: 169.20 MHz
+#xrandr --newmode "1280x1024_90"  169.20  1280 1376 1512 1744  1024 1025 1028 1078  -HSync +Vsync
+#xrandr --addmode DisplayPort-0 "1024x768_85"
+#xrandr --addmode DisplayPort-0 "1024x768_100"
+#xrandr --addmode DisplayPort-0 "1024x768_115"
+#xrandr --addmode DisplayPort-0 "1280x1024_90"
+
+#xrandr --output HDMI-A-0 --auto --output DisplayPort-0 --mode 1024x768_85 --left-of HDMI-A-0
+xrandr --output HDMI-A-0 --auto --output DisplayPort-0 --auto --left-of HDMI-A-0
+
+[ -f ~/.config/stuff/fehbg ] && . ~/.config/stuff/fehbg
+export PATH=$HOME/bin:$HOME/.local/bin/:$PATH
 exec dwm

@@ -1,3 +1,2 @@
 #!/bin/sh
-PATH=~/.config/stuff/dmenu_bin:$PATH
 dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} &
