@@ -62,19 +62,15 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /*class                     instance                        title           tags mask       isfloating      monitor */
-    { "VIM",                    "VIM",                          "VIM",          T_VIM,          0,              -1 },
-    { "Media",                  NULL,                           NULL,           T_MEDIA,        0,              -1 },
+    { NULL,                     "Media",                        NULL,           T_MEDIA,        0,              -1 },
     { "Firefox",                "Navigator",                    NULL,           T_WEB,          0,              -1 },
     { "News",                   NULL,                           NULL,           T_MAIL,         0,              -1 },
     { NULL,                     "Mail",                         NULL,           T_MAIL,         0,              -1 },
     { "Surf",                   "surf",                         NULL,           T_MAIL,         0,              -1 },
-    { "Hexchat",                "hexchat",                      NULL,           T_MAIL,         0,              -1 },
-    { "HTOP",                   "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
-    { "WICD",                   "WICD",                         "WICD",         T_VOID,         0,              -1 },
+    { NULL,                     "IRC",                          NULL,           T_MAIL,         0,              -1 },
+    { NULL,                     "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
     { "mpv",                    "gl",                           NULL,           T_MEDIA,        0,              -1 },
-    { "Gimp",                   NULL,                           NULL,           0,              1,              -1 },
-    { "processing-app-Base",    "sun-awt-X11-XFramePeer",       NULL,           0,              1,              -1 }, /* Arduino IDE */
 };
 
 /* layout(s) */
@@ -89,14 +85,14 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define XF86AudioLowerVolume    0x1008ff11
-#define XF86AudioMute           0x1008ff12
-#define XF86AudioRaiseVolume    0x1008ff13
-#define XF86AudioPlay           0x1008ff14
-#define XF86AudioStop           0x1008ff15
-#define XF86AudioNext           0x1008ff16
-#define XF86AudioPrev           0x1008ff17
-#define PrintScreen             0x1008ff61
+#define XF86AudioLowerVolume 0x1008ff11
+#define XF86AudioMute        0x1008ff12
+#define XF86AudioRaiseVolume 0x1008ff13
+#define XF86AudioPlay        0x1008ff14
+#define XF86AudioStop        0x1008ff15
+#define XF86AudioNext        0x1008ff16
+#define XF86AudioPrev        0x1008ff17
+#define PrintScreen          0x1008ff61
 
 #define LAlt           Mod1Mask
 #define WinKey         Mod4Mask
@@ -110,16 +106,19 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define TERM_CMD   "terminal"
+#define TERM_CLASS "--class"
+#define TERM_TITLE "-t"
+#define TERM_EXEC  "-e"
+
 /* commands */
 static char dmenumon[2]       = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-f", "-m", dmenumon, "-fn", dmenufont, "-nb", col0, "-nf", col2, "-sb", col5, "-sf", col3, NULL };
-static const char *htopcmd[]  = { "st", "-c", "HTOP", "-n", "HTOP", "-t", "HTOP", "htop", NULL };
-static const char *termfm[]   = { "st", "-c", "VIFM", "-n", "VIFM", "-t", "VIFM", "vifm", NULL };
+static const char *htopcmd[]  = { TERM_CMD, TERM_CLASS, "HTOP", TERM_TITLE, "HTOP", TERM_EXEC, "htop", NULL };
+static const char *termfm[]   = { TERM_CMD, TERM_CLASS, "VIFM", TERM_TITLE, "VIFM", TERM_EXEC, "vifm", NULL };
 static const char *guifm[]    = { "spacefm", NULL };
-static const char *termcmd[]  = { "terminal", NULL };
-static const char *dvtm[]     = { "st", "-c", "ST", "-n", "ST", "-t", "ST", "dvtm", NULL };
-static const char *vimcmd[]   = { "st", "-c", "VIM", "-n", "VIM", "-t", "VIM", "vim", NULL };
-static const char *printsc[]  = { "st", "maim", "--hidecursor", "~/Pictures/maim/$(date +%Y%m%d%H%M%S).png", NULL };
+static const char *termcmd[]  = { TERM_CMD, TERM_TITLE, "terminal", NULL };
+static const char *dvtm[]     = { TERM_CMD, TERM_TITLE, "dvtm", TERM_EXEC, "dvtm", NULL };
 
 /* volume controls */
 static const char *amvolup[]   = { "amixer", "set", "Master", "5%+",  NULL };
@@ -132,59 +131,59 @@ static const char *cmus_stop[] = { "cmus-remote", "-s", NULL };
 static const char *cmus_prev[] = { "cmus-remote", "-n", NULL };
 static const char *cmus_next[] = { "cmus-remote", "-r", NULL };
 
-static const char * lockcmd[]  = { "slock", NULL };
-static const char * susplockcmd[] = { "slock", "systemctl", "suspend", NULL };
+static const char *lockcmd[]     = { "slock", NULL };
+static const char *susplockcmd[] = { "slock", "systemctl", "suspend", NULL };
 
 #include "movestack.c"
 
 static const Key keys[] = {
-    /*modifier                  key                     function                argument */
-    { WinKey,                   XK_h,                   togglebar,              {0} },
-    { LAlt,                     XK_Tab,                 focusstack,             {.i = +1 } },
-    { LAlt|ShiftMask,           XK_Tab,                 focusstack,             {.i = -1 } },
-    { WinKey,                   XK_j,                   movestack,              {.i = +1 } },
-    { WinKey,                   XK_k,                   movestack,              {.i = -1 } },
-    { WinKey,                   XK_i,                   incnmaster,             {.i = +1 } },
-    { WinKey,                   XK_d,                   incnmaster,             {.i = -1 } },
-    { LAlt|ShiftMask,           XK_h,                   setmfact,               {.f = -0.05 } },
-    { LAlt|ShiftMask,           XK_l,                   setmfact,               {.f = +0.05 } },
-    { WinKey,                   XK_Tab,                 view,                   {0} },
-    { LAlt,                     XK_F4,                  killclient,             {0} },
-    { WinKey,                   XK_space,               setlayout,              {0} },
-    { WinKey|ShiftMask,         XK_space,               togglefloating,         {0} },
-    TAGKEYS(                    XK_1,                                           0),
-    TAGKEYS(                    XK_2,                                           1),
-    TAGKEYS(                    XK_3,                                           2),
-    TAGKEYS(                    XK_4,                                           3),
-    TAGKEYS(                    XK_5,                                           4),
-    TAGKEYS(                    XK_6,                                           5),
-    TAGKEYS(                    XK_7,                                           6),
-    TAGKEYS(                    XK_8,                                           7),
-    TAGKEYS(                    XK_9,                                           8),
-    TAGKEYS(                    XK_0,                                           9),
-    { WinKey,                   XK_l,                   spawn,                  {.v = lockcmd } },
-    { WinKey|ShiftMask,         XK_l,                   spawn,                  {.v = susplockcmd } },
-    { WinKey,                   XK_v,                   spawn,                  {.v = vimcmd } },
-    { WinKey,                   XK_r,                   spawn,                  {.v = dmenucmd } },
-    { WinKey,                   XK_t,                   spawn,                  {.v = dvtm } },
-    { WinKey|ShiftMask,         XK_t,                   spawn,                  {.v = termcmd } },
-    { ShiftMask|ControlMask,    XK_Delete,              spawn,                  {.v = htopcmd } },
-    { WinKey,                   XK_e,                   spawn,                  {.v = termfm } },
-    { WinKey|ShiftMask,         XK_e,                   spawn,                  {.v = guifm } },
-    { WinKey,                   XK_comma,               focusmon,               {.i = -1 } },
-    { WinKey,                   XK_period,              focusmon,               {.i = +1 } },
-    { WinKey|ShiftMask,         XK_comma,               tagmon,                 {.i = -1 } },
-    { WinKey|ShiftMask,         XK_period,              tagmon,                 {.i = +1 } },
+    /*modifier               key                   function        argument */
+    { WinKey,                XK_h,                 togglebar,      {0} },
+    { LAlt,                  XK_Tab,               focusstack,     {.i = +1 } },
+    { LAlt|ShiftMask,        XK_Tab,               focusstack,     {.i = -1 } },
+    { WinKey,                XK_j,                 movestack,      {.i = +1 } },
+    { WinKey,                XK_k,                 movestack,      {.i = -1 } },
+    { WinKey,                XK_i,                 incnmaster,     {.i = +1 } },
+    { WinKey,                XK_d,                 incnmaster,     {.i = -1 } },
+    { LAlt|ShiftMask,        XK_h,                 setmfact,       {.f = -0.05 } },
+    { LAlt|ShiftMask,        XK_l,                 setmfact,       {.f = +0.05 } },
+    { WinKey,                XK_Tab,               view,           {0} },
+    { LAlt,                  XK_F4,                killclient,     {0} },
+    { WinKey,                XK_space,             setlayout,      {0} },
+    { WinKey|ShiftMask,      XK_space,             togglefloating, {0} },
+    { LAlt,                  XK_space,             zoom,           {0} },
+    TAGKEYS(                 XK_1,                                 0),
+    TAGKEYS(                 XK_2,                                 1),
+    TAGKEYS(                 XK_3,                                 2),
+    TAGKEYS(                 XK_4,                                 3),
+    TAGKEYS(                 XK_5,                                 4),
+    TAGKEYS(                 XK_6,                                 5),
+    TAGKEYS(                 XK_7,                                 6),
+    TAGKEYS(                 XK_8,                                 7),
+    TAGKEYS(                 XK_9,                                 8),
+    TAGKEYS(                 XK_0,                                 9),
+    { WinKey,                XK_l,                 spawn,          {.v = lockcmd } },
+    { WinKey|ShiftMask,      XK_l,                 spawn,          {.v = susplockcmd } },
+    { WinKey,                XK_r,                 spawn,          {.v = dmenucmd } },
+    { WinKey,                XK_t,                 spawn,          {.v = dvtm } },
+    { WinKey|ShiftMask,      XK_t,                 spawn,          {.v = termcmd } },
+    { ShiftMask|ControlMask, XK_Delete,            spawn,          {.v = htopcmd } },
+    { WinKey,                XK_e,                 spawn,          {.v = termfm } },
+    { WinKey|ShiftMask,      XK_e,                 spawn,          {.v = guifm } },
+    { WinKey,                XK_comma,             focusmon,       {.i = -1 } },
+    { WinKey,                XK_period,            focusmon,       {.i = +1 } },
+    { WinKey|ShiftMask,      XK_comma,             tagmon,         {.i = -1 } },
+    { WinKey|ShiftMask,      XK_period,            tagmon,         {.i = +1 } },
     /* Volume & CMUS controls */
-    { 0,                        XF86AudioRaiseVolume,   spawn,                  {.v = amvolup } },
-    { 0,                        XF86AudioLowerVolume,   spawn,                  {.v = amvoldown } },
-    { 0,                        XF86AudioMute,          spawn,                  {.v = amvolmute } },
-    { 0,                        XF86AudioPlay,          spawn,                  {.v = cmus_play } },
-    { 0,                        XF86AudioStop,          spawn,                  {.v = cmus_stop } },
-    { 0,                        XF86AudioPrev,          spawn,                  {.v = cmus_prev } },
-    { 0,                        XF86AudioNext,          spawn,                  {.v = cmus_next } },
-    { WinKey,                   PrintScreen,            spawn,                  {.v = printsc } },
-    { WinKey|ShiftMask,         XK_F4,                  quit,                   {0} },
+    { 0,                     XF86AudioRaiseVolume, spawn,          {.v = amvolup } },
+    { 0,                     XF86AudioLowerVolume, spawn,          {.v = amvoldown } },
+    { 0,                     XF86AudioMute,        spawn,          {.v = amvolmute } },
+    { 0,                     XF86AudioPlay,        spawn,          {.v = cmus_play } },
+    { 0,                     XF86AudioStop,        spawn,          {.v = cmus_stop } },
+    { 0,                     XF86AudioPrev,        spawn,          {.v = cmus_prev } },
+    { 0,                     XF86AudioNext,        spawn,          {.v = cmus_next } },
+    { WinKey,                PrintScreen,          spawn,          SHCMD("maim --hidecursor /home/siiky/Pictures/maim/$(date +%Y%m%d%H%M%S).png") },
+    { WinKey|ShiftMask,      XK_F4,                quit,           {0} },
 };
 
 /* button definitions */

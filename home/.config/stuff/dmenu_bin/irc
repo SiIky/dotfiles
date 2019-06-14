@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec terminal --class IRC -e ssh -tt stollingrones ~/bin/abduco -A irc irssi
+exec terminal -t "irssi" --class "IRC" -e ssh -tt stollingrones ~/bin/abduco -A irc irssi
