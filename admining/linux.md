@@ -110,3 +110,10 @@ tune2fs -O large_file
 # store checksums of metadata blocks
 tune2fs -O metadata_csum
 ```
+
+# Shutdown disks
+
+```sh
+man udisksctl
+udisksctl power-off -b /dev/sdX
+```
