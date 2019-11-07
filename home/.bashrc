@@ -51,3 +51,4 @@ fi
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
 export _JAVA_AWT_WM_NONREPARENTING=1
 export ERL_AFLAGS="-kernel shell_history enabled"
+export CHICKEN_DOC_COLORS=auto

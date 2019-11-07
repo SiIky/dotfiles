@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec st -c News -t PODBEUTER -n PODBEUTER podboat -a
+exec terminal --class "News" -t "PODBEUTER" -e ssh -tt stollingrones podboat -a

@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-exec st -c News -t NEWSBEUTER -n NEWSBEUTER newsboat -C ~/.config/newsboat/config -u ~/.config/newsboat/urls
+exec terminal --class "News" -t "NEWSBOAT" -e ssh -tt stollingrones ~/bin/abduco -A news newsboat -C ~/.config/newsboat/config -u ~/.config/newsboat/urls

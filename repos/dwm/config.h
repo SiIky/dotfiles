@@ -70,7 +70,7 @@ static const Rule rules[] = {
     { NULL,                     "IRC",                          NULL,           T_MAIL,         0,              -1 },
     { NULL,                     "HTOP",                         "HTOP",         T_VOID,         0,              -1 },
     { "Steam",                  NULL,                           NULL,           T_STEAM,        0,              -1 },
-    { "mpv",                    "gl",                           NULL,           T_MEDIA,        0,              -1 },
+    { "mpv",                    NULL,                           NULL,           T_MEDIA,        0,              -1 },
 };
 
 /* layout(s) */
@@ -170,10 +170,10 @@ static const Key keys[] = {
     { ShiftMask|ControlMask, XK_Delete,            spawn,          {.v = htopcmd } },
     { WinKey,                XK_e,                 spawn,          {.v = termfm } },
     { WinKey|ShiftMask,      XK_e,                 spawn,          {.v = guifm } },
-    { WinKey,                XK_comma,             focusmon,       {.i = -1 } },
-    { WinKey,                XK_period,            focusmon,       {.i = +1 } },
-    { WinKey|ShiftMask,      XK_comma,             tagmon,         {.i = -1 } },
-    { WinKey|ShiftMask,      XK_period,            tagmon,         {.i = +1 } },
+    { WinKey,                XK_p,                 focusmon,       {.i = -1 } },
+    { WinKey,                XK_n,                 focusmon,       {.i = +1 } },
+    { WinKey|ShiftMask,      XK_p,                 tagmon,         {.i = -1 } },
+    { WinKey|ShiftMask,      XK_n,                 tagmon,         {.i = +1 } },
     /* Volume & CMUS controls */
     { 0,                     XF86AudioRaiseVolume, spawn,          {.v = amvolup } },
     { 0,                     XF86AudioLowerVolume, spawn,          {.v = amvoldown } },

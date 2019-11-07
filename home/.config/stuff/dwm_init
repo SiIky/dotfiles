@@ -41,4 +41,5 @@ xrandr --output HDMI-A-0 --auto --output DisplayPort-0 --auto --left-of HDMI-A-0
 
 [ -f ~/.config/stuff/fehbg ] && . ~/.config/stuff/fehbg
 export PATH=$HOME/bin:$HOME/.local/bin/:$PATH
+export WINIT_HIDPI_FACTOR=1
 exec dwm

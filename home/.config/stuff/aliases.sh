@@ -101,10 +101,6 @@ if $(hash podboat 2> /dev/null); then
     function podsclear() { [ -f ~/.local/share/newsboat/queue ] && command ex ~/.local/share/newsboat/queue -c 'g/downloaded$/d' +x; }
 fi
 
-if $(hash mpv 2> /dev/null); then
-    function mpv() { command mpv --fs --no-audio-display "$@"; }
-fi
-
 if $(hash rustc 2> /dev/null); then
     function rexp() { command rustc --explain "$@" | less; }
 fi
