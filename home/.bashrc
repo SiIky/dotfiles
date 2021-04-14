@@ -16,14 +16,13 @@ export HISTFILE=$HOME/.config/bash_history
 export HISTFILESIZE=500
 export HISTSIZE=250
 
-export ABDUCO_SOCKET_DIR=$HOME/.config # directory abduco will use to save sessions
+# directory abduco will use to save sessions
+export ABDUCO_SOCKET_DIR=$HOME/.config
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export MOSH_PREDICTION_DISPLAY=always
-#export PATH=$HOME/bin:$HOME/opt/bin:$HOME/.local/bin/:$PATH
-export STEAM_FRAME_FORCE_CLOSE=1 # prevent steam from closing when clicking the X button
 
-export JCD_DIR=$HOME/.config/jcd
-export NOTE=~/.config/note.txt
+# prevent steam from closing when clicking the X button
+export STEAM_FRAME_FORCE_CLOSE=1
 
 if $(hash nvim); then
     export EDITOR=nvim
@@ -48,7 +47,17 @@ fi
 [ -f $HOME/.config/stuff/aliases.sh ] && source $HOME/.config/stuff/aliases.sh
 [ -f $HOME/.config/stuff/stuff.sh ] && source $HOME/.config/stuff/stuff.sh # load extra stuff (i.e. not on the public repo)
 [ -f $HOME/.config/pomodoro/pomodoro.sh ] && source $HOME/.config/pomodoro/pomodoro.sh # load the pomodoro script
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src/
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library/
 export _JAVA_AWT_WM_NONREPARENTING=1
 export ERL_AFLAGS="-kernel shell_history enabled"
 export CHICKEN_DOC_COLORS=auto
+
+# For `chicken-install -test` with the `test` egg
+export TEST_USE_ANSI=1
+
+# Because I can never remember these...
+# sshfs -C -oidmap=user,reconnect,cache=yes,kernel_cache,compression=yes host:/remote/path/ /local/path/
+# rsync -e ssh -ahPzvv --stats host:/path/ .
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

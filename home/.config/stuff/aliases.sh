@@ -136,3 +136,15 @@ function tags() {
         ctags -R -f .tags .
     fi
 }
+
+function boinc_start() {
+    boinc --dir "$HOME/projects/.boinc/" --daemon
+}
+
+function boinc_stop() {
+    boinccmd --passwd "$(cat "$HOME/projects/.boinc/gui_rpc_auth.cfg")" --quit
+}
+
+function boinc_restart() {
+    boinc_stop; sleep 5; boinc_start
+}

@@ -20,8 +20,9 @@ se confirm
 se cursorcolumn
 se cursorline
 se encoding=utf-8
-se expandtab
-se fileencoding=utf-8
+"se expandtab
+"se fileencoding=utf-8
+se fileencodings=utf-8,sjis,default
 se foldcolumn=1
 se foldmethod=indent
 se foldnestmax=3
@@ -46,7 +47,7 @@ se omnifunc=syntaxcomplete#Complete
 se relativenumber
 se scrolljump=10
 se scrolloff=5
-se shiftwidth=4
+se shiftwidth=8
 se shortmess=atW
 se showcmd
 se showmode
@@ -68,7 +69,7 @@ se wildmode=longest:full
 highlight comment cterm=italic
 se mouse=r
 
-if rbpi == 1
+if rbpi
     se nohlsearch
     se nonumber
 else
@@ -137,6 +138,7 @@ vnoremap w W
 
 " fold
 "nnoremap <LEADER><SPACE> za
+nnoremap <TAB> za
 
 " move cursor to the beggining/end of the line
 nnoremap gh _
@@ -291,6 +293,7 @@ source ~/.vim/pconfigs/preto.vim
 source ~/.vim/pconfigs/sneak.vim
 source ~/.vim/pconfigs/surround.vim
 source ~/.vim/pconfigs/vimproc.vim
+"source ~/.vim/pconfigs/iron.vim
 
 source ~/.vim/pconfigs/awk.vim " awk indentation
 
@@ -299,24 +302,30 @@ source ~/.vim/pconfigs/racer.vim
 source ~/.vim/pconfigs/rust.vim
 source ~/.vim/pconfigs/toml.vim " for cargo (rust) files
 
-if rbpi != 1
-    source ~/.vim/pconfigs/cool.vim " stop highlight after motion
-    source ~/.vim/pconfigs/cursorword.vim " Underline words under the cursor
-    source ~/.vim/pconfigs/undotree.vim
+source ~/.vim/pconfigs/cool.vim " stop highlight after motion
+source ~/.vim/pconfigs/cursorword.vim " Underline words under the cursor
+source ~/.vim/pconfigs/undotree.vim
 
-    "source ~/.vim/pconfigs/covim.vim
-    "source ~/.vim/pconfigs/gtd.vim
-    "source ~/.vim/pconfigs/multiple-cursors.vim
-    "source ~/.vim/pconfigs/startify.vim
+"source ~/.vim/pconfigs/covim.vim
+"source ~/.vim/pconfigs/gtd.vim
+"source ~/.vim/pconfigs/multiple-cursors.vim
+"source ~/.vim/pconfigs/startify.vim
 
-    " markdown -------------------------------------------------
-    source ~/.vim/pconfigs/tabular.vim
-    source ~/.vim/pconfigs/markdown.vim
+" markdown -------------------------------------------------
+source ~/.vim/pconfigs/tabular.vim
+source ~/.vim/pconfigs/markdown.vim
 
-    source ~/.vim/pconfigs/haskell.vim
-    source ~/.vim/pconfigs/gdscript.vim " gdscript syntax highlighting (Godot)
-    source ~/.vim/pconfigs/rainbow_parentheses.vim
-endif
+source ~/.vim/pconfigs/haskell.vim
+"source ~/.vim/pconfigs/gdscript.vim " gdscript syntax highlighting (Godot)
+source ~/.vim/pconfigs/rainbow_parentheses.vim
+
+" Erlang
+source ~/.vim/pconfigs/vim-erlang-runtime.vim
+source ~/.vim/pconfigs/vim-erlang-tags.vim
+source ~/.vim/pconfigs/vim-elixir.vim
+
+" mCRL2
+"source ~/.vim/pconfigs/vim-mcrl2.vim
 
 call plug#end()
 
@@ -329,8 +338,20 @@ elseif filereadable("/usr/local/bin/grep")
     se grepprg=/usr/local/bin/grep
 endif
 
+func GitGrep(...)
+  let save = &grepprg
+  set grepprg=git\ grep\ -n\ $*
+  let s = 'grep'
+  for i in a:000
+    let s = s . ' ' . i
+  endfor
+  exe s
+  let &grepprg = save
+endfun
+command -nargs=? GitGrep call GitGrep(<f-args>)
+
 " syntax at the end because of plugins messing with it
-if rbpi == 1
+if rbpi
     colorscheme preto
     syntax off
 else

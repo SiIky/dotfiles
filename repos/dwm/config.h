@@ -37,15 +37,18 @@ static const Bool focusonwheelscroll = False;
 /* tagging */
 #define SEP     "\u232A" /* 〉 */
 
-#define TAG1    "ViM"
-#define TAG2    "term"
-#define TAG3    "media"
-#define TAG4    "W"
-#define TAG5    "M"
-#define TAG6    "steam"
-#define TAG7    "void"
+#define TAG1 "1"
+#define TAG2 "2"
+#define TAG3 "3"
+#define TAG4 "4"
+#define TAG5 "5"
+#define TAG6 "6"
+#define TAG7 "7"
+#define TAG8 "8"
+#define TAG9 "9"
+#define TAG0 "0"
 
-static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7 };
+static const char *tags[] = { TAG1, TAG2, TAG3, TAG4, TAG5, TAG6, TAG7, TAG8, TAG9, TAG0 };
 
 /* tabs */
 #define T_VIM   (1 << 0)

@@ -39,10 +39,12 @@ mkdir -m 0700 -p $SETUPDIR/hermit
 
 # install Hermit font
 cd $SETUPDIR/hermit
-wget -nv --show-progress -O hermit.tar.gz 'https://pcaro.es/d/otf-hermit-1.21.tar.gz'
+wget -nv --show-progress -O hermit.tar.gz 'https://pcaro.es/d/otf-hermit-2.0.tar.gz' \
+&& echo "ee41f8cbcdedfff568cd47ab7730c462ddd67d6170c05d35eaf64a7f954a4bb72d6ac99a383749f7032d9cf7b407b7a5ef3270b4209692c1572beb9744a21d42 *hermit.tar.gz" | sha512sum -c - && {
 tar xvzf hermit.tar.gz
 mkdir -p /usr/share/fonts/opentype/hermit
 cp $SETUPDIR/hermit/*.otf /usr/share/fonts/opentype/hermit
+}
 
 # copy dwm entry for lightdm
 cp $REPODIR/repos/dwm/dwm.desktop /usr/share/xsessions/

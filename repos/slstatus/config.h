@@ -21,7 +21,7 @@ static const char unknown_str[] = "-";
 #define CPU_A   NULL
 #define KEY_A   NULL
 #define RAM_A   NULL
-#define RUN_A   "~/bin/cmus-status.sh"
+#define RUN_A   "~/.config/cmus/slstatus.sh"
 #define TIME_A  "%R"
 #define VOL_A   "/dev/snd/hwC0D3" /* FIXME */
 

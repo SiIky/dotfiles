@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-HASTEROOT=$HOME/Downloads/haste
-rm -fr $HASTEROOT/to/*
-rm -fr $HASTEROOT/from/*

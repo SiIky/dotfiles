@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-TOHASTEDIR=$HOME/Downloads/haste/to/
-if [ ! -d $TOHASTEDIR ]; then
-    mkdir -p $TOHASTEDIR
-fi
-if [ -f $1 ]; then
-    cp $1 $TOHASTEDIR
-fi
-cat $1 | haste

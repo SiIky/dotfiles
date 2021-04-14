@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-FROMHASTEDIR=$HOME/Downloads/haste/from
-if [ ! -d $FROMHASTEDIR ]; then
-    mkdir -p $FROMHASTEDIR
-fi
-wget -O $FROMHASTEDIR/$1 -qc hastebin.com/raw/$1
